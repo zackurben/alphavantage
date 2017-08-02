@@ -26,6 +26,9 @@
     "url": "https://github.com/zackurben/alphavantage"
   },
   "homepage": "https://github.com/zackurben/alphavantage",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "dependencies": {
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4"
