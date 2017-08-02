@@ -21,6 +21,10 @@
   ],
   "author": "Zack Urben <zackurben@gmail.com> (http://zackurben.com)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zackurben/alphavantage"
+  },
+  "homepage": "https://github.com/zackurben/alphavantage",
   "dependencies": {
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4"
