@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "prettier --print-width 120 --single-quote --write \"./**/**.js\""
   },
   "keywords": [
     "alpha vantage",
@@ -19,5 +20,18 @@
     "api"
   ],
   "author": "Zack Urben <zackurben@gmail.com> (http://zackurben.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "prettier": "^1.5.3"
+  },
+  "jest": {
+    "bail": false,
+    "verbose": true,
+    "testMatch": ["**/test/**.js"]
+  }
 }
