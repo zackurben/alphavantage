@@ -40,6 +40,8 @@
   "jest": {
     "bail": false,
     "verbose": true,
-    "testMatch": ["**/test/**.js"]
+    "testMatch": [
+      "**/test/**.js"
+    ]
   }
 }
