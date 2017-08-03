@@ -9,8 +9,6 @@ This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage
 All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for
 additional information.
 
-**Checkout the [API DOCS](/DOCS.md) for full API documentation**
-
 ### Roadmap
 
  - [x] View basic symbol data
