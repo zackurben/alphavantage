@@ -24,6 +24,7 @@ module.exports = config => {
 
   // Include all the submodules.
   return {
-    data: require('./lib/data')(config)
+    data: require('./lib/data')(config),
+    performance: require('./lib/performance')(config)
   };
 };

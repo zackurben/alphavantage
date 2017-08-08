@@ -17,7 +17,7 @@ additional information.
  - [x] Add documentation
  - [x] Add more test coverage
  - [ ] Add CI/CD support
- - [ ] Add Sector Performance data
+ - [x] Add Sector Performance data
  - [ ] Add Technical indicators data
  - [ ] Add utils to clean up response data
 
@@ -79,6 +79,18 @@ alpha.data.intraday(`msft`).then(data => {
  *   The request promise.
  */
 alpha.data.<type>(`msft`).then(data => {
+  console.log(data);
+});
+
+/**
+ * Sector Performance
+ *
+ * Get realtime and historical sector performances calculated from S&P500 incumbents.
+ *
+ * @returns {Promise}
+ *   The request promise.
+ */
+alpha.performance.sector().then(data => {
   console.log(data);
 });
 ```
