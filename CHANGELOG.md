@@ -13,5 +13,6 @@
 
 0.0.5
   - Adding env variable support
-  - Adding output restructuring utils
+  - Adding output restructuring utils with tests
   - Adding CHANGELOG.md and backfilling releases
+  - Adding utils to the core export
