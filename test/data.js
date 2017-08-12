@@ -1,9 +1,6 @@
 'use strict';
 
-require('dotenv').config();
-const alpha = require('../')({
-  key: process.env.AV_KEY || 'demo'
-});
+const alpha = require('../')();
 
 test(`intraday data works`, () => {
   expect.assertions(2);
