@@ -34,6 +34,7 @@
     "request-promise-native": "^1.0.4"
   },
   "devDependencies": {
+    "dotenv": "^4.0.0",
     "jest": "^20.0.4",
     "prettier": "^1.5.3"
   },

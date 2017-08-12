@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 test(`initialization without a config throws an error`, () => {
   expect.assertions(1);
   try {
