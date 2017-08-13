@@ -16,3 +16,4 @@
   - Adding output restructuring utils with tests
   - Adding CHANGELOG.md and backfilling releases
   - Adding utils to the core export
+  - Adding missing tests
