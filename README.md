@@ -19,7 +19,7 @@ additional information.
  - [ ] Add CI/CD support
  - [x] Add Sector Performance data
  - [ ] Add Technical indicators data
- - [ ] Add utils to clean up response data
+ - [x] Add utils to clean up response data
 
 #### Installation
 ```bash
@@ -93,6 +93,14 @@ alpha.data.<type>(`msft`).then(data => {
 alpha.performance.sector().then(data => {
   console.log(data);
 });
+
+/**
+ * Data polishing
+ *
+ * Rewrite weird data keys to be consistent across all api calls. This is an optional
+ * utility you can use with the result of any api call.
+ */
+ const polished = alpha.util.polish(data);
 ```
 
 #### Contact
