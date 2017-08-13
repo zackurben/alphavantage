@@ -2,6 +2,19 @@
 
 const alpha = require('../')();
 
+test(`the url builder properly builds urls`, () => {
+  expect.assertions(7);
+  const frags = alpha.util.url('a', 'b', 'c', 'd', 'e').toString().split('?')[1].toString().split('&');
+
+  expect(frags.length).toBe(6);
+  expect(/^apikey=.*$/.test(frags[0])).toBe(true);
+  expect(frags[1]).toBe('function=a');
+  expect(frags[2]).toBe('symbol=b');
+  expect(frags[3]).toBe('outputsize=c');
+  expect(frags[4]).toBe('datatype=d');
+  expect(frags[5]).toBe('interval=e');
+});
+
 test(`intraday data polishing works`, () => {
   expect.assertions(41);
   const data = require('./examples/data/intraday');
