@@ -1,0 +1,21 @@
+{
+	"Meta Data": {
+		"1. Information": "Daily Time Series with Splits and Dividend Events",
+		"2. Symbol": "MSFT",
+		"3. Last Refreshed": "2017-08-11",
+		"4. Output Size": "Compact",
+		"5. Time Zone": "US/Eastern"
+	},
+	"Time Series (Daily)": {
+		"2017-08-11": {
+			"1. open": "71.6100",
+			"2. high": "72.7000",
+			"3. low": "71.2800",
+			"4. close": "72.5000",
+			"5. adjusted close": "72.5000",
+			"6. volume": "21121250",
+			"7. dividend amount": "0.0000",
+			"8. split coefficient": "1.0000"
+		}
+	}
+}
