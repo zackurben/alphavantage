@@ -160,3 +160,95 @@ test(`adjusted data polishing works`, () => {
   expect(polished['data'][first]['dividend']).toBeDefined();
   expect(polished['data'][first]['split']).toBeDefined();
 });
+
+test(`weekly data polishing works`, () => {
+  expect.assertions(35);
+  const data = require('./examples/data/weekly');
+  const polished = alpha.util.polish(data);
+  let first;
+
+  expect(data['Meta Data']).toBeDefined();
+  expect(data['Meta Data']['1. Information']).toBeDefined();
+  expect(data['Meta Data']['2. Symbol']).toBeDefined();
+  expect(data['Meta Data']['3. Last Refreshed']).toBeDefined();
+  expect(data['Meta Data']['4. Time Zone']).toBeDefined();
+  expect(data['Weekly Time Series']).toBeDefined();
+  first = Object.keys(data['Weekly Time Series'])[0];
+  expect(first).toBeDefined();
+  expect(data['Weekly Time Series'][first]['1. open']).toBeDefined();
+  expect(data['Weekly Time Series'][first]['2. high']).toBeDefined();
+  expect(data['Weekly Time Series'][first]['3. low']).toBeDefined();
+  expect(data['Weekly Time Series'][first]['4. close']).toBeDefined();
+  expect(data['Weekly Time Series'][first]['5. volume']).toBeDefined();
+
+  expect(polished['Meta Data']).toBeUndefined();
+  expect(polished['Weekly Time Series']).toBeUndefined();
+  expect(polished['meta']).toBeDefined();
+  expect(polished['meta']['1. Information']).toBeUndefined();
+  expect(polished['meta']['2. Symbol']).toBeUndefined();
+  expect(polished['meta']['3. Last Refreshed']).toBeUndefined();
+  expect(polished['meta']['4. Time Zone']).toBeUndefined();
+  expect(polished['meta']['information']).toBeDefined();
+  expect(polished['meta']['symbol']).toBeDefined();
+  expect(polished['meta']['updated']).toBeDefined();
+  expect(polished['meta']['zone']).toBeDefined();
+  expect(polished['data']).toBeDefined();
+  first = Object.keys(polished['data'])[0];
+  expect(first).toBeDefined();
+  expect(polished['data'][first]['1. open']).toBeUndefined();
+  expect(polished['data'][first]['2. high']).toBeUndefined();
+  expect(polished['data'][first]['3. low']).toBeUndefined();
+  expect(polished['data'][first]['4. close']).toBeUndefined();
+  expect(polished['data'][first]['5. volume']).toBeUndefined();
+  expect(polished['data'][first]['open']).toBeDefined();
+  expect(polished['data'][first]['high']).toBeDefined();
+  expect(polished['data'][first]['low']).toBeDefined();
+  expect(polished['data'][first]['close']).toBeDefined();
+  expect(polished['data'][first]['volume']).toBeDefined();
+});
+
+test(`monthly data polishing works`, () => {
+  expect.assertions(35);
+  const data = require('./examples/data/monthly');
+  const polished = alpha.util.polish(data);
+  let first;
+
+  expect(data['Meta Data']).toBeDefined();
+  expect(data['Meta Data']['1. Information']).toBeDefined();
+  expect(data['Meta Data']['2. Symbol']).toBeDefined();
+  expect(data['Meta Data']['3. Last Refreshed']).toBeDefined();
+  expect(data['Meta Data']['4. Time Zone']).toBeDefined();
+  expect(data['Monthly Time Series']).toBeDefined();
+  first = Object.keys(data['Monthly Time Series'])[0];
+  expect(first).toBeDefined();
+  expect(data['Monthly Time Series'][first]['1. open']).toBeDefined();
+  expect(data['Monthly Time Series'][first]['2. high']).toBeDefined();
+  expect(data['Monthly Time Series'][first]['3. low']).toBeDefined();
+  expect(data['Monthly Time Series'][first]['4. close']).toBeDefined();
+  expect(data['Monthly Time Series'][first]['5. volume']).toBeDefined();
+
+  expect(polished['Meta Data']).toBeUndefined();
+  expect(polished['Monthly Time Series']).toBeUndefined();
+  expect(polished['meta']).toBeDefined();
+  expect(polished['meta']['1. Information']).toBeUndefined();
+  expect(polished['meta']['2. Symbol']).toBeUndefined();
+  expect(polished['meta']['3. Last Refreshed']).toBeUndefined();
+  expect(polished['meta']['4. Time Zone']).toBeUndefined();
+  expect(polished['meta']['information']).toBeDefined();
+  expect(polished['meta']['symbol']).toBeDefined();
+  expect(polished['meta']['updated']).toBeDefined();
+  expect(polished['meta']['zone']).toBeDefined();
+  expect(polished['data']).toBeDefined();
+  first = Object.keys(polished['data'])[0];
+  expect(first).toBeDefined();
+  expect(polished['data'][first]['1. open']).toBeUndefined();
+  expect(polished['data'][first]['2. high']).toBeUndefined();
+  expect(polished['data'][first]['3. low']).toBeUndefined();
+  expect(polished['data'][first]['4. close']).toBeUndefined();
+  expect(polished['data'][first]['5. volume']).toBeUndefined();
+  expect(polished['data'][first]['open']).toBeDefined();
+  expect(polished['data'][first]['high']).toBeDefined();
+  expect(polished['data'][first]['low']).toBeDefined();
+  expect(polished['data'][first]['close']).toBeDefined();
+  expect(polished['data'][first]['volume']).toBeDefined();
+});

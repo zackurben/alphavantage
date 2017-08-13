@@ -1,0 +1,17 @@
+{
+	"Meta Data": {
+		"1. Information": "Monthly Prices (open, high, low, close) and Volumes",
+		"2. Symbol": "MSFT",
+		"3. Last Refreshed": "2017-08-11",
+		"4. Time Zone": "US/Eastern"
+	},
+	"Monthly Time Series": {
+		"2017-08-11": {
+			"1. open": "73.1000",
+			"2. high": "73.4200",
+			"3. low": "71.2800",
+			"4. close": "72.5000",
+			"5. volume": "190521592"
+		}
+	}
+}
