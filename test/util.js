@@ -38,7 +38,7 @@ test(`intraday data polishing works`, () => {
     expect(polished['meta']['updated']).toBeDefined();
     expect(polished['meta']['interval']).toBeDefined();
     expect(polished['meta']['size']).toBeDefined();
-    expect(polished['meta']['timezone']).toBeDefined();
+    expect(polished['meta']['zone']).toBeDefined();
     expect(polished['data']).toBeDefined();
     first = Object.keys(polished['data'])[0];
     expect(first).toBeDefined();
