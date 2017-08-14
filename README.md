@@ -1,7 +1,8 @@
 # AlphaVantage
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/zackurben/alphavantage.svg?branch=master)](https://travis-ci.org/zackurben/alphavantage)
+[![Coverage Status](https://coveralls.io/repos/github/zackurben/alphavantage/badge.svg?branch=master)](https://coveralls.io/github/zackurben/alphavantage?branch=master)
+[![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
 
 ```
 Note: This is a WIP
@@ -19,7 +20,7 @@ additional information.
  - [x] Add code coverage
  - [x] Add documentation
  - [x] Add more test coverage
- - [ ] Add CI/CD support
+ - [x] Add CI/CD support
  - [x] Add Sector Performance data
  - [ ] Add Technical indicators data
  - [x] Add utils to clean up response data
