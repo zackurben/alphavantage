@@ -1,5 +1,7 @@
 # AlphaVantage
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
+
 ```
 Note: This is a WIP
 ```
