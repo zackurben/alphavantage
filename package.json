@@ -7,9 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "prettier --print-width 120 --single-quote --write \"./**/**.js\"",
-    "coverage": "jest --coverage"
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "alpha vantage",
@@ -34,6 +34,7 @@
     "request-promise-native": "^1.0.4"
   },
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
     "jest": "^20.0.4",
     "prettier": "^1.5.3"

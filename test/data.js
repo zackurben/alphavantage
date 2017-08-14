@@ -1,5 +1,6 @@
 'use strict';
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 const alpha = require('../')();
 
 test(`intraday data works`, () => {
