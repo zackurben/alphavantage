@@ -15,6 +15,15 @@ test(`the url builder properly builds urls`, () => {
   expect(frags[5]).toBe('interval=e');
 });
 
+test(`the url builder with no params yeilds the base url`, () => {
+  expect.assertions(3);
+  const frags = alpha.util.url().toString().split('?')[1].toString().split('&');
+
+  expect(frags.length).toBe(2);
+  expect(/^apikey=.*$/.test(frags[0])).toBe(true);
+  expect(frags[1]).toBe('');
+});
+
 test(`intraday data polishing works`, () => {
   expect.assertions(41);
   const data = require('./examples/data/intraday');
