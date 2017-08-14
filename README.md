@@ -1,5 +1,7 @@
 # AlphaVantage
 
+[![Build Status](https://travis-ci.org/zackurben/alphavantage.svg?branch=master)](https://travis-ci.org/zackurben/alphavantage)
+
 ```
 Note: This is a WIP
 ```
