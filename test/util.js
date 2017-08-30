@@ -4,7 +4,12 @@ const alpha = require('../')();
 
 test(`the url builder properly builds urls`, () => {
   expect.assertions(7);
-  const frags = alpha.util.url('a', 'b', 'c', 'd', 'e').toString().split('?')[1].toString().split('&');
+  const frags = alpha.util
+    .url('a', 'b', 'c', 'd', 'e')
+    .toString()
+    .split('?')[1]
+    .toString()
+    .split('&');
 
   expect(frags.length).toBe(6);
   expect(/^apikey=.*$/.test(frags[0])).toBe(true);
@@ -15,9 +20,14 @@ test(`the url builder properly builds urls`, () => {
   expect(frags[5]).toBe('interval=e');
 });
 
-test(`the url builder with no params yeilds the base url`, () => {
+test(`the url builder with no params yields the base url`, () => {
   expect.assertions(3);
-  const frags = alpha.util.url().toString().split('?')[1].toString().split('&');
+  const frags = alpha.util
+    .url()
+    .toString()
+    .split('?')[1]
+    .toString()
+    .split('&');
 
   expect(frags.length).toBe(2);
   expect(/^apikey=.*$/.test(frags[0])).toBe(true);
