@@ -36,7 +36,7 @@
   "devDependencies": {
     "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
-    "jest": "^20.0.4",
+    "jest": "^21.0.0",
     "prettier": "^1.6.1"
   },
   "jest": {
