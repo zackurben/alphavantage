@@ -1,6 +1,6 @@
 {
   "name": "alphavantage",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A simple interface to the Alpha Vantage API.",
   "main": "index.js",
   "directories": {
@@ -30,14 +30,14 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "request": "^2.81.0",
+    "dotenv": "^4.0.0",
+    "request": "^2.82.0",
     "request-promise-native": "^1.0.4"
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
-    "dotenv": "^4.0.0",
-    "jest": "^21.0.0",
-    "prettier": "^1.6.1"
+    "jest": "^21.1.0",
+    "prettier": "^1.7.0"
   },
   "jest": {
     "bail": false,
