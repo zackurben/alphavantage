@@ -37,7 +37,7 @@
   "devDependencies": {
     "coveralls": "^2.13.1",
     "jest": "^21.1.0",
-    "prettier": "^1.7.0"
+    "prettier": "^1.7.3"
   },
   "jest": {
     "bail": false,
