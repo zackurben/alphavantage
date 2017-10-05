@@ -5,13 +5,13 @@ const alpha = require('../')();
 test(`the url builder properly builds urls`, () => {
   expect.assertions(7);
   const frags = alpha.util
-    .url([
-      [alpha.util.PARAMETER_TYPES.function, 'a'],
-      [alpha.util.PARAMETER_TYPES.symbol, 'b'],
-      [alpha.util.PARAMETER_TYPES.outputsize, 'c'],
-      [alpha.util.PARAMETER_TYPES.datatype, 'd'],
-      [alpha.util.PARAMETER_TYPES.interval, 'e']
-    ])
+    .url({
+      function: 'a',
+      symbol: 'b',
+      outputsize: 'c',
+      datatype: 'd',
+      interval: 'e'
+    })
     .toString()
     .split('?')[1]
     .toString()
@@ -43,7 +43,7 @@ test(`the url builder with no params yields the base url`, () => {
 test(`the url builder with undefined params yields the base url`, () => {
   expect.assertions(3);
   const frags = alpha.util
-    .url([['this_does-not_exist', 123]])
+    .url({ 'this_does-not_exist': undefined })
     .toString()
     .split('?')[1]
     .toString()

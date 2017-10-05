@@ -14,6 +14,6 @@ test(`sma data works`, () => {
     expect(data['Meta Data']['5: Time Period']).toEqual(60);
     expect(data['Meta Data']['6: Series Type']).toEqual('close');
     expect(data['Meta Data']['7: Time Zone']).toBeDefined();
-    expect(data['Technical Analysis: SMA']).toBeDefined(); 
+    expect(data['Technical Analysis: SMA']).toBeDefined();
   });
 });
