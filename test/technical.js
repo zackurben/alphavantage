@@ -108,6 +108,22 @@ test(`kama data works`, () => {
   });
 });
 
+test(`mama data works`, () => {
+  expect.assertions(10);
+  return alpha.technical.mama(`msft`, `daily`, `close`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('MESA Adaptive Moving Average (MAMA)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5.1: Fast Limit']).toEqual(0.01);
+    expect(data['Meta Data']['5.2: Slow Limit']).toEqual(0.01);
+    expect(data['Meta Data']['6: Series Type']).toEqual('close');
+    expect(data['Meta Data']['7: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: MAMA']).toBeDefined();
+  });
+});
+
 test(`t3 data works`, () => {
   expect.assertions(10);
   return alpha.technical.t3(`msft`, `daily`, 60, `close`).then(data => {
