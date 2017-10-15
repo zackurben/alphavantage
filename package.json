@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "prettier --print-width 120 --single-quote --write \"./**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
@@ -40,6 +40,7 @@
     "prettier": "^1.7.3"
   },
   "jest": {
+    "collectCoverage": true,
     "bail": false,
     "verbose": true,
     "testMatch": [
