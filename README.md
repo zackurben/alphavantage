@@ -4,14 +4,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/zackurben/alphavantage/badge.svg?branch=master)](https://coveralls.io/github/zackurben/alphavantage?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
 
-```
-Note: This is a WIP
-```
-
 This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/). I have no affiliation with AlphaAdvantage.
 
-All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for
-additional information.
+All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
 ### Roadmap
 
@@ -31,6 +26,10 @@ npm i alphavantage
 ```
 
 #### Usage
+
+
+##### Setup
+
 ```javascript
 /**
  * Init alphavantage with your API key.
@@ -39,9 +38,13 @@ npm i alphavantage
  *   Your AlphaVantage API key.
  */
 const alpha = require('alphavantage')({ key: 'qweqweqwe' });
+```
 
+##### Data
+
+```javascript
 /**
- * Data functions: Short term
+ * Data functions: Short Term
  *
  * Types available: intraday
  *
@@ -85,7 +88,70 @@ alpha.data.intraday(`msft`).then(data => {
 alpha.data.<type>(`msft`).then(data => {
   console.log(data);
 });
+```
 
+##### Technicals
+
+```javascript
+/**
+ * Technical functions: SMA-Like
+ *
+ * Types available: sma, wma, dema, tema, trima, kama, t3, rsi, mom, cmo, roc, rocr, trix, and midpoint.
+ *
+ * All of the previous technical functions have the same signature:
+ *   alpha.technical.<type>(symbol [, interval [, time_period [, series_type]]])
+ *
+ * @param {String} symbol
+ *   The stock ticker symbol to get data for.
+ * @param {String} interval
+ *   Time interval between two consecutive data points in the time series.
+ *   The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+ * @param {Number} time_period
+ *   Number of data points used to calculate each moving average value.
+ *   Positive integers are accepted (e.g., time_period=60, time_period=200)
+ * @param {String} series_type
+ *   The desired price type in the time series.
+ *   Four types are supported: close, open, high, low
+ *
+ * @returns {Promise}
+ *   The request promise.
+ */
+alpha.technical.<type>(`msft`, `daily`, `close`).then(data => {
+  console.log(data);
+});
+
+/**
+ * Technical functions: MAMA-Like
+ *
+ * Types available: mama
+ *
+ * All of the previous technical functions have the same signature:
+ *   alpha.technical.<type>(symbol [, interval [, series_type [, fastlimit [, slowlimit]]]])
+ *
+ * @param {String} symbol
+ *   The stock ticker symbol to get data for.
+ * @param {String} interval
+ *   Time interval between two consecutive data points in the time series.
+ *   The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+ * @param {String} series_type
+ *   The desired price type in the time series.
+ *   Four types are supported: close, open, high, low
+ * @param [Number] fastlimit
+ *   Positive floats are accepted. By default, fastlimit=0.01
+ * @param [Number] slowlimit
+ *   Positive floats are accepted. By default, slowlimit=0.01
+ *
+ * @returns {Promise}
+ *   The request promise.
+ */
+alpha.technical.mama(`msft`, `daily`, `close`).then(data => {
+  console.log(data);
+});
+```
+
+##### Sector
+
+```javascript
 /**
  * Sector Performance
  *
@@ -97,7 +163,11 @@ alpha.data.<type>(`msft`).then(data => {
 alpha.performance.sector().then(data => {
   console.log(data);
 });
+```
 
+##### Util
+
+```javascript
 /**
  * Data polishing
  *
@@ -106,6 +176,7 @@ alpha.performance.sector().then(data => {
  */
  const polished = alpha.util.polish(data);
 ```
+
 
 #### Contact
   - Author: Zack Urben
