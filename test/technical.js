@@ -140,6 +140,47 @@ test(`t3 data works`, () => {
   });
 });
 
+// @NOTE: The data is missing a "Time Period" and the "Series Type" is wrong.
+// Waiting on an email response from my inquiry 10/19/2017.
+test(`macd data works`, () => {
+  expect.assertions(11);
+  return alpha.technical.macd(`msft`, `daily`, `close`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('Moving Average Convergence/Divergence (MACD)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5.1: Fast Period']).toEqual(12);
+    expect(data['Meta Data']['5.2: Slow Period']).toEqual(26);
+    expect(data['Meta Data']['5.3: Signal Period']).toEqual(9);
+    expect(data['Meta Data']['6: Series Type']).toBeDefined();
+    expect(data['Meta Data']['7: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: MACD']).toBeDefined();
+  });
+});
+
+// @NOTE: The data is missing a "Time Period" and the "Series Type" is wrong.
+// Waiting on an email response from my inquiry 10/19/2017.
+test(`macdext data works`, () => {
+  expect.assertions(14);
+  return alpha.technical.macdext(`msft`, `daily`, `close`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('MACD with Controllable MA Type (MACDEXT)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5.1: Fast Period']).toEqual(12);
+    expect(data['Meta Data']['5.2: Slow Period']).toEqual(26);
+    expect(data['Meta Data']['5.3: Signal Period']).toEqual(9);
+    expect(data['Meta Data']['5.4: Fast MA Type']).toEqual(0);
+    expect(data['Meta Data']['5.5: Slow MA Type']).toEqual(0);
+    expect(data['Meta Data']['5.6: Signal MA Type']).toEqual(0);
+    expect(data['Meta Data']['6: Series Type']).toBeDefined();
+    expect(data['Meta Data']['7: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: MACDEXT']).toBeDefined();
+  });
+});
+
 test(`rsi data works`, () => {
   expect.assertions(9);
   return alpha.technical.rsi(`msft`, `daily`, 60, `close`).then(data => {

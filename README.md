@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/zackurben/alphavantage/badge.svg?branch=master)](https://coveralls.io/github/zackurben/alphavantage?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
 
-This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/). I have no affiliation with AlphaAdvantage.
+This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/) hosted on [NPM](https://www.npmjs.com/package/alphavantage). I have no affiliation with AlphaVantage.
 
 All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
@@ -18,14 +18,17 @@ All contributions are welcome! This is an open source project under the MIT lice
  - [x] Add CI/CD support
  - [x] Add Sector Performance data
  - [ ] Add Technical indicators data
+ - [ ] Add Forex data
+ - [ ] Add Crypto currency data
  - [x] Add utils to clean up response data
+ - [ ] Add better documentation for the sdk functions
 
-#### Installation
+### Installation
 ```bash
 npm i alphavantage
 ```
 
-#### Usage
+### Usage
 
 
 ##### Setup
@@ -176,7 +179,6 @@ alpha.performance.sector().then(data => {
  */
  const polished = alpha.util.polish(data);
 ```
-
 
 #### Contact
   - Author: Zack Urben
