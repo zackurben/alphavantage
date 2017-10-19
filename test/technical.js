@@ -140,6 +140,25 @@ test(`t3 data works`, () => {
   });
 });
 
+// @NOTE: The data is missing a "Time Period" and the "Series Type" is wrong.
+// Waiting on an email response from my inquiry 10/19/2017.
+test(`macd data works`, () => {
+  expect.assertions(11);
+  return alpha.technical.macd(`msft`, `daily`, 60, `close`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('Moving Average Convergence/Divergence (MACD)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5.1: Fast Period']).toEqual(12);
+    expect(data['Meta Data']['5.2: Slow Period']).toEqual(26);
+    expect(data['Meta Data']['5.3: Signal Period']).toEqual(9);
+    expect(data['Meta Data']['6: Series Type']).toBeDefined();
+    expect(data['Meta Data']['7: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: MACD']).toBeDefined();
+  });
+});
+
 test(`rsi data works`, () => {
   expect.assertions(9);
   return alpha.technical.rsi(`msft`, `daily`, 60, `close`).then(data => {
