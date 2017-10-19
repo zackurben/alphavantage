@@ -144,7 +144,7 @@ test(`t3 data works`, () => {
 // Waiting on an email response from my inquiry 10/19/2017.
 test(`macd data works`, () => {
   expect.assertions(11);
-  return alpha.technical.macd(`msft`, `daily`, 60, `close`).then(data => {
+  return alpha.technical.macd(`msft`, `daily`, `close`).then(data => {
     expect(data['Meta Data']).toBeDefined();
     expect(data['Meta Data']['1: Symbol']).toEqual('msft');
     expect(data['Meta Data']['2: Indicator']).toEqual('Moving Average Convergence/Divergence (MACD)');
@@ -163,7 +163,7 @@ test(`macd data works`, () => {
 // Waiting on an email response from my inquiry 10/19/2017.
 test(`macdext data works`, () => {
   expect.assertions(14);
-  return alpha.technical.macdext(`msft`, `daily`, 60, `close`).then(data => {
+  return alpha.technical.macdext(`msft`, `daily`, `close`).then(data => {
     expect(data['Meta Data']).toBeDefined();
     expect(data['Meta Data']['1: Symbol']).toEqual('msft');
     expect(data['Meta Data']['2: Indicator']).toEqual('MACD with Controllable MA Type (MACDEXT)');
