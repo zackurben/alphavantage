@@ -177,6 +177,40 @@ test(`macdext data works`, () => {
   });
 });
 
+test(`stoch data works`, () => {
+  expect.assertions(12);
+  return alpha.technical.stoch(`msft`, `daily`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('Stochastic (STOCH)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5.1: FastK Period']).toEqual(5);
+    expect(data['Meta Data']['5.2: SlowK Period']).toEqual(3);
+    expect(data['Meta Data']['5.3: SlowK MA Type']).toEqual(0);
+    expect(data['Meta Data']['5.4: SlowD Period']).toEqual(3);
+    expect(data['Meta Data']['5.5: SlowD MA Type']).toEqual(0);
+    expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: STOCH']).toBeDefined();
+  });
+});
+
+test(`stochf data works`, () => {
+  expect.assertions(10);
+  return alpha.technical.stochf(`msft`, `daily`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('Stochastic Fast (STOCHF)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5.1: FastK Period']).toEqual(5);
+    expect(data['Meta Data']['5.2: FastD Period']).toEqual(3);
+    expect(data['Meta Data']['5.3: FastD MA Type']).toEqual(0);
+    expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: STOCHF']).toBeDefined();
+  });
+});
+
 test(`rsi data works`, () => {
   expect.assertions(9);
   return alpha.technical.rsi(`msft`, `daily`, 60, `close`).then(data => {
@@ -189,6 +223,24 @@ test(`rsi data works`, () => {
     expect(data['Meta Data']['6: Series Type']).toEqual('close');
     expect(data['Meta Data']['7: Time Zone']).toBeDefined();
     expect(data['Technical Analysis: RSI']).toBeDefined();
+  });
+});
+
+test(`stochrsi data works`, () => {
+  expect.assertions(12);
+  return alpha.technical.stochrsi(`msft`, `daily`, 60, `close`).then(data => {
+    expect(data['Meta Data']).toBeDefined();
+    expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+    expect(data['Meta Data']['2: Indicator']).toEqual('Stochastic Relative Strength Index (STOCHRSI)');
+    expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+    expect(data['Meta Data']['4: Interval']).toEqual('daily');
+    expect(data['Meta Data']['5: Time Period']).toEqual(60);
+    expect(data['Meta Data']['6.1: FastK Period']).toEqual(5);
+    expect(data['Meta Data']['6.2: FastD Period']).toEqual(3);
+    expect(data['Meta Data']['6.3: FastD MA Type']).toEqual(0);
+    expect(data['Meta Data']['7: Series Type']).toEqual('close');
+    expect(data['Meta Data']['8: Time Zone']).toBeDefined();
+    expect(data['Technical Analysis: STOCHRSI']).toBeDefined();
   });
 });
 
