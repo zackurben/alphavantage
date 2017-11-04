@@ -1,5 +1,6 @@
 'use strict';
 
+jest.mock('request-promise-native');
 const alpha = require('../')();
 
 test(`the url builder properly builds urls`, () => {
@@ -360,4 +361,20 @@ test(`sector performance data polishing works`, () => {
   expect(polished['3year']).toBeDefined();
   expect(polished['5year']).toBeDefined();
   expect(polished['10year']).toBeDefined();
+});
+
+test(`non 200 request responses are thrown to a catch`, () => {
+  expect.assertions(1);
+
+  return alpha.util.fn('123')().catch(error => {
+    expect(error).toEqual('An AlphaVantage error occurred. 123: {}');
+  });
+});
+
+test(`200 request responses without meta data are thrown to a catch`, () => {
+  expect.assertions(1);
+
+  return alpha.util.fn('200')().catch(error => {
+    expect(error).toEqual('An AlphaVantage error occurred. {}');
+  });
 });
