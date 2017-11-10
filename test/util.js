@@ -321,13 +321,13 @@ test(`forex rate data polishing works`, () => {
   expect(data['Realtime Currency Exchange Rate']['7. Time Zone']).toBeDefined();
 
   expect(polished['Realtime Currency Exchange Rate']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['1. From_Currency Code']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['2. From_Currency Name']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['3. To_Currency Code']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['4. To_Currency Name']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['5. Exchange Rate']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['6. Last Refreshed']).toBeUndefined();
-  expect(polished['Realtime Currency Exchange Rate']['7. Time Zone']).toBeUndefined();
+  expect(polished['rate']['1. From_Currency Code']).toBeUndefined();
+  expect(polished['rate']['2. From_Currency Name']).toBeUndefined();
+  expect(polished['rate']['3. To_Currency Code']).toBeUndefined();
+  expect(polished['rate']['4. To_Currency Name']).toBeUndefined();
+  expect(polished['rate']['5. Exchange Rate']).toBeUndefined();
+  expect(polished['rate']['6. Last Refreshed']).toBeUndefined();
+  expect(polished['rate']['7. Time Zone']).toBeUndefined();
 
   expect(polished['rate']).toBeDefined();
   expect(polished['rate']['from_currency']).toBeDefined();
