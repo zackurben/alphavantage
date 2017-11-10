@@ -293,7 +293,7 @@ test(`willr data works`, () => {
     });
 });
 
-test.only(`adx data works`, () => {
+test(`adx data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.adx(`msft`, `daily`, 60))
@@ -306,6 +306,22 @@ test.only(`adx data works`, () => {
       expect(data['Meta Data']['5: Time Period']).toEqual(60);
       expect(data['Meta Data']['6: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: ADX']).toBeDefined();
+    });
+});
+
+test(`adxr data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.adxr(`msft`, `daily`, 60))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Average Directional Movement Index Rating (ADXR)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Period']).toEqual(60);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: ADXR']).toBeDefined();
     });
 });
 
