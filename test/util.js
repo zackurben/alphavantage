@@ -57,7 +57,7 @@ test(`the url builder with undefined params yields the base url`, () => {
 
 test(`intraday data polishing works`, () => {
   expect.assertions(41);
-  const data = require('./examples/data/intraday');
+  const data = require('./examples/data/intraday.json');
   const polished = alpha.util.polish(data);
   let first;
 
@@ -109,7 +109,7 @@ test(`intraday data polishing works`, () => {
 
 test(`daily data polishing works`, () => {
   expect.assertions(38);
-  const data = require('./examples/data/daily');
+  const data = require('./examples/data/daily.json');
   const polished = alpha.util.polish(data);
   let first;
 
@@ -158,7 +158,7 @@ test(`daily data polishing works`, () => {
 
 test(`adjusted data polishing works`, () => {
   expect.assertions(47);
-  const data = require('./examples/data/adjusted');
+  const data = require('./examples/data/adjusted.json');
   const polished = alpha.util.polish(data);
   let first;
 
@@ -216,7 +216,7 @@ test(`adjusted data polishing works`, () => {
 
 test(`weekly data polishing works`, () => {
   expect.assertions(35);
-  const data = require('./examples/data/weekly');
+  const data = require('./examples/data/weekly.json');
   const polished = alpha.util.polish(data);
   let first;
 
@@ -262,7 +262,7 @@ test(`weekly data polishing works`, () => {
 
 test(`monthly data polishing works`, () => {
   expect.assertions(35);
-  const data = require('./examples/data/monthly');
+  const data = require('./examples/data/monthly.json');
   const polished = alpha.util.polish(data);
   let first;
 
@@ -306,9 +306,42 @@ test(`monthly data polishing works`, () => {
   expect(polished['data'][first]['volume']).toBeDefined();
 });
 
+test(`forex rate data polishing works`, () => {
+  expect.assertions(24);
+  const data = require('./examples/forex/rate.json');
+  const polished = alpha.util.polish(data);
+
+  expect(data['Realtime Currency Exchange Rate']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['1. From_Currency Code']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['2. From_Currency Name']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['3. To_Currency Code']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['4. To_Currency Name']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['6. Last Refreshed']).toBeDefined();
+  expect(data['Realtime Currency Exchange Rate']['7. Time Zone']).toBeDefined();
+
+  expect(polished['Realtime Currency Exchange Rate']).toBeUndefined();
+  expect(polished['rate']['1. From_Currency Code']).toBeUndefined();
+  expect(polished['rate']['2. From_Currency Name']).toBeUndefined();
+  expect(polished['rate']['3. To_Currency Code']).toBeUndefined();
+  expect(polished['rate']['4. To_Currency Name']).toBeUndefined();
+  expect(polished['rate']['5. Exchange Rate']).toBeUndefined();
+  expect(polished['rate']['6. Last Refreshed']).toBeUndefined();
+  expect(polished['rate']['7. Time Zone']).toBeUndefined();
+
+  expect(polished['rate']).toBeDefined();
+  expect(polished['rate']['from_currency']).toBeDefined();
+  expect(polished['rate']['from_currency_name']).toBeDefined();
+  expect(polished['rate']['to_currency']).toBeDefined();
+  expect(polished['rate']['to_currency_name']).toBeDefined();
+  expect(polished['rate']['value']).toBeDefined();
+  expect(polished['rate']['updated']).toBeDefined();
+  expect(polished['rate']['zone']).toBeDefined();
+});
+
 test(`sector performance data polishing works`, () => {
   expect.assertions(48);
-  const data = require('./examples/sector/performance');
+  const data = require('./examples/sector/performance.json');
   const polished = alpha.util.polish(data);
 
   expect(data['Meta Data']).toBeDefined();

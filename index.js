@@ -27,6 +27,7 @@ module.exports = config => {
   return {
     util: require('./lib/util')(config),
     data: require('./lib/data')(config),
+    forex: require('./lib/forex')(config),
     technical: require('./lib/technical')(config),
     performance: require('./lib/performance')(config)
   };
