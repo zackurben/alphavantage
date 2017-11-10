@@ -1,0 +1,25 @@
+{
+	"Meta Data": {
+		"1. Information": "Monthly Prices and Volumes for Digital Currency",
+		"2. Digital Currency Code": "BTC",
+		"3. Digital Currency Name": "Bitcoin",
+		"4. Market Code": "CNY",
+		"5. Market Name": "Chinese Yuan",
+		"6. Last Refreshed": "2017-11-08 (end of day)",
+		"7. Time Zone": "UTC"
+	},
+	"Time Series (Digital Currency Monthly)": {
+		"2017-11-08": {
+			"1a. open (CNY)": "40403.23107950",
+			"1b. open (USD)": "6090.00596585",
+			"2a. high (CNY)": "50785.89758990",
+			"2b. high (USD)": "7662.71154442",
+			"3a. low (CNY)": "40403.23107950",
+			"3b. low (USD)": "6088.06653953",
+			"4a. close (CNY)": "50610.55297110",
+			"4b. close (USD)": "7636.33185031",
+			"5. volume": "31.83540897",
+			"6. market cap (USD)": "231388.53466500"
+		}
+	}
+}
