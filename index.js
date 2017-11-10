@@ -27,6 +27,7 @@ module.exports = config => {
   return {
     util: require('./lib/util')(config),
     data: require('./lib/data')(config),
+    crypto: require('./lib/crypto')(config),
     technical: require('./lib/technical')(config),
     performance: require('./lib/performance')(config)
   };
