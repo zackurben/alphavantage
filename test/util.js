@@ -361,7 +361,7 @@ test(`intraday crypto polishing works`, () => {
   expect(data['Time Series (Digital Currency Intraday)'][first]['1b. price (USD)']).toBeDefined();
   expect(data['Time Series (Digital Currency Intraday)'][first]['2. volume']).toBeDefined();
   expect(data['Time Series (Digital Currency Intraday)'][first]['3. market cap (USD)']).toBeDefined();
-  
+
   expect(polished['Meta Data']).toBeUndefined();
   expect(polished['Time Series (Digital Currency Intraday)']).toBeUndefined();
   expect(polished['meta']).toBeDefined();
@@ -410,7 +410,7 @@ test(`daily crypto polishing works`, () => {
   expect(data['Meta Data']['7. Time Zone']).toBeDefined();
   expect(data['Time Series (Digital Currency Daily)']).toBeDefined();
   first = Object.keys(data['Time Series (Digital Currency Daily)'])[0];
-  
+
   expect(first).toBeDefined();
   expect(data['Time Series (Digital Currency Daily)'][first]['1a. open (CNY)']).toBeDefined();
   expect(data['Time Series (Digital Currency Daily)'][first]['1b. open (USD)']).toBeDefined();
@@ -481,7 +481,7 @@ test(`weekly crypto polishing works`, () => {
   expect(data['Meta Data']['7. Time Zone']).toBeDefined();
   expect(data['Time Series (Digital Currency Weekly)']).toBeDefined();
   first = Object.keys(data['Time Series (Digital Currency Weekly)'])[0];
-  
+
   expect(first).toBeDefined();
   expect(data['Time Series (Digital Currency Weekly)'][first]['1a. open (CNY)']).toBeDefined();
   expect(data['Time Series (Digital Currency Weekly)'][first]['1b. open (USD)']).toBeDefined();
@@ -552,7 +552,7 @@ test(`monthly crypto polishing works`, () => {
   expect(data['Meta Data']['7. Time Zone']).toBeDefined();
   expect(data['Time Series (Digital Currency Monthly)']).toBeDefined();
   first = Object.keys(data['Time Series (Digital Currency Monthly)'])[0];
-  
+
   expect(first).toBeDefined();
   expect(data['Time Series (Digital Currency Monthly)'][first]['1a. open (CNY)']).toBeDefined();
   expect(data['Time Series (Digital Currency Monthly)'][first]['1b. open (USD)']).toBeDefined();
