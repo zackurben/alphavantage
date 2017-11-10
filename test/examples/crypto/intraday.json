@@ -1,0 +1,20 @@
+{
+	"Meta Data": {
+		"1. Information": "Intraday Prices and Volumes for Digital Currency",
+		"2. Digital Currency Code": "BTC",
+		"3. Digital Currency Name": "Bitcoin",
+		"4. Market Code": "CNY",
+		"5. Market Name": "Chinese Yuan",
+		"6. Interval": "5min",
+		"7. Last Refreshed": "2017-11-10 00:05:00",
+		"8. Time Zone": "UTC"
+	},
+	"Time Series (Digital Currency Intraday)": {
+		"2017-11-10 00:05:00": {
+			"1a. price (CNY)": "49536.70008089",
+			"1b. price (USD)": "7461.96577915",
+			"2. volume": "1.34882209",
+			"3. market cap (USD)": "10064.86427775"
+		}
+	}
+}
