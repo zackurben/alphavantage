@@ -601,3 +601,19 @@ test(`midprice data works`, () => {
       expect(data['Technical Analysis: MIDPRICE']).toBeDefined();
     });
 });
+
+test(`trange data works`, () => {
+  expect.assertions(7);
+  return delay(TIME)
+    .then(() => alpha.technical.trange(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('True Range (TRANGE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: TRANGE']).toBeDefined();
+    });
+});
+
