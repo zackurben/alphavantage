@@ -342,6 +342,21 @@ test(`mom data works`, () => {
     });
 });
 
+test(`bop data works`, () => {
+  expect.assertions(7);
+  return delay(TIME)
+    .then(() => alpha.technical.bop(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Balance Of Power (BOP)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: BOP']).toBeDefined();
+    });
+});
+
 test(`cmo data works`, () => {
   expect.assertions(9);
   return delay(TIME)
