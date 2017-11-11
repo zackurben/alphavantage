@@ -648,3 +648,18 @@ test(`natr data works`, () => {
       expect(data['Technical Analysis: NATR']).toBeDefined();
     });
 });
+
+test(`ad data works`, () => {
+  expect.assertions(7);
+  return delay(TIME)
+    .then(() => alpha.technical.ad(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Chaikin A/D Line');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: Chaikin A/D']).toBeDefined();
+    });
+});
