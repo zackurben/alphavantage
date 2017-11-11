@@ -553,6 +553,22 @@ test(`minus_dm data works`, () => {
     });
 });
 
+test(`plus_dm data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.plus_dm(`msft`, `daily`, 60))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Plus Directional Movement (PLUS_DM)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Period']).toEqual(60);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: PLUS_DM']).toBeDefined();
+    });
+});
+
 test(`midpoint data works`, () => {
   expect.assertions(9);
   return delay(TIME)
