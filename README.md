@@ -18,8 +18,8 @@ All contributions are welcome! This is an open source project under the MIT lice
  - [x] Add CI/CD support
  - [x] Add Sector Performance data
  - [ ] Add Technical indicators data
- - [ ] Add Forex data
- - [ ] Add Crypto currency data
+ - [x] Add Forex data
+ - [x] Add Crypto currency data
  - [x] Add utils to clean up response data
  - [ ] Add better documentation for the sdk functions
 
