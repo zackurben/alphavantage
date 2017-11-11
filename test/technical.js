@@ -505,6 +505,22 @@ test(`dx data works`, () => {
     });
 });
 
+test(`minus_di data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.minus_di(`msft`, `daily`, 60))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Minus Directional Indicator (MINUS_DI)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Period']).toEqual(60);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: MINUS_DI']).toBeDefined();
+    });
+});
+
 test(`midpoint data works`, () => {
   expect.assertions(9);
   return delay(TIME)
