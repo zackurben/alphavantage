@@ -456,7 +456,7 @@ test(`aroonosc data works`, () => {
     });
 });
 
-test.only(`mfi data works`, () => {
+test(`mfi data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.mfi(`msft`, `daily`, 60))
@@ -486,6 +486,22 @@ test(`trix data works`, () => {
       expect(data['Meta Data']['6: Series Type']).toEqual('close');
       expect(data['Meta Data']['7: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: TRIX']).toBeDefined();
+    });
+});
+
+test(`dx data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.dx(`msft`, `daily`, 60))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Directional Movement Index (DX)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Period']).toEqual(60);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: DX']).toBeDefined();
     });
 });
 
