@@ -607,6 +607,26 @@ test(`plus_dm data works`, () => {
     });
 });
 
+test(`bbands data works`, () => {
+  expect.assertions(12);
+  return delay(TIME)
+    .then(() => alpha.technical.bbands(`msft`, `daily`, 60, `close`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Bollinger Bands (BBANDS)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Period']).toEqual(60);
+      expect(data['Meta Data']['6.1: Deviation multiplier for upper band']).toEqual(2);
+      expect(data['Meta Data']['6.2: Deviation multiplier for lower band']).toEqual(2);
+      expect(data['Meta Data']['6.3: MA Type']).toEqual(0);
+      expect(data['Meta Data']['7: Series Type']).toEqual('close');
+      expect(data['Meta Data']['8: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: BBANDS']).toBeDefined();
+    });
+});
+
 test(`midpoint data works`, () => {
   expect.assertions(9);
   return delay(TIME)
@@ -651,7 +671,7 @@ test(`sar data works`, () => {
       expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
       expect(data['Meta Data']['4: Interval']).toEqual('daily');
       expect(data['Meta Data']['5.1: Acceleration']).toEqual(0.01);
-      expect(data['Meta Data']['5.2: Maximum']).toEqual(0.20);
+      expect(data['Meta Data']['5.2: Maximum']).toEqual(0.2);
       expect(data['Meta Data']['6: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: SAR']).toBeDefined();
     });
