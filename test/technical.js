@@ -664,6 +664,23 @@ test(`ad data works`, () => {
     });
 });
 
+test(`adosc data works`, () => {
+  expect.assertions(9);
+  return delay(TIME)
+    .then(() => alpha.technical.adosc(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Chaikin A/D Oscillator (ADOSC)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: FastK Period']).toEqual(3);
+      expect(data['Meta Data']['5.2: SlowK Period']).toEqual(10);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: ADOSC']).toBeDefined();
+    });
+});
+
 test(`obv data works`, () => {
   expect.assertions(7);
   return delay(TIME)
