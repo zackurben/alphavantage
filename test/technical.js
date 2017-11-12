@@ -539,7 +539,7 @@ test(`ultosc data works`, () => {
       expect(data['Meta Data']['4: Interval']).toEqual('daily');
       expect(data['Meta Data']['5.1: Time Period 1']).toEqual(7);
       expect(data['Meta Data']['5.2: Time Period 2']).toEqual(14);
-      expect(data['Meta Data']['5.3: Time Period 2']).toEqual(28);
+      expect(data['Meta Data']['5.3: Time Period 3']).toEqual(28);
       expect(data['Meta Data']['6: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: ULTOSC']).toBeDefined();
     });
