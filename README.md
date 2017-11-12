@@ -152,6 +152,10 @@ See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-informatio
 alpha.performance.sector()
 ```
 
+## Contributing
+
+All contributions are welcome! The purpose of this library is to keep function parity with the Alpha Vantage API, while keeping a slim and intuitive programming interface. Before any pull requests are made, please run `npm run lint` to fix style issues and ensure that all test are passing `npm test`. The codebase should always remain at 100% test coverage.
+
 ## Contact
   - Author: Zack Urben
   - Twitter: https://twitter.com/zackurben (better)
