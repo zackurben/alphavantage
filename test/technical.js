@@ -640,6 +640,23 @@ test(`midprice data works`, () => {
     });
 });
 
+test(`sar data works`, () => {
+  expect.assertions(9);
+  return delay(TIME)
+    .then(() => alpha.technical.sar(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Parabolic SAR (SAR)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: Acceleration']).toEqual(0.01);
+      expect(data['Meta Data']['5.2: Maximum']).toEqual(0.20);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: SAR']).toBeDefined();
+    });
+});
+
 test(`trange data works`, () => {
   expect.assertions(7);
   return delay(TIME)
