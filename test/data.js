@@ -26,10 +26,10 @@ test(`daily data works`, () => {
     });
 });
 
-test(`adjusted data works`, () => {
+test(`daily adjusted data works`, () => {
   expect.assertions(2);
   return delay(TIME)
-    .then(() => alpha.data.adjusted(`msft`))
+    .then(() => alpha.data.daily_adjusted(`msft`))
     .then(data => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Time Series (Daily)']).toBeDefined();
