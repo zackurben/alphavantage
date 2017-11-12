@@ -46,6 +46,16 @@ test(`weekly data works`, () => {
     });
 });
 
+test(`weekly adjusted data works`, () => {
+  expect.assertions(2);
+  return delay(TIME)
+    .then(() => alpha.data.weekly_adjusted(`msft`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Weekly Adjusted Time Series']).toBeDefined();
+    });
+});
+
 test(`monthly data works`, () => {
   expect.assertions(2);
   return delay(TIME)
