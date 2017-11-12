@@ -17,3 +17,23 @@
   - Adding CHANGELOG.md and backfilling releases
   - Adding utils to the core export
   - Adding missing tests
+
+0.0.6
+  - Increasing jest timeout
+  - Updating deps
+
+0.0.7
+  - Adding env support for the api key
+  - Updating deps
+
+1.0.0
+  - Adding forex support
+  - Adding crypto support
+  - Adding technical indicator support
+  - Adding weekly and monthly adjusted time series data support
+  - Updating deps
+  - Fixed issue where failing requests were not going to a catch handler.
+
+BREAKING
+  - Changing the daily adjusted data to be under the daily_adjusted namespace from
+    adjusted
