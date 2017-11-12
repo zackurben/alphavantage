@@ -8,179 +8,151 @@ This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage
 
 All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
-### Roadmap
+`All available functions with this SDK have the same parameters as listed in the the Alpha Vantage Docs, without the "function" or "apikey". Do not include the "function" or "apikey" parameters when using this library. All functions return promises with the response data.`
 
- - [x] View basic symbol data
- - [x] Add code linting
- - [x] Add code coverage
- - [x] Add documentation
- - [x] Add more test coverage
- - [x] Add CI/CD support
- - [x] Add Sector Performance data
- - [ ] Add Technical indicators data
- - [x] Add Forex data
- - [x] Add Crypto currency data
- - [x] Add utils to clean up response data
- - [ ] Add better documentation for the sdk functions
-
-### Installation
+## Installation
 ```bash
 npm i alphavantage
 ```
 
-### Usage
-
-
-##### Setup
+## Usage
 
 ```javascript
 /**
- * Init alphavantage with your API key.
+ * Init Alpha Vantage with your API key.
  *
  * @param {String} key
- *   Your AlphaVantage API key.
+ *   Your Alpha Vantage API key.
  */
 const alpha = require('alphavantage')({ key: 'qweqweqwe' });
-```
 
-##### Data
-
-```javascript
-/**
- * Data functions: Short Term
- *
- * Types available: intraday
- *
- * All of the data functions have the same signature:
- *   alpha.data.intraday(symbol [, size [, type [, interval]]])
- *
- * @param {String} symbol
- *   The stock ticker symbol to get data for.
- * @param [String] size
- *   The result size to fetch. Available: compact (last 100pts) and full (all, very large).
- * @param [String] type
- *   The datatype to getch. Available: json and csv
- * @param [Number] interval
- *   The time interval (mins) inbetween data points. Available: 1, 5, 15, 30, and 60
- *
- * @returns {Promise}
- *   The request promise.
- */
+// Simple examples
 alpha.data.intraday(`msft`).then(data => {
   console.log(data);
 });
 
-/**
- * Data functions: Long Term
- *
- * Types available: daily, adjusted, weekly, and monthly
- *
- * All of the data functions have the same signature:
- *   alpha.data.<type>(symbol [, size [, type]])
- *
- * @param {String} symbol
- *   The stock ticker symbol to get data for.
- * @param [String] size
- *   The result size to fetch. Available: compact (last 100pts) and full (all, very large).
- * @param [String] type
- *   The datatype to getch. Available: json and csv
- *
- * @returns {Promise}
- *   The request promise.
- */
-alpha.data.<type>(`msft`).then(data => {
+alpha.forex.rate('btc', 'usd').then(data => {
   console.log(data);
-});
-```
+})
 
-##### Technicals
-
-```javascript
-/**
- * Technical functions: SMA-Like
- *
- * Types available: sma, wma, dema, tema, trima, kama, t3, rsi, mom, cmo, roc, rocr, trix, and midpoint.
- *
- * All of the previous technical functions have the same signature:
- *   alpha.technical.<type>(symbol [, interval [, time_period [, series_type]]])
- *
- * @param {String} symbol
- *   The stock ticker symbol to get data for.
- * @param {String} interval
- *   Time interval between two consecutive data points in the time series.
- *   The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
- * @param {Number} time_period
- *   Number of data points used to calculate each moving average value.
- *   Positive integers are accepted (e.g., time_period=60, time_period=200)
- * @param {String} series_type
- *   The desired price type in the time series.
- *   Four types are supported: close, open, high, low
- *
- * @returns {Promise}
- *   The request promise.
- */
-alpha.technical.<type>(`msft`, `daily`, `close`).then(data => {
+alpha.crypto.intraday('btc', 'usd').then(data => {
   console.log(data);
-});
+})
 
-/**
- * Technical functions: MAMA-Like
- *
- * Types available: mama
- *
- * All of the previous technical functions have the same signature:
- *   alpha.technical.<type>(symbol [, interval [, series_type [, fastlimit [, slowlimit]]]])
- *
- * @param {String} symbol
- *   The stock ticker symbol to get data for.
- * @param {String} interval
- *   Time interval between two consecutive data points in the time series.
- *   The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
- * @param {String} series_type
- *   The desired price type in the time series.
- *   Four types are supported: close, open, high, low
- * @param [Number] fastlimit
- *   Positive floats are accepted. By default, fastlimit=0.01
- * @param [Number] slowlimit
- *   Positive floats are accepted. By default, slowlimit=0.01
- *
- * @returns {Promise}
- *   The request promise.
- */
-alpha.technical.mama(`msft`, `daily`, `close`).then(data => {
+alpha.technical.sma(`msft`, `daily`, 60, `close`).then(data => {
   console.log(data);
-});
-```
+})
 
-##### Sector
-
-```javascript
-/**
- * Sector Performance
- *
- * Get realtime and historical sector performances calculated from S&P500 incumbents.
- *
- * @returns {Promise}
- *   The request promise.
- */
 alpha.performance.sector().then(data => {
   console.log(data);
 });
 ```
 
-##### Util
+## Util
+
+Data polishing
+  - Rewrite weird data keys to be consistent across all api calls. This is an optional utility you can use with the result of any api call.
 
 ```javascript
-/**
- * Data polishing
- *
- * Rewrite weird data keys to be consistent across all api calls. This is an optional
- * utility you can use with the result of any api call.
- */
- const polished = alpha.util.polish(data);
+const polished = alpha.util.polish(data);
 ```
 
-#### Contact
+## Data
+
+See [Alpha Vantage](https://www.alphavantage.co/documentation/#time-series-data) for the parameters.
+```javascript
+alpha.data.intraday(symbol, interval)
+alpha.data.daily(symbol, interval)
+alpha.data.daily_adjusted(symbol, interval)
+alpha.data.weekly(symbol, interval)
+alpha.data.weekly_adjusted(symbol, interval)
+alpha.data.monthly(symbol, interval)
+alpha.data.monthly_adjusted(symbol, interval)
+```
+
+## Forex
+
+See [Alpha Vantage](https://www.alphavantage.co/documentation/#fx) for the parameters.
+```javascript
+alpha.forex.rate(from_currency, to_currency)
+```
+
+## Crypto
+
+See [Alpha Vantage](https://www.alphavantage.co/documentation/#digital-currency) for the parameters.
+```javascript
+alpha.crypto.intraday(symbol, market)
+alpha.crypto.daily(symbol, market)
+alpha.crypto.weekly(symbol, market)
+alpha.crypto.monthly(symbol, market)
+```
+
+## Technicals
+
+See [Alpha Vantage](https://www.alphavantage.co/documentation/#technical-indicators) for the parameters.
+```javascript
+alpha.technical.sma(symbol, market)
+alpha.technical.ema(symbol, interval, time_period, series_type)
+alpha.technical.wma(symbol, interval, time_period, series_type)
+alpha.technical.dema(symbol, interval, time_period, series_type)
+alpha.technical.tema(symbol, interval, time_period, series_type)
+alpha.technical.trima(symbol, interval, time_period, series_type)
+alpha.technical.kama(symbol, interval, time_period, series_type)
+alpha.technical.mama(symbol, interval, series_type, fastlimit, slowlimit)
+alpha.technical.t3(symbol, interval, time_period, series_type)
+alpha.technical.macd(symbol, interval, series_type, fastperiod, slowperiod, signalperiod)
+alpha.technical.macdext(symbol, interval, series_type, fastperiod, slowperiod, signalperiod, fastmatype, slowmatype, signalmatype)
+alpha.technical.stoch(symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype)
+alpha.technical.stochf(symbol, interval, fastkperiod, fastdperiod, fastdmatype)
+alpha.technical.rsi(symbol, interval, time_period, series_type)
+alpha.technical.stochrsi(symbol, interval, time_period, series_type, fastkperiod, slowdperiod, fastdmatype)
+alpha.technical.willr(symbol, interval, time_period)
+alpha.technical.adx(symbol, interval, time_period)
+alpha.technical.adxr(symbol, interval, time_period)
+alpha.technical.apo(symbol, interval, series_type, fastperiod, slowperiod, matype)
+alpha.technical.ppo(symbol, interval, series_type, fastperiod, slowperiod, matype)
+alpha.technical.mom(symbol, interval, time_period, series_type)
+alpha.technical.bop(symbol, interval)
+alpha.technical.cci(symbol, interval, time_period)
+alpha.technical.cmo(symbol, interval, time_period, series_type)
+alpha.technical.roc(symbol, interval, time_period, series_type)
+alpha.technical.rocr(symbol, interval, time_period, series_type)
+alpha.technical.aroon(symbol, interval, time_period)
+alpha.technical.aroonosc(symbol, interval, time_period)
+alpha.technical.mfi(symbol, interval, time_period)
+alpha.technical.trix(symbol, interval, time_period, series_type)
+alpha.technical.ultosc(symbol, interval, timeperiod1, timeperiod2, timeperiod3)
+alpha.technical.dx(symbol, interval, time_period)
+alpha.technical.minus_di(symbol, interval, time_period)
+alpha.technical.plus_di(symbol, interval, time_period)
+alpha.technical.minus_dm(symbol, interval, time_period)
+alpha.technical.plus_dm(symbol, interval, time_period)
+alpha.technical.bbands(symbol, interval, time_period, series_type, nbdevup, nbdevdn)
+alpha.technical.midpoint(symbol, interval, time_period, series_type)
+alpha.technical.midprice(symbol, interval, time_period)
+alpha.technical.sar(symbol, interval, acceleration, maximum)
+alpha.technical.trange(symbol, interval)
+alpha.technical.atr(symbol, interval, time_period)
+alpha.technical.natr(symbol, interval, time_period)
+alpha.technical.ad(symbol, interval)
+alpha.technical.adosc(symbol, interval, fastperiod, slowperiod)
+alpha.technical.obv(symbol, interval)
+alpha.technical.ht_trendline(symbol, interval, series_type)
+alpha.technical.ht_sine(symbol, interval, series_type)
+alpha.technical.ht_trendmode(symbol, interval, series_type)
+alpha.technical.ht_dcperiod(symbol, interval, series_type)
+alpha.technical.ht_dcphase(symbol, interval, series_type)
+alpha.technical.ht_dcphasor(symbol, interval, series_type)
+```
+
+## Performance
+
+See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-information) for the parameters.
+```javascript
+alpha.performance.sector()
+```
+
+## Contact
   - Author: Zack Urben
   - Twitter: https://twitter.com/zackurben (better)
   - Contact: zackurben@gmail.com
