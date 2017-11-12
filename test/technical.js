@@ -527,6 +527,24 @@ test(`trix data works`, () => {
     });
 });
 
+test(`ultosc data works`, () => {
+  expect.assertions(10);
+  return delay(TIME)
+    .then(() => alpha.technical.ultosc(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Ultimate Oscillator (ULTOSC)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: Time Period 1']).toEqual(7);
+      expect(data['Meta Data']['5.2: Time Period 2']).toEqual(14);
+      expect(data['Meta Data']['5.3: Time Period 2']).toEqual(28);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: ULTOSC']).toBeDefined();
+    });
+});
+
 test(`dx data works`, () => {
   expect.assertions(8);
   return delay(TIME)
