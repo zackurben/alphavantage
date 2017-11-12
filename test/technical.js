@@ -852,3 +852,19 @@ test(`ht_dcperiod data works`, () => {
       expect(data['Technical Analysis: HT_DCPERIOD']).toBeDefined();
     });
 });
+
+test(`ht_dcphase data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_dcphase(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Dominant Cycle Phase (HT_DCPHASE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_DCPHASE']).toBeDefined();
+    });
+});
