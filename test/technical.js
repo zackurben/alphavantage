@@ -788,3 +788,19 @@ test(`obv data works`, () => {
       expect(data['Technical Analysis: OBV']).toBeDefined();
     });
 });
+
+test(`ht_trendline data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_trendline(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Instantaneous Trendline (HT_TRENDLINE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_TRENDLINE']).toBeDefined();
+    });
+});
