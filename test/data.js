@@ -4,7 +4,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 jest.unmock('request-promise-native');
 const alpha = require('../')();
 const delay = require('delay');
-const TIME = 4000;
+const TIME = 5000;
 
 test(`intraday data works`, () => {
   expect.assertions(2);
