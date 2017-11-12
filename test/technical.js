@@ -4,7 +4,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 jest.unmock('request-promise-native');
 const alpha = require('../')();
 const delay = require('delay');
-const TIME = 4000;
+const TIME = 5000;
 
 test(`sma data works`, () => {
   expect.assertions(9);
@@ -322,6 +322,44 @@ test(`adxr data works`, () => {
       expect(data['Meta Data']['5: Time Period']).toEqual(60);
       expect(data['Meta Data']['6: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: ADXR']).toBeDefined();
+    });
+});
+
+test(`apo data works`, () => {
+  expect.assertions(11);
+  return delay(TIME)
+    .then(() => alpha.technical.apo(`msft`, `daily`, `close`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Absolute Price Oscillator (APO)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: Fast Period']).toEqual(12);
+      expect(data['Meta Data']['5.2: Slow Period']).toEqual(26);
+      expect(data['Meta Data']['5.3: MA Type']).toEqual(0);
+      expect(data['Meta Data']['6: Series Type']).toEqual('close');
+      expect(data['Meta Data']['7: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: APO']).toBeDefined();
+    });
+});
+
+test(`ppo data works`, () => {
+  expect.assertions(11);
+  return delay(TIME)
+    .then(() => alpha.technical.ppo(`msft`, `daily`, `close`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Percentage Price Oscillator (PPO)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: Fast Period']).toEqual(12);
+      expect(data['Meta Data']['5.2: Slow Period']).toEqual(26);
+      expect(data['Meta Data']['5.3: MA Type']).toEqual(0);
+      expect(data['Meta Data']['6: Series Type']).toEqual('close');
+      expect(data['Meta Data']['7: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: PPO']).toBeDefined();
     });
 });
 
