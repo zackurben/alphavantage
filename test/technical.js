@@ -527,6 +527,24 @@ test(`trix data works`, () => {
     });
 });
 
+test(`ultosc data works`, () => {
+  expect.assertions(10);
+  return delay(TIME)
+    .then(() => alpha.technical.ultosc(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Ultimate Oscillator (ULTOSC)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: Time Period 1']).toEqual(7);
+      expect(data['Meta Data']['5.2: Time Period 2']).toEqual(14);
+      expect(data['Meta Data']['5.3: Time Period 3']).toEqual(28);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: ULTOSC']).toBeDefined();
+    });
+});
+
 test(`dx data works`, () => {
   expect.assertions(8);
   return delay(TIME)
@@ -607,6 +625,26 @@ test(`plus_dm data works`, () => {
     });
 });
 
+test(`bbands data works`, () => {
+  expect.assertions(12);
+  return delay(TIME)
+    .then(() => alpha.technical.bbands(`msft`, `daily`, 60, `close`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Bollinger Bands (BBANDS)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Time Period']).toEqual(60);
+      expect(data['Meta Data']['6.1: Deviation multiplier for upper band']).toEqual(2);
+      expect(data['Meta Data']['6.2: Deviation multiplier for lower band']).toEqual(2);
+      expect(data['Meta Data']['6.3: MA Type']).toEqual(0);
+      expect(data['Meta Data']['7: Series Type']).toEqual('close');
+      expect(data['Meta Data']['8: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: BBANDS']).toBeDefined();
+    });
+});
+
 test(`midpoint data works`, () => {
   expect.assertions(9);
   return delay(TIME)
@@ -637,6 +675,23 @@ test(`midprice data works`, () => {
       expect(data['Meta Data']['5: Time Period']).toEqual(60);
       expect(data['Meta Data']['6: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: MIDPRICE']).toBeDefined();
+    });
+});
+
+test(`sar data works`, () => {
+  expect.assertions(9);
+  return delay(TIME)
+    .then(() => alpha.technical.sar(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Parabolic SAR (SAR)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: Acceleration']).toEqual(0.01);
+      expect(data['Meta Data']['5.2: Maximum']).toEqual(0.2);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: SAR']).toBeDefined();
     });
 });
 
@@ -702,6 +757,23 @@ test(`ad data works`, () => {
     });
 });
 
+test(`adosc data works`, () => {
+  expect.assertions(9);
+  return delay(TIME)
+    .then(() => alpha.technical.adosc(`msft`, `daily`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Chaikin A/D Oscillator (ADOSC)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5.1: FastK Period']).toEqual(3);
+      expect(data['Meta Data']['5.2: SlowK Period']).toEqual(10);
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: ADOSC']).toBeDefined();
+    });
+});
+
 test(`obv data works`, () => {
   expect.assertions(7);
   return delay(TIME)
@@ -714,5 +786,101 @@ test(`obv data works`, () => {
       expect(data['Meta Data']['4: Interval']).toEqual('daily');
       expect(data['Meta Data']['5: Time Zone']).toBeDefined();
       expect(data['Technical Analysis: OBV']).toBeDefined();
+    });
+});
+
+test(`ht_trendline data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_trendline(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Instantaneous Trendline (HT_TRENDLINE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_TRENDLINE']).toBeDefined();
+    });
+});
+
+test(`ht_sine data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_sine(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - SineWave (HT_SINE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_SINE']).toBeDefined();
+    });
+});
+
+test(`ht_trendmode data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_trendmode(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Trend vs Cycle Mode (HT_TRENDMODE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_TRENDMODE']).toBeDefined();
+    });
+});
+
+test(`ht_dcperiod data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_dcperiod(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Dominant Cycle Period (HT_DCPERIOD)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_DCPERIOD']).toBeDefined();
+    });
+});
+
+test(`ht_dcphase data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_dcphase(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Dominant Cycle Phase (HT_DCPHASE)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_DCPHASE']).toBeDefined();
+    });
+});
+
+test(`ht_dcphasor data works`, () => {
+  expect.assertions(8);
+  return delay(TIME)
+    .then(() => alpha.technical.ht_dcphasor(`msft`, `daily`, 'close'))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Meta Data']['1: Symbol']).toEqual('msft');
+      expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Phasor Components (HT_PHASOR)');
+      expect(data['Meta Data']['3: Last Refreshed']).toBeDefined();
+      expect(data['Meta Data']['4: Interval']).toEqual('daily');
+      expect(data['Meta Data']['5: Series Type']).toEqual('close');
+      expect(data['Meta Data']['6: Time Zone']).toBeDefined();
+      expect(data['Technical Analysis: HT_PHASOR']).toBeDefined();
     });
 });

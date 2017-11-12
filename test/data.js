@@ -26,10 +26,10 @@ test(`daily data works`, () => {
     });
 });
 
-test(`adjusted data works`, () => {
+test(`daily adjusted data works`, () => {
   expect.assertions(2);
   return delay(TIME)
-    .then(() => alpha.data.adjusted(`msft`))
+    .then(() => alpha.data.daily_adjusted(`msft`))
     .then(data => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Time Series (Daily)']).toBeDefined();
@@ -46,6 +46,16 @@ test(`weekly data works`, () => {
     });
 });
 
+test(`weekly adjusted data works`, () => {
+  expect.assertions(2);
+  return delay(TIME)
+    .then(() => alpha.data.weekly_adjusted(`msft`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Weekly Adjusted Time Series']).toBeDefined();
+    });
+});
+
 test(`monthly data works`, () => {
   expect.assertions(2);
   return delay(TIME)
@@ -55,3 +65,14 @@ test(`monthly data works`, () => {
       expect(data['Monthly Time Series']).toBeDefined();
     });
 });
+
+test(`weekly adjusted data works`, () => {
+  expect.assertions(2);
+  return delay(TIME)
+    .then(() => alpha.data.monthly_adjusted(`msft`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Monthly Adjusted Time Series']).toBeDefined();
+    });
+});
+
