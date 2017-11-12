@@ -65,3 +65,14 @@ test(`monthly data works`, () => {
       expect(data['Monthly Time Series']).toBeDefined();
     });
 });
+
+test(`weekly adjusted data works`, () => {
+  expect.assertions(2);
+  return delay(TIME)
+    .then(() => alpha.data.monthly_adjusted(`msft`))
+    .then(data => {
+      expect(data['Meta Data']).toBeDefined();
+      expect(data['Monthly Adjusted Time Series']).toBeDefined();
+    });
+});
+
