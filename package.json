@@ -37,7 +37,7 @@
   "devDependencies": {
     "coveralls": "^3.0.0",
     "delay": "^2.0.0",
-    "jest": "^21.2.1",
+    "jest": "^22.0.0",
     "prettier": "^1.7.4"
   },
   "jest": {
