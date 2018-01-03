@@ -37,3 +37,7 @@
 BREAKING
   - Changing the daily adjusted data to be under the daily_adjusted namespace from
     adjusted
+
+1.1.0
+  - Adding batch quote support
+  - Updating jest to 22.0.4

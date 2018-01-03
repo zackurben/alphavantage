@@ -31,6 +31,10 @@ alpha.data.intraday(`msft`).then(data => {
   console.log(data);
 });
 
+alpha.data.batch([`msft`, `aapl`]).then(data => {
+  console.log(data);
+});
+
 alpha.forex.rate('btc', 'usd').then(data => {
   console.log(data);
 })
@@ -68,6 +72,7 @@ alpha.data.weekly(symbol, interval)
 alpha.data.weekly_adjusted(symbol, interval)
 alpha.data.monthly(symbol, interval)
 alpha.data.monthly_adjusted(symbol, interval)
+alpha.data.batch([symbol1, symbol2..])
 ```
 
 ## Forex
