@@ -87,9 +87,6 @@ alpha.forex.rate(from_currency, to_currency)
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#digital-currency) for the parameters.
 ```javascript
 alpha.crypto.intraday(symbol, market)
-alpha.crypto.daily(symbol, market)
-alpha.crypto.weekly(symbol, market)
-alpha.crypto.monthly(symbol, market)
 ```
 
 ## Technicals
