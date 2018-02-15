@@ -41,3 +41,7 @@ BREAKING
 1.1.0
   - Adding batch quote support
   - Updating jest to 22.0.4
+
+1.1.1
+  - Updating dotenv dependency
+  - Fixing documentation for data endpoints
