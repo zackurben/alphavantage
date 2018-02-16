@@ -65,13 +65,13 @@ const polished = alpha.util.polish(data);
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#time-series-data) for the parameters.
 ```javascript
-alpha.data.intraday(symbol, interval)
-alpha.data.daily(symbol, interval)
-alpha.data.daily_adjusted(symbol, interval)
-alpha.data.weekly(symbol, interval)
-alpha.data.weekly_adjusted(symbol, interval)
-alpha.data.monthly(symbol, interval)
-alpha.data.monthly_adjusted(symbol, interval)
+alpha.data.intraday(symbol, outputsize, datatype, interval)
+alpha.data.daily(symbol, outputsize, datatype, interval)
+alpha.data.daily_adjusted(symbol, outputsize, datatype, interval)
+alpha.data.weekly(symbol, outputsize, datatype, interval)
+alpha.data.weekly_adjusted(symbol, outputsize, datatype, interval)
+alpha.data.monthly(symbol, outputsize, datatype, interval)
+alpha.data.monthly_adjusted(symbol, outputsize, datatype, interval)
 alpha.data.batch([symbol1, symbol2..])
 ```
 
