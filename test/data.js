@@ -76,6 +76,16 @@ test(`weekly adjusted data works`, () => {
     });
 });
 
+test(`global quote data works`, () => {
+  expect.assertions(2);
+  return delay(TIME)
+    .then(() => alpha.data.quote(`msft`))
+    .then(data => {
+      expect(data['Global Quote']).toBeDefined();
+      expect(data['Global Quote']['01. symbol']).toEqual('MSFT');
+    });
+});
+
 test(`batch data works`, () => {
   expect.assertions(9);
   return delay(TIME)

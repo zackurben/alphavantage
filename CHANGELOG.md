@@ -45,3 +45,10 @@ BREAKING
 1.1.1
   - Updating dotenv dependency
   - Fixing documentation for data endpoints
+
+1.1.2
+  - Updating deps
+  - Fixing broken forex test
+
+1.2.0
+  - Adding global quote endpoint support
