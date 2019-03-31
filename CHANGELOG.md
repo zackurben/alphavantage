@@ -56,3 +56,6 @@ BREAKING
 1.2.1
   - Fixing documentation for SMA usage
   - Removing test for intraday crypto data (removed from API)
+
+1.2.2
+  - Adding Time Series FX (Daily) to the polish function
