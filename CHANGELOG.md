@@ -52,3 +52,7 @@ BREAKING
 
 1.2.0
   - Adding global quote endpoint support
+
+1.2.1
+  - Fixing documentation for SMA usage
+  - Removing test for intraday crypto data (removed from API)
