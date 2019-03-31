@@ -59,3 +59,6 @@ BREAKING
 
 1.2.2
   - Adding Time Series FX (Daily) to the polish function
+
+1.2.3
+  - Updating dependencies to remove audit and outdated warnings
