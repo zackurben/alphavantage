@@ -97,7 +97,7 @@ alpha.crypto.monthly(symbol, market)
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#technical-indicators) for the parameters.
 ```javascript
-alpha.technical.sma(symbol, market)
+alpha.technical.sma(symbol, interval, time_period, series_type)
 alpha.technical.ema(symbol, interval, time_period, series_type)
 alpha.technical.wma(symbol, interval, time_period, series_type)
 alpha.technical.dema(symbol, interval, time_period, series_type)

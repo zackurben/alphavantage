@@ -6,16 +6,6 @@ const alpha = require('../')();
 const delay = require('delay');
 const TIME = 1000;
 
-test(`intraday crypto works`, () => {
-  expect.assertions(2);
-  return delay(TIME)
-    .then(() => alpha.crypto.intraday('btc', 'usd'))
-    .then(data => {
-      expect(data['Meta Data']).toBeDefined();
-      expect(data['Time Series (Digital Currency Intraday)']).toBeDefined();
-    });
-});
-
 test(`daily data works`, () => {
   expect.assertions(2);
   return delay(TIME)
