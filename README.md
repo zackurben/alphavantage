@@ -73,6 +73,7 @@ alpha.data.weekly_adjusted(symbol, outputsize, datatype, interval)
 alpha.data.monthly(symbol, outputsize, datatype, interval)
 alpha.data.monthly_adjusted(symbol, outputsize, datatype, interval)
 alpha.data.quote(symbol, outputsize, datatype, interval)
+alpha.data.search(keywords)
 alpha.data.batch([symbol1, symbol2..])
 ```
 

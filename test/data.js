@@ -86,6 +86,16 @@ test(`global quote data works`, () => {
     });
 });
 
+test(`symbol search works`, () => {
+  expect.assertions(2);
+  return delay(TIME)
+    .then(() => alpha.data.search(`Micro`))
+    .then(data => {
+      expect(data['bestMatches']).toBeDefined();
+      expect(data['bestMatches'][0]['1. symbol']).toEqual('AMD');
+    });
+});
+
 test(`batch data works`, () => {
   expect.assertions(9);
   return delay(TIME)

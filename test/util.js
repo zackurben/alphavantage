@@ -664,6 +664,38 @@ test(`sector performance data polishing works`, () => {
   expect(polished['10year']).toBeDefined();
 });
 
+test(`symbol search polishing works`, () => {
+  expect.assertions(21);
+  const data = require('./examples/data/search.json');
+  const polished = alpha.util.polish(data);
+  let first;
+
+  expect(polished['bestMatches']).toBeDefined();
+  first = Object.keys(polished['bestMatches'])[0];
+  expect(first).toBeDefined();
+  expect(polished['bestMatches'][first]).toBeDefined();
+
+  expect(polished['bestMatches'][first]['1. symbol']).toBeUndefined();
+  expect(polished['bestMatches'][first]['2. name']).toBeUndefined();
+  expect(polished['bestMatches'][first]['3. type']).toBeUndefined();
+  expect(polished['bestMatches'][first]['4. region']).toBeUndefined();
+  expect(polished['bestMatches'][first]['5. marketOpen']).toBeUndefined();
+  expect(polished['bestMatches'][first]['6. marketClose']).toBeUndefined();
+  expect(polished['bestMatches'][first]['7. timezone']).toBeUndefined();
+  expect(polished['bestMatches'][first]['8. currency']).toBeUndefined();
+  expect(polished['bestMatches'][first]['9. matchScore']).toBeUndefined();
+
+  expect(polished['bestMatches'][first]['symbol']).toBeDefined();
+  expect(polished['bestMatches'][first]['name']).toBeDefined();
+  expect(polished['bestMatches'][first]['type']).toBeDefined();
+  expect(polished['bestMatches'][first]['region']).toBeDefined();
+  expect(polished['bestMatches'][first]['market_open']).toBeDefined();
+  expect(polished['bestMatches'][first]['market_close']).toBeDefined();
+  expect(polished['bestMatches'][first]['zone']).toBeDefined();
+  expect(polished['bestMatches'][first]['currency']).toBeDefined();
+  expect(polished['bestMatches'][first]['match_score']).toBeDefined();
+});
+
 test(`non 200 request responses are thrown to a catch`, () => {
   expect.assertions(1);
 
