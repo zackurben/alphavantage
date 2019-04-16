@@ -339,61 +339,6 @@ test(`forex rate data polishing works`, () => {
   expect(polished['rate']['zone']).toBeDefined();
 });
 
-test(`intraday crypto polishing works`, () => {
-  expect.assertions(44);
-  const data = require('./examples/crypto/intraday');
-  const polished = alpha.util.polish(data);
-  let first;
-
-  expect(data['Meta Data']).toBeDefined();
-  expect(data['Meta Data']['1. Information']).toBeDefined();
-  expect(data['Meta Data']['2. Digital Currency Code']).toBeDefined();
-  expect(data['Meta Data']['3. Digital Currency Name']).toBeDefined();
-  expect(data['Meta Data']['4. Market Code']).toBeDefined();
-  expect(data['Meta Data']['5. Market Name']).toBeDefined();
-  expect(data['Meta Data']['6. Interval']).toBeDefined();
-  expect(data['Meta Data']['7. Last Refreshed']).toBeDefined();
-  expect(data['Meta Data']['8. Time Zone']).toBeDefined();
-  expect(data['Time Series (Digital Currency Intraday)']).toBeDefined();
-  first = Object.keys(data['Time Series (Digital Currency Intraday)'])[0];
-  expect(first).toBeDefined();
-  expect(data['Time Series (Digital Currency Intraday)'][first]['1a. price (CNY)']).toBeDefined();
-  expect(data['Time Series (Digital Currency Intraday)'][first]['1b. price (USD)']).toBeDefined();
-  expect(data['Time Series (Digital Currency Intraday)'][first]['2. volume']).toBeDefined();
-  expect(data['Time Series (Digital Currency Intraday)'][first]['3. market cap (USD)']).toBeDefined();
-
-  expect(polished['Meta Data']).toBeUndefined();
-  expect(polished['Time Series (Digital Currency Intraday)']).toBeUndefined();
-  expect(polished['meta']).toBeDefined();
-  expect(polished['meta']['1. Information']).toBeUndefined();
-  expect(polished['meta']['2. Digital Currency Code']).toBeUndefined();
-  expect(polished['meta']['3. Digital Currency Name']).toBeUndefined();
-  expect(polished['meta']['4. Market Code']).toBeUndefined();
-  expect(polished['meta']['5. Market Name']).toBeUndefined();
-  expect(polished['meta']['6. Interval']).toBeUndefined();
-  expect(polished['meta']['7. Last Refreshed']).toBeUndefined();
-  expect(polished['meta']['8. Time Zone']).toBeUndefined();
-  expect(polished['meta']['information']).toBeDefined();
-  expect(polished['meta']['coin']).toBeDefined();
-  expect(polished['meta']['coin_name']).toBeDefined();
-  expect(polished['meta']['market']).toBeDefined();
-  expect(polished['meta']['market_name']).toBeDefined();
-  expect(polished['meta']['interval']).toBeDefined();
-  expect(polished['meta']['updated']).toBeDefined();
-  expect(polished['meta']['zone']).toBeDefined();
-  expect(polished['data']).toBeDefined();
-  first = Object.keys(polished['data'])[0];
-  expect(first).toBeDefined();
-  expect(polished['data'][first]['1a. price (CNY)']).toBeUndefined();
-  expect(polished['data'][first]['1b. price (USD)']).toBeUndefined();
-  expect(polished['data'][first]['2. volume']).toBeUndefined();
-  expect(polished['data'][first]['3. market cap (USD)']).toBeUndefined();
-  expect(polished['data'][first]['market']).toBeDefined();
-  expect(polished['data'][first]['usd']).toBeDefined();
-  expect(polished['data'][first]['volume']).toBeDefined();
-  expect(polished['data'][first]['cap']).toBeDefined();
-});
-
 test(`daily crypto polishing works`, () => {
   expect.assertions(59);
   const data = require('./examples/crypto/daily');

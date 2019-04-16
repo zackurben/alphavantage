@@ -39,7 +39,7 @@ alpha.forex.rate('btc', 'usd').then(data => {
   console.log(data);
 })
 
-alpha.crypto.intraday('btc', 'usd').then(data => {
+alpha.crypto.daily('btc', 'usd').then(data => {
   console.log(data);
 })
 
@@ -88,7 +88,6 @@ alpha.forex.rate(from_currency, to_currency)
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#digital-currency) for the parameters.
 ```javascript
-alpha.crypto.intraday(symbol, market)
 alpha.crypto.daily(symbol, market)
 alpha.crypto.weekly(symbol, market)
 alpha.crypto.monthly(symbol, market)
