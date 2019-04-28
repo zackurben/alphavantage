@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.3",
-    "delay": "^4.1.0",
-    "jest": "^24.5.0",
-    "prettier": "^1.16.4"
+    "delay": "^4.2.0",
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0"
   },
   "jest": {
     "collectCoverage": true,
