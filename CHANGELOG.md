@@ -65,3 +65,6 @@ BREAKING
 
 1.2.4
   - Adding symbol search endpoint support
+
+1.2.5
+  - Removing crypto intraday support (removed from API)

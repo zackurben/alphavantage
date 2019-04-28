@@ -89,7 +89,7 @@ test(`global quote data works`, () => {
 test(`symbol search works`, () => {
   expect.assertions(2);
   return delay(TIME)
-    .then(() => alpha.data.search(`Micro`))
+    .then(() => alpha.data.search(`Advanced Micro`))
     .then(data => {
       expect(data['bestMatches']).toBeDefined();
       expect(data['bestMatches'][0]['1. symbol']).toEqual('AMD');
