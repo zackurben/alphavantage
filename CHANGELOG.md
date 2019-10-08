@@ -68,3 +68,7 @@ BREAKING
 
 1.2.5
   - Removing crypto intraday support (removed from API)
+
+1.2.6
+  - Updating dependencies.
+  - Removing sector performance test until the API works again.
