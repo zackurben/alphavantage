@@ -6,7 +6,7 @@ const alpha = require('../')();
 const delay = require('delay');
 const TIME = 1000;
 
-test(`sector performance data works`, () => {
+test.skip(`sector performance data works`, () => {
   expect.assertions(11);
   return delay(TIME)
     .then(() => alpha.performance.sector())
