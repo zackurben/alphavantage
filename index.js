@@ -1,13 +1,27 @@
 'use strict';
 
-require('dotenv').config();
-const apiKey = 'AV_KEY';
+import Util from './lib/util';
+import Data from './lib/data';
+import Forex from './lib/forex';
+import Crypto from './lib/crypto';
+import Technical from './lib/technical';
+import Performance from './lib/performance';
+
+// Attempt to load the env
+try {
+  require('dotenv').config();
+} catch (e) {}
 
 /**
  * The Alpha Vantage core module.
  */
-module.exports = config => {
-  config = Object.assign({}, { key: process.env[apiKey] }, config);
+export default (config = {}) => {
+  let key;
+  try {
+    key = process.env.AV_KEY;
+  } catch (e) {}
+
+  config = Object.assign({}, { key }, config);
 
   // Check for config errors.
   let errors = [];
@@ -25,11 +39,11 @@ module.exports = config => {
 
   // Include all the submodules.
   return {
-    util: require('./lib/util')(config),
-    data: require('./lib/data')(config),
-    forex: require('./lib/forex')(config),
-    crypto: require('./lib/crypto')(config),
-    technical: require('./lib/technical')(config),
-    performance: require('./lib/performance')(config)
+    util: Util(config),
+    data: Data(config),
+    forex: Forex(config),
+    crypto: Crypto(config),
+    technical: Technical(config),
+    performance: Performance(config)
   };
 };
