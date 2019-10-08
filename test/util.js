@@ -1,5 +1,6 @@
 'use strict';
 
+jest.mock('cross-fetch');
 import Alpha from '../';
 const alpha = Alpha();
 
