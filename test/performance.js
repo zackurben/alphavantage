@@ -1,7 +1,7 @@
 'use strict';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-jest.unmock('request-promise-native');
+jest.unmock('cross-fetch');
 const alpha = require('../')();
 const delay = require('delay');
 const TIME = 1000;
