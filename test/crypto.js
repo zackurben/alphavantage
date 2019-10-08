@@ -1,9 +1,11 @@
 'use strict';
 
+import Alpha from '../';
+import delay from 'delay';
+const alpha = Alpha();
+
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 jest.unmock('cross-fetch');
-const alpha = require('../')();
-const delay = require('delay');
 const TIME = 1000;
 
 test(`daily data works`, () => {

@@ -1,7 +1,7 @@
 'use strict';
 
+import Alpha from '../';
 const env = process.env;
-const Alpha = require('../');
 
 // Clear the current environment variables for testing.
 process.env = {};

@@ -35,6 +35,9 @@
     "cross-fetch": "^3.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "babel-jest": "^24.9.0",
     "coveralls": "^3.0.6",
     "delay": "^4.3.0",
     "jest": "^24.9.0",
