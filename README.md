@@ -177,7 +177,7 @@ alpha.performance.sector();
 
 ## Browser Usage
 
-This library can be used in the browser or in node since it is packaged as a UMD module. To use it in the browser, you must first include the bundled source:
+This library can be used in the browser or in node since it is packaged as a UMD module. To use it in the browser, you must first include the bundled source. Without a bundler, that can be acheived with:
 
 ```html
 <script src="./node_modules/alphavantage/dist/bundle.js"></script>
