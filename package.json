@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "prettier --print-width 120 --single-quote --write \"./**/**.js\"",
+    "lint": "prettier --print-width 120 --single-quote --write \"./!(dist)**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": "webpack"
   },
