@@ -1,9 +1,11 @@
 'use strict';
 
+import Alpha from '../';
+import delay from 'delay';
+const alpha = Alpha();
+
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-jest.unmock('request-promise-native');
-const alpha = require('../')();
-const delay = require('delay');
+jest.unmock('cross-fetch');
 const TIME = 1000;
 
 test.skip(`sector performance data works`, () => {

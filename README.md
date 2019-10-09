@@ -11,6 +11,7 @@ All contributions are welcome! This is an open source project under the MIT lice
 `All available functions with this SDK have the same parameters as listed in the the Alpha Vantage Docs, without the "function" or "apikey". Do not include the "function" or "apikey" parameters when using this library. All functions return promises with the response data.`
 
 ## Installation
+
 ```bash
 npm i alphavantage
 ```
@@ -37,15 +38,15 @@ alpha.data.batch([`msft`, `aapl`]).then(data => {
 
 alpha.forex.rate('btc', 'usd').then(data => {
   console.log(data);
-})
+});
 
 alpha.crypto.daily('btc', 'usd').then(data => {
   console.log(data);
-})
+});
 
 alpha.technical.sma(`msft`, `daily`, 60, `close`).then(data => {
   console.log(data);
-})
+});
 
 alpha.performance.sector().then(data => {
   console.log(data);
@@ -55,7 +56,8 @@ alpha.performance.sector().then(data => {
 ## Util
 
 Data polishing
-  - Rewrite weird data keys to be consistent across all api calls. This is an optional utility you can use with the result of any api call.
+
+- Rewrite weird data keys to be consistent across all api calls. This is an optional utility you can use with the result of any api call.
 
 ```javascript
 const polished = alpha.util.polish(data);
@@ -64,6 +66,7 @@ const polished = alpha.util.polish(data);
 ## Data
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#time-series-data) for the parameters.
+
 ```javascript
 alpha.data.intraday(symbol, outputsize, datatype, interval)
 alpha.data.daily(symbol, outputsize, datatype, interval)
@@ -80,89 +83,126 @@ alpha.data.batch([symbol1, symbol2..])
 ## Forex
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#fx) for the parameters.
+
 ```javascript
-alpha.forex.rate(from_currency, to_currency)
+alpha.forex.rate(from_currency, to_currency);
 ```
 
 ## Crypto
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#digital-currency) for the parameters.
+
 ```javascript
-alpha.crypto.daily(symbol, market)
-alpha.crypto.weekly(symbol, market)
-alpha.crypto.monthly(symbol, market)
+alpha.crypto.daily(symbol, market);
+alpha.crypto.weekly(symbol, market);
+alpha.crypto.monthly(symbol, market);
 ```
 
 ## Technicals
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#technical-indicators) for the parameters.
+
 ```javascript
-alpha.technical.sma(symbol, interval, time_period, series_type)
-alpha.technical.ema(symbol, interval, time_period, series_type)
-alpha.technical.wma(symbol, interval, time_period, series_type)
-alpha.technical.dema(symbol, interval, time_period, series_type)
-alpha.technical.tema(symbol, interval, time_period, series_type)
-alpha.technical.trima(symbol, interval, time_period, series_type)
-alpha.technical.kama(symbol, interval, time_period, series_type)
-alpha.technical.mama(symbol, interval, series_type, fastlimit, slowlimit)
-alpha.technical.t3(symbol, interval, time_period, series_type)
-alpha.technical.macd(symbol, interval, series_type, fastperiod, slowperiod, signalperiod)
-alpha.technical.macdext(symbol, interval, series_type, fastperiod, slowperiod, signalperiod, fastmatype, slowmatype, signalmatype)
-alpha.technical.stoch(symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype)
-alpha.technical.stochf(symbol, interval, fastkperiod, fastdperiod, fastdmatype)
-alpha.technical.rsi(symbol, interval, time_period, series_type)
-alpha.technical.stochrsi(symbol, interval, time_period, series_type, fastkperiod, slowdperiod, fastdmatype)
-alpha.technical.willr(symbol, interval, time_period)
-alpha.technical.adx(symbol, interval, time_period)
-alpha.technical.adxr(symbol, interval, time_period)
-alpha.technical.apo(symbol, interval, series_type, fastperiod, slowperiod, matype)
-alpha.technical.ppo(symbol, interval, series_type, fastperiod, slowperiod, matype)
-alpha.technical.mom(symbol, interval, time_period, series_type)
-alpha.technical.bop(symbol, interval)
-alpha.technical.cci(symbol, interval, time_period)
-alpha.technical.cmo(symbol, interval, time_period, series_type)
-alpha.technical.roc(symbol, interval, time_period, series_type)
-alpha.technical.rocr(symbol, interval, time_period, series_type)
-alpha.technical.aroon(symbol, interval, time_period)
-alpha.technical.aroonosc(symbol, interval, time_period)
-alpha.technical.mfi(symbol, interval, time_period)
-alpha.technical.trix(symbol, interval, time_period, series_type)
-alpha.technical.ultosc(symbol, interval, timeperiod1, timeperiod2, timeperiod3)
-alpha.technical.dx(symbol, interval, time_period)
-alpha.technical.minus_di(symbol, interval, time_period)
-alpha.technical.plus_di(symbol, interval, time_period)
-alpha.technical.minus_dm(symbol, interval, time_period)
-alpha.technical.plus_dm(symbol, interval, time_period)
-alpha.technical.bbands(symbol, interval, time_period, series_type, nbdevup, nbdevdn)
-alpha.technical.midpoint(symbol, interval, time_period, series_type)
-alpha.technical.midprice(symbol, interval, time_period)
-alpha.technical.sar(symbol, interval, acceleration, maximum)
-alpha.technical.trange(symbol, interval)
-alpha.technical.atr(symbol, interval, time_period)
-alpha.technical.natr(symbol, interval, time_period)
-alpha.technical.ad(symbol, interval)
-alpha.technical.adosc(symbol, interval, fastperiod, slowperiod)
-alpha.technical.obv(symbol, interval)
-alpha.technical.ht_trendline(symbol, interval, series_type)
-alpha.technical.ht_sine(symbol, interval, series_type)
-alpha.technical.ht_trendmode(symbol, interval, series_type)
-alpha.technical.ht_dcperiod(symbol, interval, series_type)
-alpha.technical.ht_dcphase(symbol, interval, series_type)
-alpha.technical.ht_dcphasor(symbol, interval, series_type)
+alpha.technical.sma(symbol, interval, time_period, series_type);
+alpha.technical.ema(symbol, interval, time_period, series_type);
+alpha.technical.wma(symbol, interval, time_period, series_type);
+alpha.technical.dema(symbol, interval, time_period, series_type);
+alpha.technical.tema(symbol, interval, time_period, series_type);
+alpha.technical.trima(symbol, interval, time_period, series_type);
+alpha.technical.kama(symbol, interval, time_period, series_type);
+alpha.technical.mama(symbol, interval, series_type, fastlimit, slowlimit);
+alpha.technical.t3(symbol, interval, time_period, series_type);
+alpha.technical.macd(symbol, interval, series_type, fastperiod, slowperiod, signalperiod);
+alpha.technical.macdext(
+  symbol,
+  interval,
+  series_type,
+  fastperiod,
+  slowperiod,
+  signalperiod,
+  fastmatype,
+  slowmatype,
+  signalmatype
+);
+alpha.technical.stoch(symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype);
+alpha.technical.stochf(symbol, interval, fastkperiod, fastdperiod, fastdmatype);
+alpha.technical.rsi(symbol, interval, time_period, series_type);
+alpha.technical.stochrsi(symbol, interval, time_period, series_type, fastkperiod, slowdperiod, fastdmatype);
+alpha.technical.willr(symbol, interval, time_period);
+alpha.technical.adx(symbol, interval, time_period);
+alpha.technical.adxr(symbol, interval, time_period);
+alpha.technical.apo(symbol, interval, series_type, fastperiod, slowperiod, matype);
+alpha.technical.ppo(symbol, interval, series_type, fastperiod, slowperiod, matype);
+alpha.technical.mom(symbol, interval, time_period, series_type);
+alpha.technical.bop(symbol, interval);
+alpha.technical.cci(symbol, interval, time_period);
+alpha.technical.cmo(symbol, interval, time_period, series_type);
+alpha.technical.roc(symbol, interval, time_period, series_type);
+alpha.technical.rocr(symbol, interval, time_period, series_type);
+alpha.technical.aroon(symbol, interval, time_period);
+alpha.technical.aroonosc(symbol, interval, time_period);
+alpha.technical.mfi(symbol, interval, time_period);
+alpha.technical.trix(symbol, interval, time_period, series_type);
+alpha.technical.ultosc(symbol, interval, timeperiod1, timeperiod2, timeperiod3);
+alpha.technical.dx(symbol, interval, time_period);
+alpha.technical.minus_di(symbol, interval, time_period);
+alpha.technical.plus_di(symbol, interval, time_period);
+alpha.technical.minus_dm(symbol, interval, time_period);
+alpha.technical.plus_dm(symbol, interval, time_period);
+alpha.technical.bbands(symbol, interval, time_period, series_type, nbdevup, nbdevdn);
+alpha.technical.midpoint(symbol, interval, time_period, series_type);
+alpha.technical.midprice(symbol, interval, time_period);
+alpha.technical.sar(symbol, interval, acceleration, maximum);
+alpha.technical.trange(symbol, interval);
+alpha.technical.atr(symbol, interval, time_period);
+alpha.technical.natr(symbol, interval, time_period);
+alpha.technical.ad(symbol, interval);
+alpha.technical.adosc(symbol, interval, fastperiod, slowperiod);
+alpha.technical.obv(symbol, interval);
+alpha.technical.ht_trendline(symbol, interval, series_type);
+alpha.technical.ht_sine(symbol, interval, series_type);
+alpha.technical.ht_trendmode(symbol, interval, series_type);
+alpha.technical.ht_dcperiod(symbol, interval, series_type);
+alpha.technical.ht_dcphase(symbol, interval, series_type);
+alpha.technical.ht_dcphasor(symbol, interval, series_type);
 ```
 
 ## Performance
 
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-information) for the parameters.
+
 ```javascript
-alpha.performance.sector()
+alpha.performance.sector();
 ```
+
+## Browser Usage
+
+This library can be used in the browser or in node since it is packaged as a UMD module. To use it in the browser, you must first include the bundled source. Without a bundler, that can be acheived with:
+
+```html
+<script src="./node_modules/alphavantage/dist/bundle.js"></script>
+```
+
+Then you can use it with the following:
+
+```js
+// import api from 'alphavantage';
+let AV = window.alphavantage.default({ key: 'XXX' });
+let data = AV.data.quote('aapl').then(data => {
+  console.log(data);
+});
+```
+
+> Note: Your API key will be visible in the network traffic, this should not be used for public projects.
 
 ## Contributing
 
 All contributions are welcome! The purpose of this library is to keep function parity with the Alpha Vantage API, while keeping a slim and intuitive programming interface. Before any pull requests are made, please run `npm run lint` to fix style issues and ensure that all test are passing `npm test`. The codebase should always remain at 100% test coverage.
 
+The build script, `npm run build`, can be used to rebuild the UMD module `dist/bundle.js` and it should be updated with each pull request.
+
 ## Contact
-  - Author: Zack Urben
-  - Twitter: https://twitter.com/zackurben (better)
-  - Contact: zackurben@gmail.com
+
+- Author: Zack Urben
+- Twitter: https://twitter.com/zackurben (better)
+- Contact: zackurben@gmail.com

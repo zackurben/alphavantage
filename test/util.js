@@ -1,7 +1,8 @@
 'use strict';
 
-jest.mock('request-promise-native');
-const alpha = require('../')();
+jest.mock('cross-fetch');
+import Alpha from '../';
+const alpha = Alpha();
 
 test(`the url builder properly builds urls`, () => {
   expect.assertions(7);
