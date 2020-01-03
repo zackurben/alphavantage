@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A simple interface to the Alpha Vantage API.",
   "main": "index.js",
-  "browser": "dist/bundle.js",
+  "browser": "dist/node/main.js",
   "directories": {
     "test": "test"
   },
@@ -32,7 +32,8 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "cross-fetch": "^3.0.4"
+    "cross-fetch": "^3.0.4",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "@babel/core": "^7.6.3",

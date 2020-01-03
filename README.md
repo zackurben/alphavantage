@@ -180,7 +180,7 @@ alpha.performance.sector();
 This library can be used in the browser or in node since it is packaged as a UMD module. To use it in the browser, you must first include the bundled source. Without a bundler, that can be acheived with:
 
 ```html
-<script src="./node_modules/alphavantage/dist/bundle.js"></script>
+<script src="./node_modules/alphavantage/dist/browser/main.js"></script>
 ```
 
 Then you can use it with the following:
@@ -199,7 +199,7 @@ let data = AV.data.quote('aapl').then(data => {
 
 All contributions are welcome! The purpose of this library is to keep function parity with the Alpha Vantage API, while keeping a slim and intuitive programming interface. Before any pull requests are made, please run `npm run lint` to fix style issues and ensure that all test are passing `npm test`. The codebase should always remain at 100% test coverage.
 
-The build script, `npm run build`, can be used to rebuild the UMD module `dist/bundle.js` and it should be updated with each pull request.
+The build script, `npm run build`, can be used to rebuild the UMD module `dist/browser/main.js` and it should be updated with each pull request.
 
 ## Contact
 

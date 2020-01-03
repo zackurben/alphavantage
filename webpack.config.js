@@ -1,16 +1,31 @@
-const path = require('path');
+const { resolve } = require('path');
 
-module.exports = {
-  entry: './index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    library: 'alphavantage',
-    libraryTarget: 'umd'
-  },
-  target: 'web',
-  mode: 'development',
-  node: {
-    fs: 'empty'
-  }
+const base = {
+	entry: './index.js',
+	mode: "development"
+}
+
+const browser = {
+	...base,
+	output: {
+		path: resolve(__dirname, 'dist/browser'),
+		filename: "[name].js",
+		library: 'alphavantage',
+		libraryTarget: 'umd'
+	},
+	target: 'web',
+	node: {
+		fs: 'empty'
+	}
 };
+
+const node = {
+	...base,
+	output: {
+		path: resolve(__dirname, "dist/node"),
+		filename: "[name].js"
+	},
+	target: "node"
+}
+
+module.exports = [ node, browser ]
