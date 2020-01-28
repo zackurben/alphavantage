@@ -1,37 +1,19 @@
 'use strict';
 
-import Util from './lib/util';
+import Crypto from './lib/crypto';
 import Data from './lib/data';
 import Forex from './lib/forex';
-import Crypto from './lib/crypto';
-import Technical from './lib/technical';
 import Performance from './lib/performance';
-
-// Attempt to load the env
-try {
-  require('dotenv').config();
-} catch (e) {}
+import Technical from './lib/technical';
+import Util from './lib/util';
 
 /**
  * The Alpha Vantage core module.
  */
 export default (config = {}) => {
-  let key;
-  try {
-    key = process.env.AV_KEY;
-  } catch (e) {}
-
-  config = Object.assign({}, { key }, config);
-
-  // Check for config errors.
-  let errors = [];
-  ['key'].forEach(prop => {
-    if (config[prop] === undefined) {
-      errors.push(prop);
-    }
-  });
-  if (errors.length) {
-    throw new Error(`Missing Alpha Vantage config settings: ${errors.join(', ')}`);
+  // Check for API Key
+  if (config.key === undefined) {
+    throw new Error('Missing Alpha Vantage config settings: key');
   }
 
   // Add the base url for submodules to use.
@@ -44,6 +26,6 @@ export default (config = {}) => {
     forex: Forex(config),
     crypto: Crypto(config),
     technical: Technical(config),
-    performance: Performance(config)
+    performance: Performance(config),
   };
 };
