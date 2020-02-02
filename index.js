@@ -26,6 +26,6 @@ export default (config = {}) => {
     forex: Forex(config),
     crypto: Crypto(config),
     technical: Technical(config),
-    performance: Performance(config),
+    performance: Performance(config)
   };
 };

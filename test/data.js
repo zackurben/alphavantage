@@ -2,7 +2,7 @@
 
 import delay from 'delay';
 import Alpha from '../';
-const alpha = Alpha({ key: process.env.API_KEY });
+const alpha = Alpha({ key: process.env.AV_KEY });
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 jest.unmock('cross-fetch');
@@ -95,39 +95,5 @@ test(`symbol search works`, () => {
     .then(data => {
       expect(data['bestMatches']).toBeDefined();
       expect(data['bestMatches'][0]['1. symbol']).toEqual('AMD');
-    });
-});
-
-test(`batch data works`, () => {
-  expect.assertions(9);
-  return delay(TIME)
-    .then(() => alpha.data.batch('MSFT,FB,AAPL'))
-    .then(data => {
-      expect(data['Meta Data']).toBeDefined();
-      expect(data['Stock Quotes']).toBeDefined();
-      expect(data['Stock Quotes'].length).toEqual(3);
-      data['Stock Quotes'].forEach(quote => {
-        expect(quote['1. symbol']).toBeDefined();
-      });
-      expect(data['Stock Quotes'][0]['1. symbol']).toEqual('MSFT');
-      expect(data['Stock Quotes'][1]['1. symbol']).toEqual('FB');
-      expect(data['Stock Quotes'][2]['1. symbol']).toEqual('AAPL');
-    });
-});
-
-test(`batch data works with array input`, () => {
-  expect.assertions(9);
-  return delay(TIME)
-    .then(() => alpha.data.batch(['MSFT', 'FB', 'AAPL']))
-    .then(data => {
-      expect(data['Meta Data']).toBeDefined();
-      expect(data['Stock Quotes']).toBeDefined();
-      expect(data['Stock Quotes'].length).toEqual(3);
-      data['Stock Quotes'].forEach(quote => {
-        expect(quote['1. symbol']).toBeDefined();
-      });
-      expect(data['Stock Quotes'][0]['1. symbol']).toEqual('MSFT');
-      expect(data['Stock Quotes'][1]['1. symbol']).toEqual('FB');
-      expect(data['Stock Quotes'][2]['1. symbol']).toEqual('AAPL');
     });
 });

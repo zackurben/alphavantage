@@ -2,7 +2,7 @@
 
 import delay from 'delay';
 import Alpha from '../';
-const alpha = Alpha({ key: process.env.API_KEY });
+const alpha = Alpha({ key: process.env.AV_KEY });
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 jest.unmock('cross-fetch');

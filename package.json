@@ -5,7 +5,7 @@
   "main": "dist/bundle.js",
   "scripts": {
     "test": "jest --setupFiles dotenv/config",
-    "lint": "prettier --print-width 120 --single-quote --write \"./!(dist)**/**.js\"",
+    "lint": "prettier --write \"./!(dist)**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": "rollup index.js --file dist/bundle.js --format umd --name 'alphavantage'"
   },
