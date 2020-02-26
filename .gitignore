@@ -185,3 +185,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/osx,git,node,windows,webstorm,visualstudiocode
+
+# Build Directory
+dist

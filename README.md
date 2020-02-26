@@ -32,10 +32,6 @@ alpha.data.intraday(`msft`).then(data => {
   console.log(data);
 });
 
-alpha.data.batch([`msft`, `aapl`]).then(data => {
-  console.log(data);
-});
-
 alpha.forex.rate('btc', 'usd').then(data => {
   console.log(data);
 });
@@ -68,16 +64,15 @@ const polished = alpha.util.polish(data);
 See [Alpha Vantage](https://www.alphavantage.co/documentation/#time-series-data) for the parameters.
 
 ```javascript
-alpha.data.intraday(symbol, outputsize, datatype, interval)
-alpha.data.daily(symbol, outputsize, datatype, interval)
-alpha.data.daily_adjusted(symbol, outputsize, datatype, interval)
-alpha.data.weekly(symbol, outputsize, datatype, interval)
-alpha.data.weekly_adjusted(symbol, outputsize, datatype, interval)
-alpha.data.monthly(symbol, outputsize, datatype, interval)
-alpha.data.monthly_adjusted(symbol, outputsize, datatype, interval)
-alpha.data.quote(symbol, outputsize, datatype, interval)
-alpha.data.search(keywords)
-alpha.data.batch([symbol1, symbol2..])
+alpha.data.intraday(symbol, outputsize, datatype, interval);
+alpha.data.daily(symbol, outputsize, datatype, interval);
+alpha.data.daily_adjusted(symbol, outputsize, datatype, interval);
+alpha.data.weekly(symbol, outputsize, datatype, interval);
+alpha.data.weekly_adjusted(symbol, outputsize, datatype, interval);
+alpha.data.monthly(symbol, outputsize, datatype, interval);
+alpha.data.monthly_adjusted(symbol, outputsize, datatype, interval);
+alpha.data.quote(symbol, outputsize, datatype, interval);
+alpha.data.search(keywords);
 ```
 
 ## Forex

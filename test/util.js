@@ -2,7 +2,7 @@
 
 jest.mock('cross-fetch');
 import Alpha from '../';
-const alpha = Alpha();
+const alpha = Alpha({ key: process.env.AV_KEY });
 
 test(`the url builder properly builds urls`, () => {
   expect.assertions(7);
