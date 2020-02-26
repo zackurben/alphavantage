@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/zackurben/alphavantage/badge.svg?branch=master)](https://coveralls.io/github/zackurben/alphavantage?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/zackurben/alphavantage.svg)](https://greenkeeper.io/)
 
-This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/) hosted on [NPM](https://www.npmjs.com/package/alphavantage). I have no affiliation with AlphaVantage.
+This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/) hosted on [NPM](https://www.npmjs.com/package/alphavantage). I have no affiliation with AlphaVantage. This library can be used in the browser or in node since it is packaged as a UMD module.
 
 All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
@@ -16,7 +16,7 @@ All contributions are welcome! This is an open source project under the MIT lice
 npm i alphavantage
 ```
 
-## Usage
+## Node.js Initialization
 
 ```javascript
 /**
@@ -26,7 +26,30 @@ npm i alphavantage
  *   Your Alpha Vantage API key.
  */
 const alpha = require('alphavantage')({ key: 'qweqweqwe' });
+```
 
+## Browser Initialization
+
+> Note: Your API key will be visible in the network traffic, this should not be used for public projects.
+
+```html
+<body>
+  <script src="path/to/alphavantage/dist/bundle.js"></script>
+  <script type="application/javascript">
+    /**
+     * Init Alpha Vantage with your API key.
+     *
+     * @param {String} key
+     *   Your Alpha Vantage API key.
+     */
+    const alpha = alphavantage({ key: 'qweqweqwe' });
+  </script>
+</body>
+```
+
+## Usage
+
+```javascript
 // Simple examples
 alpha.data.intraday(`msft`).then(data => {
   console.log(data);
@@ -169,26 +192,6 @@ See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-informatio
 ```javascript
 alpha.performance.sector();
 ```
-
-## Browser Usage
-
-This library can be used in the browser or in node since it is packaged as a UMD module. To use it in the browser, you must first include the bundled source. Without a bundler, that can be acheived with:
-
-```html
-<script src="./node_modules/alphavantage/dist/bundle.js"></script>
-```
-
-Then you can use it with the following:
-
-```js
-// import api from 'alphavantage';
-let AV = window.alphavantage.default({ key: 'XXX' });
-let data = AV.data.quote('aapl').then(data => {
-  console.log(data);
-});
-```
-
-> Note: Your API key will be visible in the network traffic, this should not be used for public projects.
 
 ## Contributing
 
