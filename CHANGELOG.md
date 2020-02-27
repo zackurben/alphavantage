@@ -1,21 +1,21 @@
-0.0.1
+# 0.0.1
 
 - Initial release
 
-0.0.2
+# 0.0.2
 
 - Adding initial tests
 
-0.0.3
+# 0.0.3
 
 - Updating documentation
 - Fixing code linting
 
-0.0.4
+# 0.0.4
 
 - Adding sector performance api
 
-0.0.5
+# 0.0.5
 
 - Adding env variable support
 - Adding output restructuring utils with tests
@@ -23,17 +23,17 @@
 - Adding utils to the core export
 - Adding missing tests
 
-0.0.6
+# 0.0.6
 
 - Increasing jest timeout
 - Updating deps
 
-0.0.7
+# 0.0.7
 
 - Adding env support for the api key
 - Updating deps
 
-1.0.0
+# 1.0.0
 
 - Adding forex support
 - Adding crypto support
@@ -42,56 +42,60 @@
 - Updating deps
 - Fixed issue where failing requests were not going to a catch handler.
 
-BREAKING
+_BREAKING_
 
 - Changing the daily adjusted data to be under the daily_adjusted namespace from
   adjusted
 
-1.1.0
+# 1.1.0
 
 - Adding batch quote support
 - Updating jest to 22.0.4
 
-1.1.1
+# 1.1.1
 
 - Updating dotenv dependency
 - Fixing documentation for data endpoints
 
-1.1.2
+# 1.1.2
 
 - Updating deps
 - Fixing broken forex test
 
-1.2.0
+# 1.2.0
 
 - Adding global quote endpoint support
 
-1.2.1
+# 1.2.1
 
 - Fixing documentation for SMA usage
 - Removing test for intraday crypto data (removed from API)
 
-1.2.2
+# 1.2.2
 
 - Adding Time Series FX (Daily) to the polish function
 
-1.2.3
+# 1.2.3
 
 - Updating dependencies to remove audit and outdated warnings
 
-1.2.4
+# 1.2.4
 
 - Adding symbol search endpoint support
 
-1.2.5
+# 1.2.5
 
 - Removing crypto intraday support (removed from API)
 
-1.2.6
+# 1.2.6
 
 - Updating dependencies.
 - Removing sector performance test until the API works again.
 
-2.0.0
+# 2.0.0 - _DEPRECATED_
 
 - Adding browser support via UMD bundle.
+
+# 2.0.1
+
+- Fixed UMD support for browser and Node.js environments.
