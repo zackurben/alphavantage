@@ -1,5 +1,8 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 after_script:
-  - npm run coveralls
+- npm run coveralls
+env:
+  global:
+    secure: Zb28/LW7GG58RGn5w5zFY7GwdI5uYud+qu3+yJfIgBHvnaiVZET5Zcz0OOLzK+DcSSgnScRqY/4VhyYvgii+pQOymT+Ho2DmlOyHEwYJwdxUGmEM16gkpASfwq3NK/VMr05+E5LOfB8F+dLCq/51JNmTRmpcjKjZdXlgj/7DMBVWfdu8pbLWQeuhwY+gzQEnEmSrOscLup/NKDWz/0oOFW8RdOJVNr0GTTSvMkOZUzQJ7Zj5DL12+PYTLlGtlJPNNLUUDDqotgD24CgkeiGA/3JCQk7SXW2iD6Do7ogRMY2a6sIdr8LtP1970JzVEZsIyBkQN/eXVrrIv1FlMz2FqM+5OG24ji3CRrcE7braauEJSCdqerVVntU6TXWOgUU+hWEPT/4g6VFRGG1kFFnjk9cElCeeq5uMo2oCUFM8zCO9jec7kFUinWIx3gW9XAzQbrSgnYCaIoFeA6rP0iZA7wntTm5cq9WmJjEyPYYwsimWGXMc8zggDnzAkRoX1xXH95lcE5LS8u/PQItj6bQtr7oXyDh+4zArmNx15sUlFN2q+qwgQLF6u+YbKJ/uU30j/EGHUbaPSkOSkOo6OBBYfUlP3ZqKfqpsVFKfRUa4YWGIi0S2IwdrNmUQJtmrTK4+U7e8Z351o9f0yQpfEIrOZ/h7qLh3wx2ooGkNOEQCtEM=
