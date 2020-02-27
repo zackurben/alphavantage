@@ -407,15 +407,7 @@
       monthly: series('TIME_SERIES_MONTHLY'),
       monthly_adjusted: series('TIME_SERIES_MONTHLY_ADJUSTED'),
       quote: series('GLOBAL_QUOTE'),
-      search: search('SYMBOL_SEARCH'),
-      batch: symbols => {
-        // Convert array to csv string.
-        if (symbols instanceof Array) {
-          symbols = symbols.join(',');
-        }
-
-        return util.fn('BATCH_STOCK_QUOTES')({ symbols });
-      }
+      search: search('SYMBOL_SEARCH')
     };
   };
 
@@ -575,7 +567,7 @@
       forex: Forex(config),
       crypto: Crypto(config),
       technical: Technical(config),
-      performance: Performance(config),
+      performance: Performance(config)
     };
   };
 
