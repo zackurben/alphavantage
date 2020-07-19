@@ -7,7 +7,7 @@
     "test": "jest --setupFiles dotenv/config",
     "lint": "prettier --write \"./!(dist)**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "rollup index.js --file dist/bundle.js --format umd --name 'alphavantage'"
+    "build": "rollup index.js --file dist/bundle.js --format umd --name alphavantage"
   },
   "keywords": [
     "alpha vantage",
