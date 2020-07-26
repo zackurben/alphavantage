@@ -11,7 +11,7 @@ const TIME = 1000;
 test(`forex rate works`, () => {
   expect.assertions(3);
   return delay(TIME)
-    .then(() => alpha.forex.rate('btc', 'usd'))
+    .then(() => alpha.forex.rate('btc', 'USD'))
     .then((data) => {
       expect(data['Realtime Currency Exchange Rate']).toBeDefined();
       expect(data['Realtime Currency Exchange Rate']['1. From_Currency Code']).toEqual('BTC');
@@ -22,7 +22,7 @@ test(`forex rate works`, () => {
 test(`forex intraday works`, () => {
   expect.assertions(3);
   return delay(TIME)
-    .then(() => alpha.forex.intraday('usd', 'eur', '60min'))
+    .then(() => alpha.forex.intraday('USD', 'EUR', '60min'))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['2. From Symbol']).toEqual('USD');
@@ -33,7 +33,7 @@ test(`forex intraday works`, () => {
 test(`forex daily works`, () => {
   expect.assertions(3);
   return delay(TIME)
-    .then(() => alpha.forex.daily('usd', 'eur'))
+    .then(() => alpha.forex.daily('USD', 'EUR'))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['2. From Symbol']).toEqual('USD');
@@ -44,7 +44,7 @@ test(`forex daily works`, () => {
 test(`forex weekly works`, () => {
   expect.assertions(3);
   return delay(TIME)
-    .then(() => alpha.forex.weekly('usd', 'eur'))
+    .then(() => alpha.forex.weekly('USD', 'EUR'))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['2. From Symbol']).toEqual('USD');
@@ -55,7 +55,7 @@ test(`forex weekly works`, () => {
 test(`forex monthly works`, () => {
   expect.assertions(3);
   return delay(TIME)
-    .then(() => alpha.forex.monthly('usd', 'eur'))
+    .then(() => alpha.forex.monthly('USD', 'EUR'))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['2. From Symbol']).toEqual('USD');

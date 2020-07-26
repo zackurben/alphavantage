@@ -102,4 +102,4 @@ _BREAKING_
 
 # 2.1.0
 
-- Adding forex daily endpoint support.
+- Adding forex intraday, daily, monthly, and weekly endpoint support.
