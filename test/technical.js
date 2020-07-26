@@ -4,7 +4,7 @@ import delay from 'delay';
 import Alpha from '../';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+jest.setTimeout(30000);
 jest.unmock('cross-fetch');
 const TIME = 1000;
 
@@ -12,7 +12,7 @@ test(`sma data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.sma(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Simple Moving Average (SMA)');
@@ -29,7 +29,7 @@ test(`ema data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.ema(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Exponential Moving Average (EMA)');
@@ -46,7 +46,7 @@ test(`wma data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.wma(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Weighted Moving Average (WMA)');
@@ -63,7 +63,7 @@ test(`dema data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.dema(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Double Exponential Moving Average (DEMA)');
@@ -80,7 +80,7 @@ test(`tema data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.tema(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Triple Exponential Moving Average (TEMA)');
@@ -97,7 +97,7 @@ test(`trima data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.trima(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Triangular Exponential Moving Average (TRIMA)');
@@ -114,7 +114,7 @@ test(`kama data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.kama(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Kaufman Adaptive Moving Average (KAMA)');
@@ -131,7 +131,7 @@ test(`mama data works`, () => {
   expect.assertions(10);
   return delay(TIME)
     .then(() => alpha.technical.mama(`msft`, `daily`, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('MESA Adaptive Moving Average (MAMA)');
@@ -149,7 +149,7 @@ test(`t3 data works`, () => {
   expect.assertions(10);
   return delay(TIME)
     .then(() => alpha.technical.t3(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Triple Exponential Moving Average (T3)');
@@ -167,7 +167,7 @@ test(`macd data works`, () => {
   expect.assertions(11);
   return delay(TIME)
     .then(() => alpha.technical.macd(`msft`, `daily`, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Moving Average Convergence/Divergence (MACD)');
@@ -186,7 +186,7 @@ test(`macdext data works`, () => {
   expect.assertions(14);
   return delay(TIME)
     .then(() => alpha.technical.macdext(`msft`, `daily`, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('MACD with Controllable MA Type (MACDEXT)');
@@ -208,7 +208,7 @@ test(`stoch data works`, () => {
   expect.assertions(12);
   return delay(TIME)
     .then(() => alpha.technical.stoch(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Stochastic (STOCH)');
@@ -228,7 +228,7 @@ test(`stochf data works`, () => {
   expect.assertions(10);
   return delay(TIME)
     .then(() => alpha.technical.stochf(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Stochastic Fast (STOCHF)');
@@ -246,7 +246,7 @@ test(`rsi data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.rsi(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Relative Strength Index (RSI)');
@@ -263,7 +263,7 @@ test(`stochrsi data works`, () => {
   expect.assertions(12);
   return delay(TIME)
     .then(() => alpha.technical.stochrsi(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Stochastic Relative Strength Index (STOCHRSI)');
@@ -283,7 +283,7 @@ test(`willr data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.willr(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual("Williams' %R (WILLR)");
@@ -299,7 +299,7 @@ test(`adx data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.adx(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Average Directional Movement Index (ADX)');
@@ -315,7 +315,7 @@ test(`adxr data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.adxr(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Average Directional Movement Index Rating (ADXR)');
@@ -331,7 +331,7 @@ test(`apo data works`, () => {
   expect.assertions(11);
   return delay(TIME)
     .then(() => alpha.technical.apo(`msft`, `daily`, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Absolute Price Oscillator (APO)');
@@ -350,7 +350,7 @@ test(`ppo data works`, () => {
   expect.assertions(11);
   return delay(TIME)
     .then(() => alpha.technical.ppo(`msft`, `daily`, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Percentage Price Oscillator (PPO)');
@@ -369,7 +369,7 @@ test(`mom data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.mom(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Momentum (MOM)');
@@ -386,7 +386,7 @@ test(`bop data works`, () => {
   expect.assertions(7);
   return delay(TIME)
     .then(() => alpha.technical.bop(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Balance Of Power (BOP)');
@@ -401,7 +401,7 @@ test(`cci data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.cci(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Commodity Channel Index (CCI)');
@@ -417,7 +417,7 @@ test(`cmo data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.cmo(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Chande Momentum Oscillator (CMO)');
@@ -434,7 +434,7 @@ test(`roc data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.roc(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Rate of change : ((price/prevPrice)-1)*100');
@@ -451,7 +451,7 @@ test(`rocr data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.rocr(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Rate of change ratio: (price/prevPrice)');
@@ -468,7 +468,7 @@ test(`aroon data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.aroon(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Aroon (AROON)');
@@ -484,7 +484,7 @@ test(`aroonosc data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.aroonosc(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Aroon Oscillator (AROONOSC)');
@@ -500,7 +500,7 @@ test(`mfi data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.mfi(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Money Flow Index (MFI)');
@@ -516,7 +516,7 @@ test(`trix data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.trix(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (TRIX)');
@@ -533,7 +533,7 @@ test(`ultosc data works`, () => {
   expect.assertions(10);
   return delay(TIME)
     .then(() => alpha.technical.ultosc(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Ultimate Oscillator (ULTOSC)');
@@ -551,7 +551,7 @@ test(`dx data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.dx(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Directional Movement Index (DX)');
@@ -567,7 +567,7 @@ test(`minus_di data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.minus_di(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Minus Directional Indicator (MINUS_DI)');
@@ -583,7 +583,7 @@ test(`plus_di data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.plus_di(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Plus Directional Indicator (PLUS_DI)');
@@ -599,7 +599,7 @@ test(`minus_dm data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.minus_dm(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Minus Directional Movement (MINUS_DM)');
@@ -615,7 +615,7 @@ test(`plus_dm data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.plus_dm(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Plus Directional Movement (PLUS_DM)');
@@ -631,7 +631,7 @@ test(`bbands data works`, () => {
   expect.assertions(12);
   return delay(TIME)
     .then(() => alpha.technical.bbands(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Bollinger Bands (BBANDS)');
@@ -651,7 +651,7 @@ test(`midpoint data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.midpoint(`msft`, `daily`, 60, `close`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('MidPoint over period (MIDPOINT)');
@@ -668,7 +668,7 @@ test(`midprice data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.midprice(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Midpoint Price over period (MIDPRICE)');
@@ -684,7 +684,7 @@ test(`sar data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.sar(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Parabolic SAR (SAR)');
@@ -701,7 +701,7 @@ test(`trange data works`, () => {
   expect.assertions(7);
   return delay(TIME)
     .then(() => alpha.technical.trange(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('True Range (TRANGE)');
@@ -716,7 +716,7 @@ test(`atr data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.atr(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Average True Range (ATR)');
@@ -732,7 +732,7 @@ test(`natr data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.natr(`msft`, `daily`, 60))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Normalized Average True Range (NATR)');
@@ -748,7 +748,7 @@ test(`ad data works`, () => {
   expect.assertions(7);
   return delay(TIME)
     .then(() => alpha.technical.ad(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Chaikin A/D Line');
@@ -763,7 +763,7 @@ test(`adosc data works`, () => {
   expect.assertions(9);
   return delay(TIME)
     .then(() => alpha.technical.adosc(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Chaikin A/D Oscillator (ADOSC)');
@@ -780,7 +780,7 @@ test(`obv data works`, () => {
   expect.assertions(7);
   return delay(TIME)
     .then(() => alpha.technical.obv(`msft`, `daily`))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('On Balance Volume (OBV)');
@@ -795,7 +795,7 @@ test(`ht_trendline data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.ht_trendline(`msft`, `daily`, 'close'))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Instantaneous Trendline (HT_TRENDLINE)');
@@ -811,7 +811,7 @@ test(`ht_sine data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.ht_sine(`msft`, `daily`, 'close'))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - SineWave (HT_SINE)');
@@ -827,7 +827,7 @@ test(`ht_trendmode data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.ht_trendmode(`msft`, `daily`, 'close'))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Trend vs Cycle Mode (HT_TRENDMODE)');
@@ -843,7 +843,7 @@ test(`ht_dcperiod data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.ht_dcperiod(`msft`, `daily`, 'close'))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Dominant Cycle Period (HT_DCPERIOD)');
@@ -859,7 +859,7 @@ test(`ht_dcphase data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.ht_dcphase(`msft`, `daily`, 'close'))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Dominant Cycle Phase (HT_DCPHASE)');
@@ -875,7 +875,7 @@ test(`ht_dcphasor data works`, () => {
   expect.assertions(8);
   return delay(TIME)
     .then(() => alpha.technical.ht_dcphasor(`msft`, `daily`, 'close'))
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Meta Data']['1: Symbol']).toEqual('msft');
       expect(data['Meta Data']['2: Indicator']).toEqual('Hilbert Transform - Phasor Components (HT_PHASOR)');
