@@ -30,12 +30,7 @@ test(`the url builder properly builds urls`, () => {
 
 test(`the url builder with no params yields the base url`, () => {
   expect.assertions(3);
-  const frags = alpha.util
-    .url()
-    .toString()
-    .split('?')[1]
-    .toString()
-    .split('&');
+  const frags = alpha.util.url().toString().split('?')[1].toString().split('&');
 
   expect(frags.length).toBe(2);
   expect(/^apikey=.*$/.test(frags[0])).toBe(true);
@@ -44,12 +39,7 @@ test(`the url builder with no params yields the base url`, () => {
 
 test(`the url builder with undefined params yields the base url`, () => {
   expect.assertions(3);
-  const frags = alpha.util
-    .url({ 'this_does-not_exist': undefined })
-    .toString()
-    .split('?')[1]
-    .toString()
-    .split('&');
+  const frags = alpha.util.url({ 'this_does-not_exist': undefined }).toString().split('?')[1].toString().split('&');
 
   expect(frags.length).toBe(2);
   expect(/^apikey=.*$/.test(frags[0])).toBe(true);
@@ -338,6 +328,43 @@ test(`forex rate data polishing works`, () => {
   expect(polished['rate']['value']).toBeDefined();
   expect(polished['rate']['updated']).toBeDefined();
   expect(polished['rate']['zone']).toBeDefined();
+});
+
+test(`forex daily data polishing works`, () => {
+  expect.assertions(26);
+  const data = require('./examples/forex/daily.json');
+  const polished = alpha.util.polish(data);
+  let first = Object.keys(polished['data'])[0];
+
+  expect(data['Meta Data']).toBeDefined();
+  expect(data['Meta Data']['1. Information']).toBeDefined();
+  expect(data['Meta Data']['2. From Symbol']).toBeDefined();
+  expect(data['Meta Data']['3. To Symbol']).toBeDefined();
+  expect(data['Meta Data']['4. Output Size']).toBeDefined();
+  expect(data['Meta Data']['5. Last Refreshed']).toBeDefined();
+  expect(data['Meta Data']['6. Time Zone']).toBeDefined();
+
+  expect(polished['Meta Data']).toBeUndefined();
+  expect(polished['Time Series FX (Daily)']).toBeUndefined();
+  expect(polished['meta']).toBeDefined();
+  expect(polished['meta']['1. Information']).toBeUndefined();
+  expect(polished['meta']['2. From Symbol']).toBeUndefined();
+  expect(polished['meta']['3. To Symbol']).toBeUndefined();
+  expect(polished['meta']['4. Output Size']).toBeUndefined();
+  expect(polished['meta']['5. Last Refreshed']).toBeUndefined();
+
+  expect(polished['meta']['information']).toBeDefined();
+  expect(polished['meta']['from_currency']).toBeDefined();
+  expect(polished['meta']['to_currency']).toBeDefined();
+  expect(polished['meta']['size']).toBeDefined();
+  expect(polished['meta']['updated']).toBeDefined();
+
+  expect(polished['data']).toBeDefined();
+  expect(polished['data'][first]).toBeDefined();
+  expect(polished['data'][first]['open']).toBeDefined();
+  expect(polished['data'][first]['high']).toBeDefined();
+  expect(polished['data'][first]['low']).toBeDefined();
+  expect(polished['data'][first]['close']).toBeDefined();
 });
 
 test(`daily crypto polishing works`, () => {
@@ -647,7 +674,7 @@ test(`non 200 request responses are thrown to a catch`, () => {
 
   return alpha.util
     .fn('123')()
-    .catch(error => {
+    .catch((error) => {
       expect(error).toEqual('An AlphaVantage error occurred. 123: {}');
     });
 });
@@ -657,7 +684,7 @@ test(`200 request responses without meta data are thrown to a catch`, () => {
 
   return alpha.util
     .fn('200')()
-    .catch(error => {
+    .catch((error) => {
       expect(error).toEqual('An AlphaVantage error occurred. {}');
     });
 });

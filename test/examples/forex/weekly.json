@@ -1,0 +1,17 @@
+{
+  "Meta Data": {
+    "1. Information": "Forex Weekly Prices (open, high, low, close)",
+    "2. From Symbol": "EUR",
+    "3. To Symbol": "USD",
+    "4. Last Refreshed": "2020-07-24 21:00:00",
+    "5. Time Zone": "UTC"
+  },
+  "Time Series FX (Weekly)": {
+    "2020-07-24": {
+      "1. open": "1.1436",
+      "2. high": "1.1658",
+      "3. low": "1.1401",
+      "4. close": "1.1656"
+    }
+  }
+}
