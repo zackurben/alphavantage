@@ -103,3 +103,6 @@ _BREAKING_
 # 2.1.0
 
 - Adding forex intraday, daily, monthly, and weekly endpoint support.
+- Adding initial typescript types.
+- Fixing malformed bundle file
+- Removed the data interval parameter for all except intraday
