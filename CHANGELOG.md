@@ -99,3 +99,7 @@ _BREAKING_
 # 2.0.1
 
 - Fixed UMD support for browser and Node.js environments.
+
+# 2.1.0
+
+- Adding forex intraday, daily, monthly, and weekly endpoint support.

@@ -1,10 +1,10 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('cross-fetch')) :
   typeof define === 'function' && define.amd ? define(['cross-fetch'], factory) :
-  (global = global || self, global.alphavantage = factory(global.fetch));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory(global.fetch));
 }(this, (function (fetch) { 'use strict';
 
-  fetch = fetch && fetch.hasOwnProperty('default') ? fetch['default'] : fetch;
+  fetch = fetch && Object.prototype.hasOwnProperty.call(fetch, 'default') ? fetch['default'] : fetch;
 
   /**
    * Time stamp regex that AlphaVantage uses.
@@ -58,6 +58,13 @@
     'Time Series (Digital Currency Weekly)': 'data',
     'Time Series (Digital Currency Monthly)': 'data',
     'Time Series FX (Daily)': 'data',
+    'Time Series FX (1min)': 'data',
+    'Time Series FX (5min)': 'data',
+    'Time Series FX (15min)': 'data',
+    'Time Series FX (30min)': 'data',
+    'Time Series FX (60min)': 'data',
+    'Time Series FX (Weekly)': 'data',
+    'Time Series FX (Monthly)': 'data',
     'Weekly Time Series': 'data',
     'Weekly Adjusted Time Series': 'data',
     'Monthly Adjusted Time Series': 'data',
@@ -128,6 +135,7 @@
     '10. change percent': 'change_percent',
     '1. Information': 'information',
     '1. From_Currency Code': 'from_currency',
+    '2. From Symbol': 'from_currency',
     '1: Symbol': 'symbol',
     '1. open': 'open',
     '1b. price (USD)': 'usd',
@@ -142,7 +150,9 @@
     '2b. high (USD)': 'usd_high',
     '3. low': 'low',
     '3. To_Currency Code': 'to_currency',
+    '3. To Symbol': 'to_currency',
     '3. Last Refreshed': 'updated',
+    '4. Last Refreshed': 'updated',
     '3. Digital Currency Name': 'coin_name',
     '3. market cap (USD)': 'cap',
     '3. volume': 'volume',
@@ -151,6 +161,7 @@
     '4. To_Currency Name': 'to_currency_name',
     '4. close': 'close',
     '4. Interval': 'interval',
+    '5. Interval': 'interval',
     '4. Market Code': 'market',
     '4. Time Zone': 'zone',
     '4. timestamp': 'updated',
@@ -160,6 +171,7 @@
     '5. Market Name': 'market_name',
     '5: Time Period': 'period',
     '5. Output Size': 'size',
+    '6. Output Size': 'size',
     '5. Time Zone': 'zone',
     '5. volume': 'volume',
     '5: Series Type': 'series',
@@ -188,6 +200,7 @@
     '6. volume': 'volume',
     '6. Time Zone': 'zone',
     '6. market cap (USD)': 'cap',
+    '5. Last Refreshed': 'updated',
     '6. Last Refreshed': 'updated',
     '6: Volume Factor (vFactor)': 'volume',
     '6: Series Type': 'series',
@@ -215,7 +228,7 @@
     '9. matchScore': 'match_score'
   };
 
-  var Util = config => {
+  var Util = (config) => {
     /**
      * Recursively walk the data tree and replace weird keys with a normalized set.
      *
@@ -225,7 +238,7 @@
      * @returns {Object|String|Number}
      *   Normalized data.
      */
-    const polish = data => {
+    const polish = (data) => {
       // If this is not an object, dont recurse.
       if (!data || typeof data !== 'object') {
         return data;
@@ -233,7 +246,7 @@
 
       // If the data is a complex object, walk all subtrees to normalize all branches.
       let clean = {};
-      Object.keys(data).forEach(key => {
+      Object.keys(data).forEach((key) => {
         key = key.toString();
 
         // If the key is a date time string, convert it to an iso timestamp.
@@ -281,9 +294,9 @@
      * @returns {String}
      *   The API url to use for a given function and input parameters.
      */
-    const url = params => {
+    const url = (params) => {
       params = Object.keys(params || {})
-        .map(type => {
+        .map((type) => {
           let value = params[type];
           if (value !== undefined) {
             return `${type}=${value}`;
@@ -291,7 +304,7 @@
 
           return undefined;
         })
-        .filter(value => value !== undefined)
+        .filter((value) => value !== undefined)
         .join('&');
 
       return `${config.base}${params}`;
@@ -306,16 +319,16 @@
      * @returns {Function}
      *   The callback function to use in the sdk.
      */
-    const fn = type => params =>
+    const fn = (type) => (params) =>
       fetch(url(Object.assign({}, params, { function: type })))
-        .then(res => {
+        .then((res) => {
           if (res.status !== 200) {
             throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
           }
 
           return res.json();
         })
-        .then(data => {
+        .then((data) => {
           if (
             data['Meta Data'] === undefined &&
             data['Realtime Currency Exchange Rate'] === undefined &&
@@ -415,7 +428,12 @@
     const util = Util(config);
 
     return {
-      rate: (from_currency, to_currency) => util.fn('CURRENCY_EXCHANGE_RATE')({ from_currency, to_currency })
+      rate: (from_currency, to_currency) => util.fn('CURRENCY_EXCHANGE_RATE')({ from_currency, to_currency }),
+      intraday: (from_symbol, to_symbol, interval, outputsize = 'compact') =>
+        util.fn('FX_INTRADAY')({ from_symbol, to_symbol, interval, outputsize }),
+      daily: (from_symbol, to_symbol) => util.fn('FX_DAILY')({ from_symbol, to_symbol }),
+      weekly: (from_symbol, to_symbol) => util.fn('FX_WEEKLY')({ from_symbol, to_symbol }),
+      monthly: (from_symbol, to_symbol) => util.fn('FX_MONTHLY')({ from_symbol, to_symbol })
     };
   };
 

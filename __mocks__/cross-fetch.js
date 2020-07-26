@@ -1,6 +1,6 @@
 'use strict';
 
-export default url =>
+export default (url) =>
   Promise.resolve({
     body: `{}`,
     status: parseInt(url.slice(-3)),

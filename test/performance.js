@@ -4,15 +4,15 @@ import delay from 'delay';
 import Alpha from '../';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+jest.setTimeout(30000);
 jest.unmock('cross-fetch');
 const TIME = 1000;
 
-test.skip(`sector performance data works`, () => {
+test(`sector performance data works`, () => {
   expect.assertions(11);
   return delay(TIME)
     .then(() => alpha.performance.sector())
-    .then(data => {
+    .then((data) => {
       expect(data['Meta Data']).toBeDefined();
       expect(data['Rank A: Real-Time Performance']).toBeDefined();
       expect(data['Rank B: 1 Day Performance']).toBeDefined();
