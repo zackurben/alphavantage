@@ -373,7 +373,7 @@ test(`forex intraday data polishing works`, () => {
 });
 
 test(`forex daily data polishing works`, () => {
-  expect.assertions(26);
+  expect.assertions(28);
   const data = require('./examples/forex/daily.json');
   const polished = alpha.util.polish(data);
   let first = Object.keys(polished['data'])[0];
@@ -394,12 +394,50 @@ test(`forex daily data polishing works`, () => {
   expect(polished['meta']['3. To Symbol']).toBeUndefined();
   expect(polished['meta']['4. Output Size']).toBeUndefined();
   expect(polished['meta']['5. Last Refreshed']).toBeUndefined();
+  expect(polished['meta']['6. Time Zone']).toBeUndefined();
 
   expect(polished['meta']['information']).toBeDefined();
   expect(polished['meta']['from_currency']).toBeDefined();
   expect(polished['meta']['to_currency']).toBeDefined();
   expect(polished['meta']['size']).toBeDefined();
   expect(polished['meta']['updated']).toBeDefined();
+  expect(polished['meta']['zone']).toBeDefined();
+
+  expect(polished['data']).toBeDefined();
+  expect(polished['data'][first]).toBeDefined();
+  expect(polished['data'][first]['open']).toBeDefined();
+  expect(polished['data'][first]['high']).toBeDefined();
+  expect(polished['data'][first]['low']).toBeDefined();
+  expect(polished['data'][first]['close']).toBeDefined();
+});
+
+test(`forex weekly data polishing works`, () => {
+  expect.assertions(25);
+  const data = require('./examples/forex/weekly.json');
+  const polished = alpha.util.polish(data);
+  let first = Object.keys(polished['data'])[0];
+
+  expect(data['Meta Data']).toBeDefined();
+  expect(data['Meta Data']['1. Information']).toBeDefined();
+  expect(data['Meta Data']['2. From Symbol']).toBeDefined();
+  expect(data['Meta Data']['3. To Symbol']).toBeDefined();
+  expect(data['Meta Data']['4. Last Refreshed']).toBeDefined();
+  expect(data['Meta Data']['5. Time Zone']).toBeDefined();
+
+  expect(polished['Meta Data']).toBeUndefined();
+  expect(polished['Time Series FX (Weekly)']).toBeUndefined();
+  expect(polished['meta']).toBeDefined();
+  expect(polished['meta']['1. Information']).toBeUndefined();
+  expect(polished['meta']['2. From Symbol']).toBeUndefined();
+  expect(polished['meta']['3. To Symbol']).toBeUndefined();
+  expect(polished['meta']['4. Last Refreshed']).toBeUndefined();
+  expect(polished['meta']['5. Time Zone']).toBeUndefined();
+
+  expect(polished['meta']['information']).toBeDefined();
+  expect(polished['meta']['from_currency']).toBeDefined();
+  expect(polished['meta']['to_currency']).toBeDefined();
+  expect(polished['meta']['updated']).toBeDefined();
+  expect(polished['meta']['zone']).toBeDefined();
 
   expect(polished['data']).toBeDefined();
   expect(polished['data'][first]).toBeDefined();
