@@ -1,13 +1,13 @@
 {
   "name": "alphavantage",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A simple interface to the Alpha Vantage API.",
   "main": "dist/bundle.js",
   "scripts": {
     "test": "jest --setupFiles dotenv/config",
     "lint": "prettier --write \"./!(dist)**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "rollup index.js --file dist/bundle.js --format umd --name 'alphavantage'"
+    "build": "rollup index.js --file dist/bundle.js --format umd --name alphavantage"
   },
   "keywords": [
     "alpha vantage",

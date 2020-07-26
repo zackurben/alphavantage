@@ -348,7 +348,7 @@
     };
   };
 
-  var Crypto = config => {
+  var Crypto = (config) => {
     const util = Util(config);
 
     /**
@@ -360,7 +360,7 @@
      * @returns {Function}
      *   A data function to accept user input and returns a promise.
      */
-    const series = fn => (symbol, market) =>
+    const series = (fn) => (symbol, market) =>
       util.fn(fn)({
         symbol,
         market
@@ -373,7 +373,7 @@
     };
   };
 
-  var Data = config => {
+  var Data = (config) => {
     const util = Util(config);
 
     /**
@@ -387,13 +387,16 @@
      * @returns {Function}
      *   A timeseries function to accept user data that returns a promise.
      */
-    const series = fn => (symbol, outputsize = 'compact', datatype = 'json', interval = '1min') =>
-      util.fn(fn)({
+    const series = (fn) => (symbol, outputsize = 'compact', datatype = 'json', interval = '1min') => {
+      let params = {
         symbol,
-        interval,
         outputsize,
         datatype
-      });
+      };
+
+      if (fn === 'TIME_SERIES_INTRADAY') params.interval = interval;
+      return util.fn(fn)(params);
+    };
 
     /**
      * Util function to get the symbol search data.
@@ -406,7 +409,7 @@
      * @returns {Function}
      *   A search function to accept user data that returns a promise.
      */
-    const search = fn => keywords =>
+    const search = (fn) => (keywords) =>
       util.fn(fn)({
         keywords
       });
@@ -424,7 +427,7 @@
     };
   };
 
-  var Forex = config => {
+  var Forex = (config) => {
     const util = Util(config);
 
     return {
@@ -437,7 +440,7 @@
     };
   };
 
-  var Performance = config => {
+  var Performance = (config) => {
     const util = Util(config);
 
     return {
@@ -445,7 +448,7 @@
     };
   };
 
-  var Technical = config => {
+  var Technical = (config) => {
     const util = Util(config);
 
     /**
@@ -454,7 +457,7 @@
      * @param {String} fn
      *   The sma-like function to use
      */
-    const SMA_LIKE = fn => (symbol, interval, time_period, series_type) =>
+    const SMA_LIKE = (fn) => (symbol, interval, time_period, series_type) =>
       util.fn(fn)({ symbol, interval, time_period, series_type });
 
     /**
@@ -463,7 +466,7 @@
      * @param {String} fn
      *   The macdext-like function to use
      */
-    const MACDEXT_LIKE = fn => (
+    const MACDEXT_LIKE = (fn) => (
       symbol,
       interval,
       series_type,
@@ -492,7 +495,7 @@
      * @param {String} fn
      *   The apo-like function to use
      */
-    const APO_LIKE = fn => (symbol, interval, series_type, fastperiod, slowperiod, matype) =>
+    const APO_LIKE = (fn) => (symbol, interval, series_type, fastperiod, slowperiod, matype) =>
       util.fn(fn)({ symbol, interval, series_type, fastperiod, slowperiod, matype });
 
     /**
@@ -501,7 +504,7 @@
      * @param {String} fn
      *   The ht-like function to use
      */
-    const HT_LIKE = fn => (symbol, interval, series_type) => util.fn(fn)({ symbol, interval, series_type });
+    const HT_LIKE = (fn) => (symbol, interval, series_type) => util.fn(fn)({ symbol, interval, series_type });
 
     return {
       sma: SMA_LIKE('SMA'),
