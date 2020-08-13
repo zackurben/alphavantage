@@ -231,6 +231,13 @@ declare function alpha(config?: {
   performance: {
     sector: <T = any>(params: any) => T;
   };
+
+  fundamental: {
+    company_overview: <T = any>(symbol: string) => Promise<T>;
+    income_statement: <T = any>(symbol: string) => Promise<T>;
+    balance_sheet: <T = any>(symbol: string) => Promise<T>;
+    cash_flow: <T = any>(symbol: string) => Promise<T>;
+  };
 };
 
 declare namespace alpha {
