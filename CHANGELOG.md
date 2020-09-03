@@ -106,3 +106,7 @@ _BREAKING_
 - Adding initial typescript types.
 - Fixing malformed bundle file
 - Removed the data interval parameter for all except intraday
+
+# 2.2.0
+
+- Adding fundamental api support: OVERVIEW, INCOME_STATEMENT, BALANCE_SHEET, and CASH_FLOW
