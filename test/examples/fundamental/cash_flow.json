@@ -1,0 +1,59 @@
+{
+    "symbol": "IBM",
+    "annualReports": [
+        {
+            "fiscalDateEnding": "2019-12-31",
+            "reportedCurrency": "USD",
+            "investments": "6988000000",
+            "changeInLiabilities": "-503000000",
+            "cashflowFromInvestment": "-26936000000",
+            "otherCashflowFromInvestment": "-31638000000",
+            "netBorrowings": "16284000000",
+            "cashflowFromFinancing": "9042000000",
+            "otherCashflowFromFinancing": "98000000",
+            "changeInOperatingActivities": "1159000000",
+            "netIncome": "9431000000",
+            "changeInCash": "-3124000000",
+            "operatingCashflow": "14770000000",
+            "otherOperatingCashflow": "63000000",
+            "depreciation": "6059000000",
+            "dividendPayout": "-5707000000",
+            "stockSaleAndPurchase": "-1361000000",
+            "changeInInventory": "67000000",
+            "changeInAccountReceivables": "491000000",
+            "changeInNetIncome": "-1945000000",
+            "capitalExpenditures": "2286000000",
+            "changeInReceivables": "502000000",
+            "changeInExchangeRate": "None",
+            "changeInCashAndCashEquivalents": "-3124000000"
+        }
+    ],
+    "quarterlyReports": [
+        {
+            "fiscalDateEnding": "2020-06-30",
+            "reportedCurrency": "USD",
+            "investments": "-1236000000",
+            "changeInLiabilities": "0",
+            "cashflowFromInvestment": "-1236000000",
+            "otherCashflowFromInvestment": "-1000000",
+            "netBorrowings": "-38000000",
+            "cashflowFromFinancing": "-1625000000",
+            "otherCashflowFromFinancing": "31000000",
+            "changeInOperatingActivities": "444000000",
+            "netIncome": "1361000000",
+            "changeInCash": "817000000",
+            "operatingCashflow": "3576000000",
+            "otherOperatingCashflow": "290000000",
+            "depreciation": "1679000000",
+            "dividendPayout": "-1450000000",
+            "stockSaleAndPurchase": "-167000000",
+            "changeInInventory": "None",
+            "changeInAccountReceivables": "589000000",
+            "changeInNetIncome": "92000000",
+            "capitalExpenditures": "733000000",
+            "changeInReceivables": "None",
+            "changeInExchangeRate": "None",
+            "changeInCashAndCashEquivalents": "716000000"
+        }
+    ]
+}

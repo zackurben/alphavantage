@@ -6,6 +6,7 @@ import Forex from './lib/forex';
 import Performance from './lib/performance';
 import Technical from './lib/technical';
 import Util from './lib/util';
+import Fundamental from './lib/fundamental';
 
 /**
  * The Alpha Vantage core module.
@@ -26,6 +27,7 @@ export default (config = {}) => {
     forex: Forex(config),
     crypto: Crypto(config),
     technical: Technical(config),
-    performance: Performance(config)
+    performance: Performance(config),
+    fundamental: Fundamental(config)
   };
 };

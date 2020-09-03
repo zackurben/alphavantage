@@ -333,7 +333,9 @@
             data['Meta Data'] === undefined &&
             data['Realtime Currency Exchange Rate'] === undefined &&
             data['Global Quote'] === undefined &&
-            data['bestMatches'] === undefined
+            data['bestMatches'] === undefined &&
+            data['Symbol'] === undefined &&
+            data['symbol'] === undefined
           ) {
             throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
           }
@@ -569,6 +571,19 @@
     };
   };
 
+  var Fundamental = (config) => {
+    const util = Util(config);
+
+    const fundamental = (fn) => (symbol) => util.fn(fn)({ symbol });
+
+    return {
+      company_overview: fundamental('OVERVIEW'),
+      income_statement: fundamental('INCOME_STATEMENT'),
+      balance_sheet: fundamental('BALANCE_SHEET'),
+      cash_flow: fundamental('CASH_FLOW')
+    };
+  };
+
   /**
    * The Alpha Vantage core module.
    */
@@ -588,7 +603,8 @@
       forex: Forex(config),
       crypto: Crypto(config),
       technical: Technical(config),
-      performance: Performance(config)
+      performance: Performance(config),
+      fundamental: Fundamental(config)
     };
   };
 
