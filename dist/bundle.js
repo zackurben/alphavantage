@@ -333,7 +333,9 @@
             data['Meta Data'] === undefined &&
             data['Realtime Currency Exchange Rate'] === undefined &&
             data['Global Quote'] === undefined &&
-            data['bestMatches'] === undefined
+            data['bestMatches'] === undefined &&
+            data['Symbol'] === undefined &&
+            data['symbol'] === undefined
           ) {
             throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
           }
