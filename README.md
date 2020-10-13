@@ -5,7 +5,7 @@
 
 This is a simple wrapper around the [Alpha Vantage API](https://www.alphavantage.co/documentation/) hosted on [NPM](https://www.npmjs.com/package/alphavantage). I have no affiliation with AlphaVantage. This library can be used in the browser or in node since it is packaged as a UMD module.
 
-All contributions are welcome! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
+All contributions are welcome, see our [CONTRIBUTING.md](CONTRIBUTING.md)! This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
 `All available functions with this SDK have the same parameters as listed in the the Alpha Vantage Docs, without the "function" or "apikey". Do not include the "function" or "apikey" parameters when using this library. All functions return promises with the response data.`
 
@@ -50,23 +50,23 @@ const alpha = require('alphavantage')({ key: 'qweqweqwe' });
 
 ```javascript
 // Simple examples
-alpha.data.intraday(`msft`).then(data => {
+alpha.data.intraday(`msft`).then((data) => {
   console.log(data);
 });
 
-alpha.forex.rate('btc', 'usd').then(data => {
+alpha.forex.rate('btc', 'usd').then((data) => {
   console.log(data);
 });
 
-alpha.crypto.daily('btc', 'usd').then(data => {
+alpha.crypto.daily('btc', 'usd').then((data) => {
   console.log(data);
 });
 
-alpha.technical.sma(`msft`, `daily`, 60, `close`).then(data => {
+alpha.technical.sma(`msft`, `daily`, 60, `close`).then((data) => {
   console.log(data);
 });
 
-alpha.performance.sector().then(data => {
+alpha.performance.sector().then((data) => {
   console.log(data);
 });
 ```
@@ -191,12 +191,6 @@ See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-informatio
 ```javascript
 alpha.performance.sector();
 ```
-
-## Contributing
-
-All contributions are welcome! The purpose of this library is to keep function parity with the Alpha Vantage API, while keeping a slim and intuitive programming interface. Before any pull requests are made, please run `npm run lint` to fix style issues and ensure that all test are passing `npm test`. The codebase should always remain at 100% test coverage.
-
-The build script, `npm run build`, can be used to rebuild the UMD module `dist/bundle.js` and it should be updated with each pull request.
 
 ## Contact
 
