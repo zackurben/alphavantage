@@ -80,7 +80,7 @@ declare function alpha(config?: {
       interval?: string
     ) => Promise<T>;
     quote: (symbol: string, outputsize?: string, datatype?: string, interval?: string) => Promise<RawStockQuote>;
-    search: (keywords: string) => RawStockSearch;
+    search: (keywords: string) => Promise<RawStockSearch>;
   };
 
   forex: {
