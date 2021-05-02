@@ -244,7 +244,7 @@ declare namespace alpha {
   // Polished
 
   // https://www.alphavantage.co/documentation/#latestprice
-  interface StockQuote {
+  export interface StockQuote {
     data: {
       symbol: string;
       open: string;
@@ -260,7 +260,7 @@ declare namespace alpha {
   }
 
   // https://www.alphavantage.co/documentation/#dailyadj
-  interface StockDailyAdjusted {
+  export interface StockDailyAdjusted {
     meta: {
       information: string;
       symbol: string;
@@ -285,7 +285,7 @@ declare namespace alpha {
   }
 
   // https://www.alphavantage.co/documentation/#symbolsearch
-  interface StockSearch {
+  export interface StockSearch {
     bestMatches: {
       [index: string]:
         | {
