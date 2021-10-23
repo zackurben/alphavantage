@@ -1,45 +1,165 @@
-# 0.0.1
+# Changelog
 
-- Initial release
+All notable changes to this project will be documented in this file.
 
-# 0.0.2
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- Adding initial tests
+## [Unreleased]
 
-# 0.0.3
+### Changed
 
-- Updating documentation
-- Fixing code linting
+- Updated the changelog to use [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format
 
-# 0.0.4
+## [2.3.0] - 10/23/2021
 
-- Adding sector performance api
+### Fixed
 
-# 0.0.5
+- Updated dependencies
+- Fixed broken tests
 
-- Adding env variable support
-- Adding output restructuring utils with tests
-- Adding CHANGELOG.md and backfilling releases
-- Adding utils to the core export
-- Adding missing tests
+### Changed
 
-# 0.0.6
+- Modified jest config and folder name to follow a more standard configuration
 
-- Increasing jest timeout
+### Added
+
+- Adding new alpha.experimental function to support any API endpoint
+
+## [2.2.1] - 10/4/2020
+
+### Fixed
+
+- Updated dependencies
+
+## [2.2.0] - 9/3/2020
+
+### Added
+
+- Adding fundamental api support: OVERVIEW, INCOME_STATEMENT, BALANCE_SHEET, and CASH_FLOW
+
+## [2.1.0] - 7/26/2020
+
+### Added
+
+- Adding forex intraday, daily, monthly, and weekly endpoint support.
+- Adding initial typescript types.
+
+### Fixed
+
+- Fixing malformed bundle file
+
+### Removed
+
+- Removed the data interval parameter for all except intraday
+
+## [2.0.1] - 2/26/2020
+
+### Fixed
+
+- Fixed UMD support for browser and Node.js environments.
+
+## [2.0.0] - 10/8/2019 _DEPRECATED_
+
+### Added
+
+- Adding browser support via UMD bundle.
+
+## [1.2.6] - 10/7/2019
+
+### Changed
+
+- Updating dependencies.
+
+### Removed
+
+- Removing sector performance test until the API works again.
+
+## [1.2.5] - 4/15/2019
+
+### Removed
+
+- Removing crypto intraday support (removed from API)
+
+## [1.2.4] - 4/5/2019
+
+### Added
+
+- Adding symbol search endpoint support
+
+## [1.2.3] - 3/31/2019
+
+### Changed
+
+- Updating dependencies to remove audit and outdated warnings
+
+## [1.2.2] - 3/31/2019
+
+### Added
+
+- Adding Time Series FX (Daily) to the polish function
+
+## [1.2.1] - 3/31/2019
+
+### Fixed
+
+- Fixing documentation for SMA usage
+
+### Removed
+
+- Removing test for intraday crypto data (removed from API)
+
+## [1.2.0] - 10/16/2018
+
+### Added
+
+- Adding global quote endpoint support
+
+## [1.1.2] - 10/16/2018
+
+### Changed
+
 - Updating deps
 
-# 0.0.7
+### Fixed
 
-- Adding env support for the api key
-- Updating deps
+- Fixing broken forex test
 
-# 1.0.0
+## [1.1.1] - 2/14/2018
+
+### Changed
+
+- Updating dotenv dependency
+
+### Fixed
+
+- Fixing documentation for data endpoints
+
+## [1.1.0] - 1/1/2018
+
+### Added
+
+- Adding batch quote support
+
+### Changed
+
+- Updating jest to 22.0.4
+
+## [1.0.0] - 10/2/2017
+
+### Added
 
 - Adding forex support
 - Adding crypto support
 - Adding technical indicator support
 - Adding weekly and monthly adjusted time series data support
+
+### Changed
+
 - Updating deps
+
+### Fixed
+
 - Fixed issue where failing requests were not going to a catch handler.
 
 _BREAKING_
@@ -47,70 +167,55 @@ _BREAKING_
 - Changing the daily adjusted data to be under the daily_adjusted namespace from
   adjusted
 
-# 1.1.0
+## [0.0.7] - 9/19/2017
 
-- Adding batch quote support
-- Updating jest to 22.0.4
+### Added
 
-# 1.1.1
+- Adding env support for the api key
 
-- Updating dotenv dependency
-- Fixing documentation for data endpoints
-
-# 1.1.2
+### Changed
 
 - Updating deps
-- Fixing broken forex test
 
-# 1.2.0
+## [0.0.6] - 8/30/2017
 
-- Adding global quote endpoint support
+### Changed
 
-# 1.2.1
+- Increasing jest timeout
+- Updating deps
 
-- Fixing documentation for SMA usage
-- Removing test for intraday crypto data (removed from API)
+## [0.0.5] - 8/13/2017
 
-# 1.2.2
+### Added
 
-- Adding Time Series FX (Daily) to the polish function
+- Adding env variable support
+- Adding output restructuring utils with tests
+- Adding CHANGELOG.md and backfilling releases
+- Adding utils to the core export
+- Adding missing tests
 
-# 1.2.3
+## [0.0.4] - 8/8/2017
 
-- Updating dependencies to remove audit and outdated warnings
+### Added
 
-# 1.2.4
+- Adding sector performance api
 
-- Adding symbol search endpoint support
+## [0.0.3] - 8/2/2017
 
-# 1.2.5
+### Changed
 
-- Removing crypto intraday support (removed from API)
+- Updating documentation
 
-# 1.2.6
+### Fixed
 
-- Updating dependencies.
-- Removing sector performance test until the API works again.
+- Fixing code linting
 
-# 2.0.0 - _DEPRECATED_
+## [0.0.2] - 8/2/2017
 
-- Adding browser support via UMD bundle.
+### Added
 
-# 2.0.1
+- Adding initial tests
 
-- Fixed UMD support for browser and Node.js environments.
+## [0.0.1] - 8/2/2017
 
-# 2.1.0
-
-- Adding forex intraday, daily, monthly, and weekly endpoint support.
-- Adding initial typescript types.
-- Fixing malformed bundle file
-- Removed the data interval parameter for all except intraday
-
-# 2.2.0
-
-- Adding fundamental api support: OVERVIEW, INCOME_STATEMENT, BALANCE_SHEET, and CASH_FLOW
-
-# 2.3.0
-
-- Adding new alpha.experimental function to support any API endpoint
+- Initial release
