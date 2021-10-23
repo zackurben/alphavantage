@@ -88,7 +88,7 @@ test(`global quote data works`, () => {
     });
 });
 
-test.only(`symbol search works`, () => {
+test(`symbol search works`, () => {
   expect.assertions(2);
   return delay(TIME)
     .then(() => alpha.data.search(`Advanced Micro Devices`))
