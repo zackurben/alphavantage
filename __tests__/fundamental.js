@@ -1,7 +1,7 @@
 'use strict';
 
 import delay from 'delay';
-import Alpha from '../';
+import Alpha from '..';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
 jest.setTimeout(30000);
@@ -9,7 +9,7 @@ jest.unmock('cross-fetch');
 const TIME = 1000;
 
 test(`company overview works`, () => {
-  expect.assertions(59);
+  expect.assertions(58);
   return delay(TIME)
     .then(() => alpha.fundamental.company_overview(`ibm`))
     .then((data) => {
@@ -23,7 +23,6 @@ test(`company overview works`, () => {
       expect(data['Sector']).toBeDefined();
       expect(data['Industry']).toBeDefined();
       expect(data['Address']).toBeDefined();
-      expect(data['FullTimeEmployees']).toBeDefined();
       expect(data['FiscalYearEnd']).toBeDefined();
       expect(data['LatestQuarter']).toBeDefined();
       expect(data['MarketCapitalization']).toBeDefined();

@@ -1,7 +1,7 @@
 'use strict';
 
 import delay from 'delay';
-import Alpha from '../';
+import Alpha from '..';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
 jest.setTimeout(30000);
@@ -91,9 +91,14 @@ test(`global quote data works`, () => {
 test(`symbol search works`, () => {
   expect.assertions(2);
   return delay(TIME)
-    .then(() => alpha.data.search(`Advanced Micro`))
+    .then(() => alpha.data.search(`Advanced Micro Devices`))
     .then((data) => {
       expect(data['bestMatches']).toBeDefined();
-      expect(data['bestMatches'][0]['1. symbol']).toEqual('AMD');
+
+      let map = {};
+      data['bestMatches'].forEach((raw) => {
+        map[raw['1. symbol']] = true;
+      });
+      expect(map['AMD']).toEqual(true);
     });
 });

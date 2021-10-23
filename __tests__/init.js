@@ -1,6 +1,6 @@
 'use strict';
 
-import Alpha from '../';
+import Alpha from '..';
 const env = process.env;
 
 // Clear the current environment variables for testing.
