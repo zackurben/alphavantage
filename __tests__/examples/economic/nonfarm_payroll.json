@@ -1,0 +1,6 @@
+{
+  "name": "Total Nonfarm Payroll",
+  "interval": "monthly",
+  "unit": "thousands of persons",
+  "data": [{ "date": "2021-09-01", "value": "147682" }]
+}

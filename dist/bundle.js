@@ -337,7 +337,11 @@
             data['Global Quote'] === undefined &&
             data['bestMatches'] === undefined &&
             data['Symbol'] === undefined &&
-            data['symbol'] === undefined
+            data['symbol'] === undefined &&
+            data['name'] === undefined &&
+            data['interval'] === undefined &&
+            data['unit'] === undefined &&
+            data['data'] === undefined
           ) {
             throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
           }
