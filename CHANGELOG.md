@@ -110,3 +110,7 @@ _BREAKING_
 # 2.2.0
 
 - Adding fundamental api support: OVERVIEW, INCOME_STATEMENT, BALANCE_SHEET, and CASH_FLOW
+
+# 2.3.0
+
+- Adding new alpha.experimental function to support any API endpoint

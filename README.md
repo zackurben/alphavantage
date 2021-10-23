@@ -9,6 +9,8 @@ All contributions are welcome, see our [CONTRIBUTING.md](CONTRIBUTING.md)! This 
 
 `All available functions with this SDK have the same parameters as listed in the the Alpha Vantage Docs, without the "function" or "apikey". Do not include the "function" or "apikey" parameters when using this library. All functions return promises with the response data.`
 
+> If you want to use a function that isn't supported yet, checkout the `alpha.experimental()` function!
+
 ## Installation
 
 ```bash
@@ -67,6 +69,10 @@ alpha.technical.sma(`msft`, `daily`, 60, `close`).then((data) => {
 });
 
 alpha.performance.sector().then((data) => {
+  console.log(data);
+});
+
+alpha.experimental('CRYPTO_INTRADAY', { symbol: 'ETH', market: 'USD', interval: '5min' })).then((data) => {
   console.log(data);
 });
 ```
@@ -190,6 +196,14 @@ See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-informatio
 
 ```javascript
 alpha.performance.sector();
+```
+
+## Experimental
+
+This function allows you to use any AlphaVantage API that has not yet been implemented, use at your own risk! You can get the function name and params from the [API Documentation](https://www.alphavantage.co/documentation/) and it should be noted that the data polishing may be broken as you encounter new props that aren't supported yet. If you notice these props, please make a new Issue/Pull Request so we can enhance the library!
+
+```javascript
+alpha.experimental(fn, params);
 ```
 
 ## Contact

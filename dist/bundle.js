@@ -2,9 +2,11 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('cross-fetch')) :
   typeof define === 'function' && define.amd ? define(['cross-fetch'], factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory(global.fetch));
-}(this, (function (fetch) { 'use strict';
+})(this, (function (fetch) { 'use strict';
 
-  fetch = fetch && Object.prototype.hasOwnProperty.call(fetch, 'default') ? fetch['default'] : fetch;
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var fetch__default = /*#__PURE__*/_interopDefaultLegacy(fetch);
 
   /**
    * Time stamp regex that AlphaVantage uses.
@@ -320,7 +322,7 @@
      *   The callback function to use in the sdk.
      */
     const fn = (type) => (params) =>
-      fetch(url(Object.assign({}, params, { function: type })))
+      fetch__default["default"](url(Object.assign({}, params, { function: type })))
         .then((res) => {
           if (res.status !== 200) {
             throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
@@ -335,7 +337,11 @@
             data['Global Quote'] === undefined &&
             data['bestMatches'] === undefined &&
             data['Symbol'] === undefined &&
-            data['symbol'] === undefined
+            data['symbol'] === undefined &&
+            data['name'] === undefined &&
+            data['interval'] === undefined &&
+            data['unit'] === undefined &&
+            data['data'] === undefined
           ) {
             throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
           }
@@ -584,6 +590,11 @@
     };
   };
 
+  var Experimental = (config) => {
+    const util = Util(config);
+    return (fn, params = {}) => util.fn(fn)(params);
+  };
+
   /**
    * The Alpha Vantage core module.
    */
@@ -604,10 +615,11 @@
       crypto: Crypto(config),
       technical: Technical(config),
       performance: Performance(config),
-      fundamental: Fundamental(config)
+      fundamental: Fundamental(config),
+      experimental: Experimental(config)
     };
   };
 
   return index;
 
-})));
+}));
