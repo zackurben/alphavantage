@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('cross-fetch')) :
-  typeof define === 'function' && define.amd ? define(['cross-fetch'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory(global.fetch));
-})(this, (function (fetch) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('cross-fetch'), require('luxon')) :
+  typeof define === 'function' && define.amd ? define(['cross-fetch', 'luxon'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory(global.fetch, global.luxon));
+})(this, (function (fetch, luxon) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -12,6 +12,7 @@
    * Time stamp regex that AlphaVantage uses.
    */
   const timestamp = /[0-9]{4}-[0-9]{2}-[0-9]{2}( [0-9]{2}:[0-9]{2}:[0-9]{2})?/g;
+  const timestampFormat = "yyyy-MM-dd HH:mm:ss";
 
   /**
    * Price open regex for target markets in target currency.
@@ -241,6 +242,19 @@
      *   Normalized data.
      */
     const polish = (data) => {
+      
+      let timezone;
+      if (data["Meta Data"]?.["6. Time Zone"]) {
+        timezone = data["Meta Data"]["6. Time Zone"];
+      } else {
+        timezone = "UTC";
+      }
+
+      return walkRawData(data, timezone)
+
+    };
+
+    const walkRawData = (data, timezone) => {
       // If this is not an object, dont recurse.
       if (!data || typeof data !== 'object') {
         return data;
@@ -251,37 +265,42 @@
       Object.keys(data).forEach((key) => {
         key = key.toString();
 
-        // If the key is a date time string, convert it to an iso timestamp.
+        // If the key is a date time string, convert it to a localised timestamp using the timezone, if provided.
         if (timestamp.test(key)) {
-          clean[new Date(key).toISOString()] = polish(data[key]);
+          var date = luxon.DateTime.fromFormat(key, timestampFormat, { zone: timezone });
+
+          if (!date.isValid) // invalid timezone
+            date = luxon.DateTime.fromFormat(key, timestampFormat);
+
+          clean[date.toISO()] = walkRawData(data[key], timezone);
           return;
         }
 
         // Rekey the crypto market open currency.
         if (cryptoMarketOpen.test(key)) {
-          clean['market_open'] = polish(data[key]);
+          clean['market_open'] = walkRawData(data[key], timezone);
           return;
         }
 
         // Rekey the crypto market high currency.
         if (cryptoMarketHigh.test(key)) {
-          clean['market_high'] = polish(data[key]);
+          clean['market_high'] = walkRawData(data[key], timezone);
           return;
         }
 
         // Rekey the crypto market low currency.
         if (cryptoMarketLow.test(key)) {
-          clean['market_low'] = polish(data[key]);
+          clean['market_low'] = walkRawData(data[key], timezone);
           return;
         }
 
         // Rekey the crypto market close currency.
         if (cryptoMarketClose.test(key)) {
-          clean['market_close'] = polish(data[key]);
+          clean['market_close'] = walkRawData(data[key], timezone);
           return;
         }
 
-        clean[keys[key] || key] = polish(data[key]);
+        clean[keys[key] || key] = walkRawData(data[key], timezone);
       });
 
       return clean;
@@ -395,16 +414,18 @@
      * @returns {Function}
      *   A timeseries function to accept user data that returns a promise.
      */
-    const series = (fn) => (symbol, outputsize = 'compact', datatype = 'json', interval = '1min') => {
-      let params = {
-        symbol,
-        outputsize,
-        datatype
-      };
+    const series =
+      (fn) =>
+      (symbol, outputsize = 'compact', datatype = 'json', interval = '1min') => {
+        let params = {
+          symbol,
+          outputsize,
+          datatype
+        };
 
-      if (fn === 'TIME_SERIES_INTRADAY') params.interval = interval;
-      return util.fn(fn)(params);
-    };
+        if (fn === 'TIME_SERIES_INTRADAY') params.interval = interval;
+        return util.fn(fn)(params);
+      };
 
     /**
      * Util function to get the symbol search data.
@@ -474,28 +495,30 @@
      * @param {String} fn
      *   The macdext-like function to use
      */
-    const MACDEXT_LIKE = (fn) => (
-      symbol,
-      interval,
-      series_type,
-      fastperiod = 12,
-      slowperiod = 26,
-      signalperiod = 9,
-      fastmatype,
-      slowmatype,
-      signalmatype
-    ) =>
-      util.fn(fn)({
+    const MACDEXT_LIKE =
+      (fn) =>
+      (
         symbol,
         interval,
         series_type,
-        fastperiod,
-        slowperiod,
-        signalperiod,
+        fastperiod = 12,
+        slowperiod = 26,
+        signalperiod = 9,
         fastmatype,
         slowmatype,
         signalmatype
-      });
+      ) =>
+        util.fn(fn)({
+          symbol,
+          interval,
+          series_type,
+          fastperiod,
+          slowperiod,
+          signalperiod,
+          fastmatype,
+          slowmatype,
+          signalmatype
+        });
 
     /**
      * A generic function generator for apo-like technicals.
