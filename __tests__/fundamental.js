@@ -9,7 +9,7 @@ jest.unmock('cross-fetch');
 const TIME = 1000;
 
 test(`company overview works`, () => {
-  expect.assertions(58);
+  expect.assertions(45);
   return delay(TIME)
     .then(() => alpha.fundamental.company_overview(`ibm`))
     .then((data) => {
@@ -56,21 +56,8 @@ test(`company overview works`, () => {
       expect(data['50DayMovingAverage']).toBeDefined();
       expect(data['200DayMovingAverage']).toBeDefined();
       expect(data['SharesOutstanding']).toBeDefined();
-      expect(data['SharesShort']).toBeDefined();
-      expect(data['SharesFloat']).toBeDefined();
-      expect(data['SharesShortPriorMonth']).toBeDefined();
-      expect(data['ShortRatio']).toBeDefined();
-      expect(data['ShortPercentOutstanding']).toBeDefined();
-      expect(data['ShortPercentFloat']).toBeDefined();
-      expect(data['PercentInsiders']).toBeDefined();
-      expect(data['PercentInstitutions']).toBeDefined();
-      expect(data['ForwardAnnualDividendRate']).toBeDefined();
-      expect(data['ForwardAnnualDividendYield']).toBeDefined();
-      expect(data['PayoutRatio']).toBeDefined();
       expect(data['DividendDate']).toBeDefined();
       expect(data['ExDividendDate']).toBeDefined();
-      expect(data['LastSplitFactor']).toBeDefined();
-      expect(data['LastSplitDate']).toBeDefined();
     });
 });
 
