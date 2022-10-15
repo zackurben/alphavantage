@@ -313,6 +313,35 @@
     };
 
     /**
+     * Strip \n and \r from values
+     *
+     * @param {String} value
+     *   The value to clean
+     */
+    const stripEol = (value = '') => value.replace(/\r/, '').replace(/\n/, '');
+
+    /**
+     * Convert raw csv input data into json.
+     *
+     * @param {String} raw
+     *   The json data
+     */
+    const csvToJSON = (raw = '') => {
+      const lines = raw.split('\n');
+      const headers = lines.shift().split(',');
+      return lines.map((row) => {
+        const cols = row.split(',');
+        let out = {};
+
+        headers.forEach((header, index) => {
+          out[stripEol(header)] = stripEol(cols[index]);
+        });
+
+        return out;
+      });
+    };
+
+    /**
      * Wrapper function generator for any endpoint.
      *
      * @param {String} type
@@ -322,15 +351,17 @@
      *   The callback function to use in the sdk.
      */
     const fn = (type) => (params) =>
-      fetch__default["default"](url(Object.assign({}, params, { function: type })))
-        .then((res) => {
-          if (res.status !== 200) {
-            throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
-          }
+      fetch__default["default"](url(Object.assign({}, params, { function: type }))).then((res) => {
+        if (!res.status.toString().match(/2\d{2}/)) {
+          throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
+        }
 
-          return res.json();
-        })
-        .then((data) => {
+        // Handle csv returns.
+        if (!params.datatype || params.datatype.toString().toLowerCase() !== 'json')
+          return res.text().then((data) => csvToJSON(data));
+
+        // Default to json return if the util doesnt specify otherwise
+        return res.json().then((data) => {
           if (
             data['Meta Data'] === undefined &&
             data['Realtime Currency Exchange Rate'] === undefined &&
@@ -348,6 +379,7 @@
 
           return data;
         });
+      });
 
     return {
       url,
@@ -395,16 +427,24 @@
      * @returns {Function}
      *   A timeseries function to accept user data that returns a promise.
      */
-    const series = (fn) => (symbol, outputsize = 'compact', datatype = 'json', interval = '1min') => {
-      let params = {
-        symbol,
-        outputsize,
-        datatype
-      };
+    const series =
+      (fn) =>
+      (symbol, outputsize = 'compact', datatype = 'json', interval = '1min', slice = 'year1month1') => {
+        let params = {
+          symbol,
+          outputsize,
+          datatype
+        };
 
-      if (fn === 'TIME_SERIES_INTRADAY') params.interval = interval;
-      return util.fn(fn)(params);
-    };
+        if (['TIME_SERIES_INTRADAY', 'TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
+          params.interval = interval;
+        }
+        if (['TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
+          params.datatype = 'csv';
+          params.slice = slice;
+        }
+        return util.fn(fn)(params);
+      };
 
     /**
      * Util function to get the symbol search data.
@@ -424,6 +464,7 @@
 
     return {
       intraday: series('TIME_SERIES_INTRADAY'),
+      intraday_extended: series('TIME_SERIES_INTRADAY_EXTENDED'),
       daily: series('TIME_SERIES_DAILY'),
       daily_adjusted: series('TIME_SERIES_DAILY_ADJUSTED'),
       weekly: series('TIME_SERIES_WEEKLY'),
