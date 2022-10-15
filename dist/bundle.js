@@ -318,7 +318,7 @@
      * @param {String} value
      *   The value to clean
      */
-    const stripEol = (value = '') => value.replace(/\r/g, '').replace(/\n/g, '');
+    const stripEol = (value = '') => value.replace(/\r/g, '').replace(/\n/g, '').trim();
 
     /**
      * Convert raw csv input data into json.
@@ -350,36 +350,46 @@
      * @returns {Function}
      *   The callback function to use in the sdk.
      */
-    const fn = (type) => (params) =>
-      fetch__default["default"](url(Object.assign({}, params, { function: type }))).then((res) => {
-        if (!res.status.toString().match(/2\d{2}/)) {
-          throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
+    const fn =
+      (type) =>
+      (
+        params = {
+          datatype: 'json'
         }
+      ) =>
+        fetch__default["default"](url(Object.assign({}, params, { function: type })))
+          .then((res) => {
+            if (!res.status.toString().match(/2\d{2}/)) {
+              throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
+            }
 
-        // Handle csv returns.
-        if (!params.datatype || params.datatype.toString().toLowerCase() !== 'json')
-          return res.text().then((data) => csvToJSON(data));
+            // Handle csv returns.
+            if (params.datatype && params.datatype.toString().toLowerCase() !== 'json')
+              return res.text().then((data) => csvToJSON(data));
 
-        // Default to json return if the util doesnt specify otherwise
-        return res.json().then((data) => {
-          if (
-            data['Meta Data'] === undefined &&
-            data['Realtime Currency Exchange Rate'] === undefined &&
-            data['Global Quote'] === undefined &&
-            data['bestMatches'] === undefined &&
-            data['Symbol'] === undefined &&
-            data['symbol'] === undefined &&
-            data['name'] === undefined &&
-            data['interval'] === undefined &&
-            data['unit'] === undefined &&
-            data['data'] === undefined
-          ) {
-            throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
-          }
+            // Default to json return if the util doesnt specify otherwise
+            return res.json();
+          })
+          .then((data) => {
+            if (
+              params.datatype &&
+              params.datatype.toString().toLowerCase() === 'json' &&
+              data['Meta Data'] === undefined &&
+              data['Realtime Currency Exchange Rate'] === undefined &&
+              data['Global Quote'] === undefined &&
+              data['bestMatches'] === undefined &&
+              data['Symbol'] === undefined &&
+              data['symbol'] === undefined &&
+              data['name'] === undefined &&
+              data['interval'] === undefined &&
+              data['unit'] === undefined &&
+              data['data'] === undefined
+            ) {
+              throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
+            }
 
-          return data;
-        });
-      });
+            return data;
+          });
 
     return {
       url,
