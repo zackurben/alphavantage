@@ -5,11 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.4.0] - 10/15/2022
+
+### Added
+
+- Added support for new symbol `TIME_SERIES_INTRADAY_EXTENDED`
+- Added generic support for new endpoints that return csv
+- Added new util `stripEol` to strip win and \*nix line endings
+- Added new util `csvToJSON` to convert raw csv into json
+
+## [2.3.1] - 10/9/2022
 
 ### Changed
 
 - Updated the changelog to use [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format
+- Updated deps
 
 ## [2.3.0] - 10/23/2021
 
