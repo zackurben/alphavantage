@@ -318,7 +318,7 @@
      * @param {String} value
      *   The value to clean
      */
-    const stripEol = (value = '') => value.replace(/\r/, '').replace(/\n/, '');
+    const stripEol = (value = '') => value.replace(/\r/g, '').replace(/\n/g, '');
 
     /**
      * Convert raw csv input data into json.
@@ -384,7 +384,9 @@
     return {
       url,
       polish,
-      fn
+      fn,
+      stripEol,
+      csvToJSON
     };
   };
 

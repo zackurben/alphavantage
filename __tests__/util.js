@@ -804,3 +804,45 @@ test(`200 request responses without meta data are thrown to a catch`, () => {
       expect(error).toEqual('An AlphaVantage error occurred. {}');
     });
 });
+
+describe('stripEol', () => {
+  test('empty input', () => {
+    expect(alpha.util.stripEol('')).toEqual('');
+  });
+
+  test('newline first', () => {
+    expect(alpha.util.stripEol('\ntest')).toEqual('test');
+  });
+
+  test('newline last', () => {
+    expect(alpha.util.stripEol('test\n')).toEqual('test');
+  });
+
+  test('multiple newline', () => {
+    expect(alpha.util.stripEol('\ntest\n')).toEqual('test');
+  });
+
+  test('return first', () => {
+    expect(alpha.util.stripEol('\rtest')).toEqual('test');
+  });
+
+  test('return last', () => {
+    expect(alpha.util.stripEol('test\r')).toEqual('test');
+  });
+
+  test('multiple returns', () => {
+    expect(alpha.util.stripEol('\rtest\r')).toEqual('test');
+  });
+
+  test('mixed newline and returns', () => {
+    expect(alpha.util.stripEol('test\r\n')).toEqual('test');
+  });
+
+  test('invalid win newline', () => {
+    expect(alpha.util.stripEol('test\n\r')).toEqual('test');
+  });
+
+  test('mixed win newline', () => {
+    expect(alpha.util.stripEol('\r\ntest\n\r')).toEqual('test');
+  });
+});
