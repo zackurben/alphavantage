@@ -204,6 +204,7 @@ This function allows you to use any AlphaVantage API that has not yet been imple
 
 ```javascript
 alpha.experimental(fn, params);
+alpha.experimental('TIME_SERIES_DAILY', { symbol: 'XYZ', ...});
 ```
 
 ## Contact

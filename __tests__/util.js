@@ -795,7 +795,17 @@ test(`non 200 request responses are thrown to a catch`, () => {
     });
 });
 
-test(`200 request responses without meta data are thrown to a catch`, () => {
+test(`(json) 200 request responses without meta data are thrown to a catch`, () => {
+  expect.assertions(1);
+
+  return alpha.util
+    .fn('200')({ datatype: 'json' })
+    .catch((error) => {
+      expect(error).toEqual('An AlphaVantage error occurred. {}');
+    });
+});
+
+test(`util.fn defaults to datatype:json and throws an error due to missing meta data`, () => {
   expect.assertions(1);
 
   return alpha.util
@@ -803,4 +813,69 @@ test(`200 request responses without meta data are thrown to a catch`, () => {
     .catch((error) => {
       expect(error).toEqual('An AlphaVantage error occurred. {}');
     });
+});
+
+describe('stripEol', () => {
+  test('empty input', () => {
+    expect(alpha.util.stripEol('')).toEqual('');
+  });
+
+  test('newline first', () => {
+    expect(alpha.util.stripEol('\ntest')).toEqual('test');
+  });
+
+  test('newline last', () => {
+    expect(alpha.util.stripEol('test\n')).toEqual('test');
+  });
+
+  test('multiple newline', () => {
+    expect(alpha.util.stripEol('\ntest\n')).toEqual('test');
+  });
+
+  test('return first', () => {
+    expect(alpha.util.stripEol('\rtest')).toEqual('test');
+  });
+
+  test('return last', () => {
+    expect(alpha.util.stripEol('test\r')).toEqual('test');
+  });
+
+  test('multiple returns', () => {
+    expect(alpha.util.stripEol('\rtest\r')).toEqual('test');
+  });
+
+  test('mixed newline and returns', () => {
+    expect(alpha.util.stripEol('test\r\n')).toEqual('test');
+  });
+
+  test('invalid win newline', () => {
+    expect(alpha.util.stripEol('test\n\r')).toEqual('test');
+  });
+
+  test('mixed win newline', () => {
+    expect(alpha.util.stripEol('\r\ntest\n\r')).toEqual('test');
+  });
+
+  test('strips spaces at both ends', () => {
+    expect(alpha.util.stripEol('\r\n test \n\r')).toEqual('test');
+  });
+
+  test('dosnt strip spaces in the middle of keys', () => {
+    expect(alpha.util.stripEol('\r\n test value \n\r')).toEqual('test value');
+  });
+});
+
+describe('csvToJSON', () => {
+  test('uses the first row for headers', () => {
+    const text = `a,b,c,d
+1,2,3,4
+9,8,7,6`;
+    const output = alpha.util.csvToJSON(text);
+
+    expect(output).toBeInstanceOf(Array);
+    expect(output.length).toEqual(2);
+    expect(Object.keys(output[0])).toEqual(['a', 'b', 'c', 'd']);
+    expect(output[0]).toEqual({ a: `1`, b: `2`, c: `3`, d: `4` });
+    expect(output[1]).toEqual({ a: `9`, b: `8`, c: `7`, d: `6` });
+  });
 });
