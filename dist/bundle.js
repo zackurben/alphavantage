@@ -4,10 +4,6 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory(global.fetch));
 })(this, (function (fetch) { 'use strict';
 
-  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-  var fetch__default = /*#__PURE__*/_interopDefaultLegacy(fetch);
-
   /**
    * Time stamp regex that AlphaVantage uses.
    */
@@ -357,7 +353,7 @@
           datatype: 'json'
         }
       ) =>
-        fetch__default["default"](url(Object.assign({}, params, { function: type })))
+        fetch(url(Object.assign({}, params, { function: type })))
           .then((res) => {
             if (!res.status.toString().match(/2\d{2}/)) {
               throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
