@@ -68,10 +68,6 @@ alpha.technical.sma(`msft`, `daily`, 60, `close`).then((data) => {
   console.log(data);
 });
 
-alpha.performance.sector().then((data) => {
-  console.log(data);
-});
-
 alpha.experimental('CRYPTO_INTRADAY', { symbol: 'ETH', market: 'USD', interval: '5min' })).then((data) => {
   console.log(data);
 });
@@ -188,14 +184,6 @@ alpha.technical.ht_trendmode(symbol, interval, series_type);
 alpha.technical.ht_dcperiod(symbol, interval, series_type);
 alpha.technical.ht_dcphase(symbol, interval, series_type);
 alpha.technical.ht_dcphasor(symbol, interval, series_type);
-```
-
-## Performance
-
-See [Alpha Vantage](https://www.alphavantage.co/documentation/#sector-information) for the parameters.
-
-```javascript
-alpha.performance.sector();
 ```
 
 ## Experimental

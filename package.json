@@ -1,6 +1,6 @@
 {
   "name": "alphavantage",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "A simple interface to the Alpha Vantage API.",
   "main": "dist/bundle.js",
   "scripts": {

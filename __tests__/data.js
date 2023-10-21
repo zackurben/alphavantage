@@ -18,18 +18,6 @@ test(`intraday data works`, () => {
     });
 });
 
-test(`intraday_extended data works`, () => {
-  const fields = ['time', 'open', 'high', 'low', 'close', 'volume'];
-  expect.assertions(3);
-  return setTimeout(TIME)
-    .then(() => alpha.data.intraday_extended(`msft`, undefined, undefined, undefined, 'year1month1'))
-    .then((data) => {
-      expect(data instanceof Array).toBeDefined();
-      expect(data.length).toBeDefined();
-      expect(Object.keys(data[0])).toEqual(fields);
-    });
-});
-
 test(`daily data works`, () => {
   expect.assertions(2);
   return setTimeout(TIME)

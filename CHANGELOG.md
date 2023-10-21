@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Updated dependencies
+- Updating babel and rollup configuration to support more detailed configurations
+
+### Removed
+
+- Removed `delay` dev dependency
+- Removed support for `TIME_SERIES_INTRADAY_EXTENDED` in favor of `TIME_SERIES_INTRADAY`
+- Removed performance `SECTOR` support as it was dropped.
+
 ## [2.4.1] - 10/15/2022
 
 ### Changed
