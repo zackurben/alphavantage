@@ -1,6 +1,6 @@
 'use strict';
 
-import delay from 'delay';
+import { setTimeout } from 'node:timers/promises';
 import Alpha from '..';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
@@ -10,7 +10,7 @@ const TIME = 1000;
 
 test(`company overview works`, () => {
   expect.assertions(45);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.fundamental.company_overview(`ibm`))
     .then((data) => {
       expect(data['Symbol']).toEqual('IBM');
@@ -63,7 +63,7 @@ test(`company overview works`, () => {
 
 test(`income statement works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.fundamental.income_statement(`ibm`))
     .then((data) => {
       expect(data['annualReports']).toBeDefined();
@@ -73,7 +73,7 @@ test(`income statement works`, () => {
 
 test(`balance sheet works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.fundamental.balance_sheet(`ibm`))
     .then((data) => {
       expect(data['annualReports']).toBeDefined();
@@ -83,7 +83,7 @@ test(`balance sheet works`, () => {
 
 test(`cash flow works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.fundamental.cash_flow(`ibm`))
     .then((data) => {
       expect(data['annualReports']).toBeDefined();

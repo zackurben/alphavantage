@@ -1,6 +1,6 @@
 'use strict';
 
-import delay from 'delay';
+import { setTimeout } from 'node:timers/promises';
 import Alpha from '../';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
@@ -10,7 +10,7 @@ const TIME = 1000;
 
 test(`sector performance data works`, () => {
   expect.assertions(11);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.performance.sector())
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();

@@ -785,33 +785,15 @@ test(`symbol search polishing works`, () => {
   expect(polished['bestMatches'][first]['match_score']).toBeDefined();
 });
 
-test(`non 200 request responses are thrown to a catch`, () => {
+test(`non unknown function calls are thrown to a catch`, () => {
   expect.assertions(1);
 
   return alpha.util
     .fn('123')()
     .catch((error) => {
-      expect(error).toEqual('An AlphaVantage error occurred. 123: {}');
-    });
-});
-
-test(`(json) 200 request responses without meta data are thrown to a catch`, () => {
-  expect.assertions(1);
-
-  return alpha.util
-    .fn('200')({ datatype: 'json' })
-    .catch((error) => {
-      expect(error).toEqual('An AlphaVantage error occurred. {}');
-    });
-});
-
-test(`util.fn defaults to datatype:json and throws an error due to missing meta data`, () => {
-  expect.assertions(1);
-
-  return alpha.util
-    .fn('200')()
-    .catch((error) => {
-      expect(error).toEqual('An AlphaVantage error occurred. {}');
+      expect(error).toEqual(
+        'An AlphaVantage error occurred. {"Error Message":"This API function (123) does not exist."}'
+      );
     });
 });
 

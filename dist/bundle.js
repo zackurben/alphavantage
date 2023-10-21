@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('cross-fetch')) :
-  typeof define === 'function' && define.amd ? define(['cross-fetch'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory(global.fetch));
-})(this, (function (fetch) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('cross-fetch/polyfill')) :
+  typeof define === 'function' && define.amd ? define(['cross-fetch/polyfill'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.alphavantage = factory());
+})(this, (function () { 'use strict';
 
   /**
    * Time stamp regex that AlphaVantage uses.
@@ -225,8 +225,7 @@
     '8. currency': 'currency',
     '9. matchScore': 'match_score'
   };
-
-  var Util = (config) => {
+  var Util = (config => {
     /**
      * Recursively walk the data tree and replace weird keys with a normalized set.
      *
@@ -236,7 +235,7 @@
      * @returns {Object|String|Number}
      *   Normalized data.
      */
-    const polish = (data) => {
+    const polish = data => {
       // If this is not an object, dont recurse.
       if (!data || typeof data !== 'object') {
         return data;
@@ -244,7 +243,7 @@
 
       // If the data is a complex object, walk all subtrees to normalize all branches.
       let clean = {};
-      Object.keys(data).forEach((key) => {
+      Object.keys(data).forEach(key => {
         key = key.toString();
 
         // If the key is a date time string, convert it to an iso timestamp.
@@ -276,10 +275,8 @@
           clean['market_close'] = polish(data[key]);
           return;
         }
-
         clean[keys[key] || key] = polish(data[key]);
       });
-
       return clean;
     };
 
@@ -292,19 +289,14 @@
      * @returns {String}
      *   The API url to use for a given function and input parameters.
      */
-    const url = (params) => {
-      params = Object.keys(params || {})
-        .map((type) => {
-          let value = params[type];
-          if (value !== undefined) {
-            return `${type}=${value}`;
-          }
-
-          return undefined;
-        })
-        .filter((value) => value !== undefined)
-        .join('&');
-
+    const url = params => {
+      params = Object.keys(params || {}).map(type => {
+        let value = params[type];
+        if (value !== undefined) {
+          return `${type}=${value}`;
+        }
+        return undefined;
+      }).filter(value => value !== undefined).join('&');
       return `${config.base}${params}`;
     };
 
@@ -325,14 +317,12 @@
     const csvToJSON = (raw = '') => {
       const lines = raw.split('\n');
       const headers = lines.shift().split(',');
-      return lines.map((row) => {
+      return lines.map(row => {
         const cols = row.split(',');
         let out = {};
-
         headers.forEach((header, index) => {
           out[stripEol(header)] = stripEol(cols[index]);
         });
-
         return out;
       });
     };
@@ -346,47 +336,26 @@
      * @returns {Function}
      *   The callback function to use in the sdk.
      */
-    const fn =
-      (type) =>
-      (
-        params = {
-          datatype: 'json'
-        }
-      ) =>
-        fetch(url(Object.assign({}, params, { function: type })))
-          .then((res) => {
-            if (!res.status.toString().match(/2\d{2}/)) {
-              throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
-            }
+    const fn = type => (params = {
+      datatype: 'json'
+    }) => fetch(url(Object.assign({}, params, {
+      function: type
+    }))).then(res => {
+      if (!res.status.toString().match(/2\d{2}/)) {
+        throw `An AlphaVantage error occurred. ${res.status}: ${res.text()}`;
+      }
 
-            // Handle csv returns.
-            if (params.datatype && params.datatype.toString().toLowerCase() !== 'json')
-              return res.text().then((data) => csvToJSON(data));
+      // Handle csv returns.
+      if (params.datatype && params.datatype.toString().toLowerCase() !== 'json') return res.text().then(data => csvToJSON(data));
 
-            // Default to json return if the util doesnt specify otherwise
-            return res.json();
-          })
-          .then((data) => {
-            if (
-              params.datatype &&
-              params.datatype.toString().toLowerCase() === 'json' &&
-              data['Meta Data'] === undefined &&
-              data['Realtime Currency Exchange Rate'] === undefined &&
-              data['Global Quote'] === undefined &&
-              data['bestMatches'] === undefined &&
-              data['Symbol'] === undefined &&
-              data['symbol'] === undefined &&
-              data['name'] === undefined &&
-              data['interval'] === undefined &&
-              data['unit'] === undefined &&
-              data['data'] === undefined
-            ) {
-              throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
-            }
-
-            return data;
-          });
-
+      // Default to json return if the util doesnt specify otherwise
+      return res.json();
+    }).then(data => {
+      if (params.datatype && params.datatype.toString().toLowerCase() === 'json' && data['Meta Data'] === undefined && data['Realtime Currency Exchange Rate'] === undefined && data['Global Quote'] === undefined && data['bestMatches'] === undefined && data['Symbol'] === undefined && data['symbol'] === undefined && data['name'] === undefined && data['interval'] === undefined && data['unit'] === undefined && data['data'] === undefined) {
+        throw `An AlphaVantage error occurred. ${data['Information'] || JSON.stringify(data)}`;
+      }
+      return data;
+    });
     return {
       url,
       polish,
@@ -394,9 +363,9 @@
       stripEol,
       csvToJSON
     };
-  };
+  });
 
-  var Crypto = (config) => {
+  var Crypto = (config => {
     const util = Util(config);
 
     /**
@@ -408,20 +377,18 @@
      * @returns {Function}
      *   A data function to accept user input and returns a promise.
      */
-    const series = (fn) => (symbol, market) =>
-      util.fn(fn)({
-        symbol,
-        market
-      });
-
+    const series = fn => (symbol, market) => util.fn(fn)({
+      symbol,
+      market
+    });
     return {
       daily: series('DIGITAL_CURRENCY_DAILY'),
       weekly: series('DIGITAL_CURRENCY_WEEKLY'),
       monthly: series('DIGITAL_CURRENCY_MONTHLY')
     };
-  };
+  });
 
-  var Data = (config) => {
+  var Data = (config => {
     const util = Util(config);
 
     /**
@@ -435,24 +402,21 @@
      * @returns {Function}
      *   A timeseries function to accept user data that returns a promise.
      */
-    const series =
-      (fn) =>
-      (symbol, outputsize = 'compact', datatype = 'json', interval = '1min', slice = 'year1month1') => {
-        let params = {
-          symbol,
-          outputsize,
-          datatype
-        };
-
-        if (['TIME_SERIES_INTRADAY', 'TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
-          params.interval = interval;
-        }
-        if (['TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
-          params.datatype = 'csv';
-          params.slice = slice;
-        }
-        return util.fn(fn)(params);
+    const series = fn => (symbol, outputsize = 'compact', datatype = 'json', interval = '1min', slice = 'year1month1') => {
+      let params = {
+        symbol,
+        outputsize,
+        datatype
       };
+      if (['TIME_SERIES_INTRADAY', 'TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
+        params.interval = interval;
+      }
+      if (['TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
+        params.datatype = 'csv';
+        params.slice = slice;
+      }
+      return util.fn(fn)(params);
+    };
 
     /**
      * Util function to get the symbol search data.
@@ -465,11 +429,9 @@
      * @returns {Function}
      *   A search function to accept user data that returns a promise.
      */
-    const search = (fn) => (keywords) =>
-      util.fn(fn)({
-        keywords
-      });
-
+    const search = fn => keywords => util.fn(fn)({
+      keywords
+    });
     return {
       intraday: series('TIME_SERIES_INTRADAY'),
       intraday_extended: series('TIME_SERIES_INTRADAY_EXTENDED'),
@@ -482,30 +444,62 @@
       quote: series('GLOBAL_QUOTE'),
       search: search('SYMBOL_SEARCH')
     };
-  };
+  });
 
-  var Forex = (config) => {
+  var Experimental = (config => {
     const util = Util(config);
+    return (fn, params = {}) => util.fn(fn)(params);
+  });
 
+  var Forex = (config => {
+    const util = Util(config);
     return {
-      rate: (from_currency, to_currency) => util.fn('CURRENCY_EXCHANGE_RATE')({ from_currency, to_currency }),
-      intraday: (from_symbol, to_symbol, interval, outputsize = 'compact') =>
-        util.fn('FX_INTRADAY')({ from_symbol, to_symbol, interval, outputsize }),
-      daily: (from_symbol, to_symbol) => util.fn('FX_DAILY')({ from_symbol, to_symbol }),
-      weekly: (from_symbol, to_symbol) => util.fn('FX_WEEKLY')({ from_symbol, to_symbol }),
-      monthly: (from_symbol, to_symbol) => util.fn('FX_MONTHLY')({ from_symbol, to_symbol })
+      rate: (from_currency, to_currency) => util.fn('CURRENCY_EXCHANGE_RATE')({
+        from_currency,
+        to_currency
+      }),
+      intraday: (from_symbol, to_symbol, interval, outputsize = 'compact') => util.fn('FX_INTRADAY')({
+        from_symbol,
+        to_symbol,
+        interval,
+        outputsize
+      }),
+      daily: (from_symbol, to_symbol) => util.fn('FX_DAILY')({
+        from_symbol,
+        to_symbol
+      }),
+      weekly: (from_symbol, to_symbol) => util.fn('FX_WEEKLY')({
+        from_symbol,
+        to_symbol
+      }),
+      monthly: (from_symbol, to_symbol) => util.fn('FX_MONTHLY')({
+        from_symbol,
+        to_symbol
+      })
     };
-  };
+  });
 
-  var Performance = (config) => {
+  var Fundamental = (config => {
     const util = Util(config);
+    const fundamental = fn => symbol => util.fn(fn)({
+      symbol
+    });
+    return {
+      company_overview: fundamental('OVERVIEW'),
+      income_statement: fundamental('INCOME_STATEMENT'),
+      balance_sheet: fundamental('BALANCE_SHEET'),
+      cash_flow: fundamental('CASH_FLOW')
+    };
+  });
 
+  var Performance = (config => {
+    const util = Util(config);
     return {
       sector: util.fn('SECTOR')
     };
-  };
+  });
 
-  var Technical = (config) => {
+  var Technical = (config => {
     const util = Util(config);
 
     /**
@@ -514,8 +508,12 @@
      * @param {String} fn
      *   The sma-like function to use
      */
-    const SMA_LIKE = (fn) => (symbol, interval, time_period, series_type) =>
-      util.fn(fn)({ symbol, interval, time_period, series_type });
+    const SMA_LIKE = fn => (symbol, interval, time_period, series_type) => util.fn(fn)({
+      symbol,
+      interval,
+      time_period,
+      series_type
+    });
 
     /**
      * A generic function generator for macdext-like technicals.
@@ -523,28 +521,17 @@
      * @param {String} fn
      *   The macdext-like function to use
      */
-    const MACDEXT_LIKE = (fn) => (
+    const MACDEXT_LIKE = fn => (symbol, interval, series_type, fastperiod = 12, slowperiod = 26, signalperiod = 9, fastmatype, slowmatype, signalmatype) => util.fn(fn)({
       symbol,
       interval,
       series_type,
-      fastperiod = 12,
-      slowperiod = 26,
-      signalperiod = 9,
+      fastperiod,
+      slowperiod,
+      signalperiod,
       fastmatype,
       slowmatype,
       signalmatype
-    ) =>
-      util.fn(fn)({
-        symbol,
-        interval,
-        series_type,
-        fastperiod,
-        slowperiod,
-        signalperiod,
-        fastmatype,
-        slowmatype,
-        signalmatype
-      });
+    });
 
     /**
      * A generic function generator for apo-like technicals.
@@ -552,8 +539,14 @@
      * @param {String} fn
      *   The apo-like function to use
      */
-    const APO_LIKE = (fn) => (symbol, interval, series_type, fastperiod, slowperiod, matype) =>
-      util.fn(fn)({ symbol, interval, series_type, fastperiod, slowperiod, matype });
+    const APO_LIKE = fn => (symbol, interval, series_type, fastperiod, slowperiod, matype) => util.fn(fn)({
+      symbol,
+      interval,
+      series_type,
+      fastperiod,
+      slowperiod,
+      matype
+    });
 
     /**
      * A generic function generator for ht-like technicals.
@@ -561,8 +554,11 @@
      * @param {String} fn
      *   The ht-like function to use
      */
-    const HT_LIKE = (fn) => (symbol, interval, series_type) => util.fn(fn)({ symbol, interval, series_type });
-
+    const HT_LIKE = fn => (symbol, interval, series_type) => util.fn(fn)({
+      symbol,
+      interval,
+      series_type
+    });
     return {
       sma: SMA_LIKE('SMA'),
       ema: SMA_LIKE('EMA'),
@@ -571,18 +567,42 @@
       tema: SMA_LIKE('TEMA'),
       trima: SMA_LIKE('TRIMA'),
       kama: SMA_LIKE('KAMA'),
-      mama: (symbol, interval, series_type, fastlimit = 0.01, slowlimit = 0.01) =>
-        util.fn('MAMA')({ symbol, interval, series_type, fastlimit, slowlimit }),
+      mama: (symbol, interval, series_type, fastlimit = 0.01, slowlimit = 0.01) => util.fn('MAMA')({
+        symbol,
+        interval,
+        series_type,
+        fastlimit,
+        slowlimit
+      }),
       t3: SMA_LIKE('T3'),
       macd: MACDEXT_LIKE('MACD'),
       macdext: MACDEXT_LIKE('MACDEXT'),
-      stoch: (symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype) =>
-        util.fn('STOCH')({ symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype }),
-      stochf: (symbol, interval, fastkperiod, fastdperiod, fastdmatype) =>
-        util.fn('STOCHF')({ symbol, interval, fastkperiod, fastdperiod, fastdmatype }),
+      stoch: (symbol, interval, fastkperiod, slowkperiod, slowdperiod, slowkmatype, slowdmatype) => util.fn('STOCH')({
+        symbol,
+        interval,
+        fastkperiod,
+        slowkperiod,
+        slowdperiod,
+        slowkmatype,
+        slowdmatype
+      }),
+      stochf: (symbol, interval, fastkperiod, fastdperiod, fastdmatype) => util.fn('STOCHF')({
+        symbol,
+        interval,
+        fastkperiod,
+        fastdperiod,
+        fastdmatype
+      }),
       rsi: SMA_LIKE('RSI'),
-      stochrsi: (symbol, interval, time_period, series_type, fastkperiod, fastdperiod, fastdmatype) =>
-        util.fn('STOCHRSI')({ symbol, interval, time_period, series_type, fastkperiod, fastdperiod, fastdmatype }),
+      stochrsi: (symbol, interval, time_period, series_type, fastkperiod, fastdperiod, fastdmatype) => util.fn('STOCHRSI')({
+        symbol,
+        interval,
+        time_period,
+        series_type,
+        fastkperiod,
+        fastdperiod,
+        fastdmatype
+      }),
       willr: SMA_LIKE('WILLR'),
       adx: SMA_LIKE('ADX'),
       adx: SMA_LIKE('ADX'),
@@ -599,23 +619,45 @@
       aroonosc: SMA_LIKE('AROONOSC'),
       mfi: SMA_LIKE('MFI'),
       trix: SMA_LIKE('TRIX'),
-      ultosc: (symbol, interval, timeperiod1, timeperiod2, timeperiod3) =>
-        util.fn('ULTOSC')({ symbol, interval, timeperiod1, timeperiod2, timeperiod3 }),
+      ultosc: (symbol, interval, timeperiod1, timeperiod2, timeperiod3) => util.fn('ULTOSC')({
+        symbol,
+        interval,
+        timeperiod1,
+        timeperiod2,
+        timeperiod3
+      }),
       dx: SMA_LIKE('DX'),
       minus_di: SMA_LIKE('MINUS_DI'),
       plus_di: SMA_LIKE('PLUS_DI'),
       minus_dm: SMA_LIKE('MINUS_DM'),
       plus_dm: SMA_LIKE('PLUS_DM'),
-      bbands: (symbol, interval, time_period, series_type, nbdevup, nbdevdn, matype) =>
-        util.fn('BBANDS')({ symbol, interval, time_period, series_type, nbdevup, nbdevdn, matype }),
+      bbands: (symbol, interval, time_period, series_type, nbdevup, nbdevdn, matype) => util.fn('BBANDS')({
+        symbol,
+        interval,
+        time_period,
+        series_type,
+        nbdevup,
+        nbdevdn,
+        matype
+      }),
       midpoint: SMA_LIKE('MIDPOINT'),
       midprice: SMA_LIKE('MIDPRICE'),
-      sar: (symbol, interval, acceleration, maximum) => util.fn('SAR')({ symbol, interval, acceleration, maximum }),
+      sar: (symbol, interval, acceleration, maximum) => util.fn('SAR')({
+        symbol,
+        interval,
+        acceleration,
+        maximum
+      }),
       trange: SMA_LIKE('TRANGE'),
       atr: SMA_LIKE('ATR'),
       natr: SMA_LIKE('NATR'),
       ad: SMA_LIKE('AD'),
-      adosc: (symbol, interval, fastperiod, slowperiod) => util.fn('ADOSC')({ symbol, interval, fastperiod, slowperiod }),
+      adosc: (symbol, interval, fastperiod, slowperiod) => util.fn('ADOSC')({
+        symbol,
+        interval,
+        fastperiod,
+        slowperiod
+      }),
       obv: SMA_LIKE('OBV'),
       ht_trendline: HT_LIKE('HT_TRENDLINE'),
       ht_sine: HT_LIKE('HT_SINE'),
@@ -624,30 +666,12 @@
       ht_dcphase: HT_LIKE('HT_DCPHASE'),
       ht_dcphasor: HT_LIKE('HT_PHASOR')
     };
-  };
-
-  var Fundamental = (config) => {
-    const util = Util(config);
-
-    const fundamental = (fn) => (symbol) => util.fn(fn)({ symbol });
-
-    return {
-      company_overview: fundamental('OVERVIEW'),
-      income_statement: fundamental('INCOME_STATEMENT'),
-      balance_sheet: fundamental('BALANCE_SHEET'),
-      cash_flow: fundamental('CASH_FLOW')
-    };
-  };
-
-  var Experimental = (config) => {
-    const util = Util(config);
-    return (fn, params = {}) => util.fn(fn)(params);
-  };
+  });
 
   /**
    * The Alpha Vantage core module.
    */
-  var index = (config = {}) => {
+  var index = ((config = {}) => {
     // Check for API Key
     if (config.key === undefined) {
       throw new Error('Missing Alpha Vantage config settings: key');
@@ -667,7 +691,7 @@
       fundamental: Fundamental(config),
       experimental: Experimental(config)
     };
-  };
+  });
 
   return index;
 
