@@ -696,63 +696,6 @@ test(`monthly crypto polishing works`, () => {
   expect(polished['data'][first]['cap']).toBeDefined();
 });
 
-test(`sector performance data polishing works`, () => {
-  expect.assertions(48);
-  const data = require('./examples/sector/performance.json');
-  const polished = alpha.util.polish(data);
-
-  expect(data['Meta Data']).toBeDefined();
-  expect(data['Meta Data']['Information']).toBeDefined();
-  expect(data['Meta Data']['Last Refreshed']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']).toBeDefined();
-  expect(data['Rank B: 1 Day Performance']).toBeDefined();
-  expect(data['Rank C: 5 Day Performance']).toBeDefined();
-  expect(data['Rank D: 1 Month Performance']).toBeDefined();
-  expect(data['Rank E: 3 Month Performance']).toBeDefined();
-  expect(data['Rank F: Year-to-Date (YTD) Performance']).toBeDefined();
-  expect(data['Rank G: 1 Year Performance']).toBeDefined();
-  expect(data['Rank H: 3 Year Performance']).toBeDefined();
-  expect(data['Rank I: 5 Year Performance']).toBeDefined();
-  expect(data['Rank J: 10 Year Performance']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Information Technology']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Consumer Discretionary']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Health Care']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Industrials']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Consumer Staples']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Telecommunication Services']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Materials']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Financials']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Real Estate']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Utilities']).toBeDefined();
-  expect(data['Rank A: Real-Time Performance']['Energy']).toBeDefined();
-
-  expect(polished['Meta Data']).toBeUndefined();
-  expect(polished['Rank A: Real-Time Performance']).toBeUndefined();
-  expect(polished['Rank B: 1 Day Performance']).toBeUndefined();
-  expect(polished['Rank C: 5 Day Performance']).toBeUndefined();
-  expect(polished['Rank D: 1 Month Performance']).toBeUndefined();
-  expect(polished['Rank E: 3 Month Performance']).toBeUndefined();
-  expect(polished['Rank F: Year-to-Date (YTD) Performance']).toBeUndefined();
-  expect(polished['Rank G: 1 Year Performance']).toBeUndefined();
-  expect(polished['Rank H: 3 Year Performance']).toBeUndefined();
-  expect(polished['Rank I: 5 Year Performance']).toBeUndefined();
-  expect(polished['Rank J: 10 Year Performance']).toBeUndefined();
-
-  expect(polished['meta']).toBeDefined();
-  expect(polished['meta']['information']).toBeDefined();
-  expect(polished['meta']['updated']).toBeDefined();
-  expect(polished['real']).toBeDefined();
-  expect(polished['1day']).toBeDefined();
-  expect(polished['5day']).toBeDefined();
-  expect(polished['1month']).toBeDefined();
-  expect(polished['3month']).toBeDefined();
-  expect(polished['ytd']).toBeDefined();
-  expect(polished['1year']).toBeDefined();
-  expect(polished['3year']).toBeDefined();
-  expect(polished['5year']).toBeDefined();
-  expect(polished['10year']).toBeDefined();
-});
-
 test(`symbol search polishing works`, () => {
   expect.assertions(21);
   const data = require('./examples/data/search.json');

@@ -6,7 +6,6 @@ import Data from './lib/data';
 import Experimental from './lib/experimental';
 import Forex from './lib/forex';
 import Fundamental from './lib/fundamental';
-import Performance from './lib/performance';
 import Technical from './lib/technical';
 import Util from './lib/util';
 
@@ -29,7 +28,6 @@ export default (config = {}) => {
     forex: Forex(config),
     crypto: Crypto(config),
     technical: Technical(config),
-    performance: Performance(config),
     fundamental: Fundamental(config),
     experimental: Experimental(config)
   };

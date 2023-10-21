@@ -408,12 +408,8 @@
         outputsize,
         datatype
       };
-      if (['TIME_SERIES_INTRADAY', 'TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
+      if (['TIME_SERIES_INTRADAY'].includes(fn)) {
         params.interval = interval;
-      }
-      if (['TIME_SERIES_INTRADAY_EXTENDED'].includes(fn)) {
-        params.datatype = 'csv';
-        params.slice = slice;
       }
       return util.fn(fn)(params);
     };
@@ -434,7 +430,6 @@
     });
     return {
       intraday: series('TIME_SERIES_INTRADAY'),
-      intraday_extended: series('TIME_SERIES_INTRADAY_EXTENDED'),
       daily: series('TIME_SERIES_DAILY'),
       daily_adjusted: series('TIME_SERIES_DAILY_ADJUSTED'),
       weekly: series('TIME_SERIES_WEEKLY'),
@@ -489,13 +484,6 @@
       income_statement: fundamental('INCOME_STATEMENT'),
       balance_sheet: fundamental('BALANCE_SHEET'),
       cash_flow: fundamental('CASH_FLOW')
-    };
-  });
-
-  var Performance = (config => {
-    const util = Util(config);
-    return {
-      sector: util.fn('SECTOR')
     };
   });
 
@@ -687,7 +675,6 @@
       forex: Forex(config),
       crypto: Crypto(config),
       technical: Technical(config),
-      performance: Performance(config),
       fundamental: Fundamental(config),
       experimental: Experimental(config)
     };
