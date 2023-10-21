@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "prettier --write \"./!(dist)**/**.js\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "rollup index.js --file dist/bundle.js --format umd --name alphavantage"
+    "build": "rollup -c rollup.config.mjs"
   },
   "keywords": [
     "alpha vantage",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
+    "@rollup/plugin-babel": "^6.0.4",
     "babel-jest": "^29.7.0",
     "coveralls": "^3.1.1",
     "delay": "^6.0.0",
