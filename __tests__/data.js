@@ -1,6 +1,6 @@
 'use strict';
 
-import delay from 'delay';
+import { setTimeout } from 'node:timers/promises';
 import Alpha from '..';
 const alpha = Alpha({ key: process.env.AV_KEY });
 
@@ -10,7 +10,7 @@ const TIME = 1000;
 
 test(`intraday data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.intraday(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -21,7 +21,7 @@ test(`intraday data works`, () => {
 test(`intraday_extended data works`, () => {
   const fields = ['time', 'open', 'high', 'low', 'close', 'volume'];
   expect.assertions(3);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.intraday_extended(`msft`, undefined, undefined, undefined, 'year1month1'))
     .then((data) => {
       expect(data instanceof Array).toBeDefined();
@@ -32,7 +32,7 @@ test(`intraday_extended data works`, () => {
 
 test(`daily data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.daily(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -42,7 +42,7 @@ test(`daily data works`, () => {
 
 test(`daily adjusted data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.daily_adjusted(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -52,7 +52,7 @@ test(`daily adjusted data works`, () => {
 
 test(`weekly data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.weekly(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -62,7 +62,7 @@ test(`weekly data works`, () => {
 
 test(`weekly adjusted data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.weekly_adjusted(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -72,7 +72,7 @@ test(`weekly adjusted data works`, () => {
 
 test(`monthly data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.monthly(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -82,7 +82,7 @@ test(`monthly data works`, () => {
 
 test(`weekly adjusted data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.monthly_adjusted(`msft`))
     .then((data) => {
       expect(data['Meta Data']).toBeDefined();
@@ -92,7 +92,7 @@ test(`weekly adjusted data works`, () => {
 
 test(`global quote data works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.quote(`msft`))
     .then((data) => {
       expect(data['Global Quote']).toBeDefined();
@@ -102,7 +102,7 @@ test(`global quote data works`, () => {
 
 test(`symbol search works`, () => {
   expect.assertions(2);
-  return delay(TIME)
+  return setTimeout(TIME)
     .then(() => alpha.data.search(`Advanced Micro Devices`))
     .then((data) => {
       expect(data['bestMatches']).toBeDefined();

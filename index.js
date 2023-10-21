@@ -1,13 +1,14 @@
 'use strict';
 
+import 'cross-fetch/polyfill';
 import Crypto from './lib/crypto';
 import Data from './lib/data';
+import Experimental from './lib/experimental';
 import Forex from './lib/forex';
+import Fundamental from './lib/fundamental';
 import Performance from './lib/performance';
 import Technical from './lib/technical';
 import Util from './lib/util';
-import Fundamental from './lib/fundamental';
-import Experimental from './lib/experimental';
 
 /**
  * The Alpha Vantage core module.
